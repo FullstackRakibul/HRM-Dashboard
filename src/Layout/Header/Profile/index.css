@@ -1,0 +1,87 @@
+/* For Settings Drawer Style */
+.profile-drawer .ant-drawer-header{
+    padding: 6px;
+}
+
+/* profile Title */
+.profile-drawer .setting-title{
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Antd Drawer Body Main */
+.profile-drawer .ant-drawer-body{
+    padding: 10px 5px;
+}
+
+/* Inner Title CSS */
+.profile-drawer .ant-drawer-body .inner-title{
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/*  For Antd Form Item Css Override */
+.profile-drawer .ant-drawer-body .ant-form-item{
+    margin-bottom: 10px;
+}
+
+/* Reduce Antd Divider Default Margin. */
+.profile-drawer .ant-divider-horizontal{
+    margin: 15px 0px;
+}
+
+/* Override Antd Space Default CSS */
+.profile-drawer .ant-space{
+    gap: 0 !important;
+    padding: 0px 5px;
+}
+
+/* Set Antd Space Item Width */
+.profile-drawer .ant-space-item{
+    width: 100%;
+}
+
+/* Style User Profile Link Button */
+.profile-drawer .profile-button{
+    margin-bottom: 4px;
+    padding: 3px 12px;
+    height: 30px;
+    line-height: 19px !important;
+    width: 100%;
+    font-family: 'Titillium Web',sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #000; 
+    border-radius: 4px;
+    background:#e9e9f1;
+    border-color: #e9e9f1 !important; 
+}
+.profile-drawer .profile-button:hover{
+    background: #10239e;
+    transition: .3s ease-out;
+    color: #fff;
+    border-color: #10239e !important;
+}
+
+
+/* Style User Profile Logout Button */
+.profile-drawer .logout-button{
+    margin: 4px 0px;
+    padding: 3px 12px;
+    height: 30px;
+    line-height: 19px !important;
+    width: 80%;
+    font-family: 'Titillium Web',sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 50px;
+    background:#fa541c;
+    border-color: #fa541c !important; 
+    color: #fff; 
+}
+.profile-drawer .logout-button:hover{
+    background: #d4380d;
+    transition: .3s ease-out;
+    color: #fff;
+    border-color: #d4380d !important;
+}

@@ -1,0 +1,137 @@
+.ant-table-body{
+    overflow-x: hidden;
+}
+
+.reusable-lists-table{
+    overflow: hidden;
+}
+.reusable-lists-table .ant-table-container{
+    border: 1px solid rgb(223 255 223);
+    border-top: 1px solid #299647;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/*** For Remove Header Border CSS ***/
+.reusable-lists-table .ant-table{
+    border-radius: 0px !important;
+}
+.reusable-lists-table .ant-table-header{
+    border-radius: 0px !important;
+}
+.reusable-lists-table .ant-table-tbody tr{
+    border: 1px solid rgb(130, 219, 130) !important;
+}
+.reusable-lists-table  .ant-table-container {
+    border-start-start-radius: 0px;
+    border-start-end-radius: 0px;
+}
+
+.reusable-lists-table .overflow-y-false .ant-table-body{
+    overflow-y: hidden !important;
+}
+
+
+.reusable-lists-table .ant-table-thead .ant-table-cell{
+    padding: 5px 8px ;
+    font-family: 'Titillium Web',sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    background-color: #299647;
+    color: #fff;
+}
+.reusable-lists-table .ant-table-thead .ant-table-cell{
+    border: 1px solid rgb(110, 201, 110);
+    border-right: none !important;
+    border-top: none !important;
+    /* border-bottom: none !important; */
+}
+.reusable-lists-table .ant-table-thead .ant-table-cell:first-child{
+    border-left: none !important;
+}
+.reusable-lists-table .ant-table-tbody .ant-table-cell{
+    /* border: 1px solid #f0f5ff; */
+    border-right: none !important;
+    border-bottom: none !important;
+}
+.reusable-lists-table .ant-table-tbody .ant-table-row .ant-table-cell:first-child{
+    border-left: none !important;
+}
+
+.reusable-lists-table .ant-table-tbody .ant-table-cell{
+    font-family: 'Titillium Web',sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 6px 8px;
+}
+.reusable-lists-table .ant-table-tbody .table-row-light .ant-table-cell{
+    background-color: rgb(223 255 223);
+}
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child{
+    border-start-start-radius:0px  !important;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child{
+    border-start-end-radius:0px !important;
+}
+
+.ant-table-wrapper .ant-table-pagination.ant-pagination{
+    margin: 6px 0px;
+}
+
+.ant-table-wrapper .ant-table-pagination.ant-pagination li{
+    font-family: 'Titillium Web',sans-serif;
+    font-weight: 600;
+    line-height: 22px !important;
+    height: 23px !important;
+    border-radius: 2px !important;
+    margin-inline-end:1px !important;
+    min-width: 22px !important;
+}
+
+
+
+/* ::-webkit-scrollbar {
+    width: 6px;
+    margin:3px;
+}
+  
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #c1c1c1; 
+    border-radius: 10px;
+}
+   
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1; 
+    border-radius: 10px;
+}
+  
+
+::-webkit-scrollbar-thumb:hover {
+    background: #979292; 
+} */
+
+.reusable-lists-table::-webkit-scrollbar {
+    width: 6px !important;
+    margin:3px !important;
+}
+  
+  
+  .reusable-lists-table::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px #c1c1c1 !important; 
+    border-radius: 10px !important;
+  }
+   
+  
+  .reusable-lists-table::-webkit-scrollbar-thumb {
+    background: #c1c1c1 !important; 
+    border-radius: 10px !important;
+  }
+  
+  
+  .reusable-lists-table::-webkit-scrollbar-thumb:hover {
+    background: #979292 !important; 
+  }
+

@@ -1,0 +1,97 @@
+
+.horizontal-module-container-open{
+    top: 42px;
+    height: 38rem;
+    width: 28rem;
+    left: -40px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    border-radius: 5px !important;
+    border: 5px solid var(--primary-border-color);
+    background:linear-gradient(180deg, rgba(75, 214, 143, 0.8) 0%, rgba(255, 255, 255, .9) 70.83%) !important;
+}
+.horizontal-module-container-close{
+    display: none;
+}
+.vertical-module-container-open{
+    height: 86px;
+    width: 95vw;
+    overflow-y: hidden;
+    display: flex;
+    overflow-x: hidden;
+    position: relative;
+    visibility: visible;
+    animation-name: example;
+    animation-duration: .4s;
+    border-radius: 5px !important;
+    border: 5px solid var(--primary-border-color);
+    background:linear-gradient(180deg, rgba(75, 214, 143, 0.8) 0%, rgba(255, 255, 255, .9) 70.83%) !important;
+}
+.vertical-module-container-close{
+    display:none;
+}
+.horizontal-module-container-open .ant-card-body{
+    flex-wrap: wrap !important;
+    padding: 0px 0px 10px 0px;
+}
+.vertical-module-container-open  .ant-card-grid{
+    background: #fff;
+    border-radius: 6px;
+    padding: 6px 0px;
+    border:1px solid var(--primary-border-color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px;
+}
+.horizontal-module-container-open{
+    .ant-card-grid{
+        background: #fff;
+        border-radius: 6px;
+        padding: 6px 0px;
+        width: 31.1%;
+        margin: 1% 1.1% !important;
+        border:1px solid var(--primary-border-color);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 2px;
+    }
+}
+.vertical-module-container-open .ant-card-grid:hover{
+    cursor: pointer;
+}
+.horizontal-module-container-open .ant-card-grid:hover{
+    cursor: pointer;
+}
+.horizontal-module-container-open .ant-card-grid{
+    max-height: 80px;
+}
+.module-image{
+    height: 25px;
+    width: 25px;
+}
+
+@keyframes example {
+    0%   {width:0vw; top:0px;}
+    100%  {width:95vw; top:0px;}
+}
+
+
+@keyframes example2 {
+    0%   {width:95vw;   height: 86px;visibility:visible;top:0px;}
+    100%  {width:0; top:0px; visibility: hidden;}
+}
+
+/*** RESPONSIVE AREA ***/
+@media only screen and (min-width:480px) {
+    
+}
+@media only screen and (min-width:768px) {
+    
+}
+@media only screen and (min-width:980px) {
+   
+}
+@media only screen and (min-width:1360px) {
+    
+}
+@media only screen and (min-width:1920px) {
+    
+}
+

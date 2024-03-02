@@ -1,0 +1,18 @@
+#scrollableDiv .ant-card{
+    box-shadow: none !important;
+}
+#scrollableDiv .ant-card-body{
+    padding: 0 !important;
+}
+#scrollableDiv .ant-list-item{
+    padding: 5px;
+}
+.continuos-list-item{
+    padding: 0px 15px;
+    margin-bottom: 5px;
+}
+.continuos-list-item:hover{
+    background: rgba(178, 215, 243, 0.9);
+    transition: .5s;
+    border-radius: 5px;
+}

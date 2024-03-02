@@ -1,0 +1,18 @@
+.main-lists{
+    border:1px solid rgb(243 243 247);
+    border-radius: 4px;
+}
+.main-lists .ant-list-item{
+    padding: 8px 10px;
+    border-block-end:none;
+    font-family: 'Titillium Web',sans-serif;
+    font-weight: 600;
+    font-size: 12px !important;
+}
+.main-lists .ant-list-item:hover{
+    background-color: #f0f5ff !important; 
+    cursor: pointer;
+}
+.main-lists .dark-lists{
+    background-color: rgb(243 243 247);
+}

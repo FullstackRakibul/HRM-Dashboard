@@ -1,0 +1,13 @@
+.innerContainer{
+    padding: 10px;
+}
+
+.listTopTitleContainer{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding: 6px 0px;
+    display: flex;
+    background:#e6f4ff;
+    align-items: center;
+    justify-content: center;
+}

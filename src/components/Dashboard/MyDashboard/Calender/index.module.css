@@ -1,0 +1,24 @@
+.leaveDeduction{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    /* margin-top: 1rem; */
+    /* background-color: #fff; */
+    /* padding: var(--card-padding);
+    border-radius: var(--card-border-radius); */
+    /* box-shadow: var(--box-shadow); */
+    padding: 5px;
+    /* height: 8vh; */
+    transition: all 0.3s ease;
+    /* background-color: #f3f3f7; */
+    border-radius: 8px;
+    /* margin-bottom: 5px; */
+}
+
+.leaveDeductionTitle{
+    font-family: 'Titillium Web',sans-serif;
+    color: rgb(19 74 143);
+    font-size: 13px;
+    font-weight: 700;
+    /* color: #1b9c85; */
+}

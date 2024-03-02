@@ -1,0 +1,174 @@
+
+.ant-layout-header{
+    height: 127px !important;
+    line-height: 127px !important;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100vw;
+    & .header-bottom{
+        height: 42px !important;
+        line-height: 42px !important;
+        & .expand-expand-button{
+            & .company-logo{
+                margin-top:8px;
+                margin-left:30px;
+                width: 68px;
+                height: 68px;
+            }
+        }
+        & .ant-col.ant-col-4{
+            line-height:0px;
+            display:flex;
+            flex-direction:column;
+            padding:5px 0px;
+            text-align:right;
+            overflow:hidden
+        }
+    }
+    & .ant-row{
+        & .ant-col-12{
+            & .ant-btn{
+                border-radius: 50px;
+                font-size: 16px !important;
+            }
+        }
+    }
+}
+// .ant-layout-header{
+   
+
+#collapsed-header{
+    position:fixed;
+    width:100%;
+    left:0;
+    top:0;
+    right: 0;
+    z-index: 10;
+}
+#expand-header{
+    /* width: calc(100% - 250px); */
+    width: 100%;
+    top:0;
+    right: 0;
+    z-index: 10;
+    position:fixed;
+    /* min-width: calc(100% - 200px); */
+}
+
+#collapsed-header .collapsed-collapsed-button{
+    /* padding-left: 15px; */
+}
+#expand-header .expand-expand-button{
+    /* padding-left: 200px; */
+}
+
+
+
+/* For Settings Drawer Style */
+.settings-drawer {
+    & .ant-drawer-header{
+        padding: 6px;
+    }
+    /* Settings Title */
+    & .setting-title{
+        font-size: 15px;
+        font-weight: 600;
+    }
+    /* Antd Drawer Body Main */
+    & .ant-drawer-body{
+        padding: 15px;
+        /* Inner Title CSS */
+        & .inner-title{
+            font-size: 14px;
+            font-weight: 600;
+        }
+        /*  For Antd Form Item Css Override */
+        & .ant-form-item{
+            margin-bottom: 10px;
+        }
+        
+    }
+    
+}
+
+
+
+
+
+
+/* Override Antd Badge CSS */
+
+.header-right-sidebar{
+    & .ant-badge{
+        margin-right: 10px;
+        & :hover{
+            cursor: pointer;
+        }
+    }
+}
+.header-right-sidebar .ant-badge .ant-avatar{
+    color: rgb(249, 248, 252);
+}
+
+/** USER INFO CSS **/
+.user-info{
+    font-family: 'Titillium Web',sans-serif;
+    color: #fff;
+    line-height: 16px !important;
+}
+.module-title-name{
+    font-family: 'Titillium Web',sans-serif;
+    color: #fff;
+    font-size: 20px;
+}
+
+
+.inner-top-container-module-name{
+    padding-left: 30px;
+}
+
+/** HANDLE MODULE VISIBLITY**/
+.visible-module-lists-container{
+    visibility: visible;
+    opacity: 1;
+}
+.hidden-module-lists-container{
+    /* visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear; */
+    display: none;
+}
+.visible-module-lists-container-2{
+    /* visibility: visible;
+    opacity: 1; */
+}
+.hidden-module-lists-container-2{
+    /* visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s linear; */
+    /* display: none; */
+}
+
+/*** RESPONSIVE AREA ***/
+@media only screen and (min-width:480px) {
+    
+}
+@media only screen and (min-width:768px) {
+    
+}
+@media only screen and (min-width:980px) {
+   
+}
+@media only screen and (min-width:1360px) {
+    .inner-top-container-module-name{
+        padding-left: 70px;
+    }
+}
+@media only screen and (min-width:1920px) {
+    .inner-top-container-module-name{
+        padding-left: 28px;
+    }
+}

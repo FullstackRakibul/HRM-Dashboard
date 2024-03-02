@@ -1,0 +1,576 @@
+body{
+  font-family: 'Titillium Web',sans-serif !important;
+  overflow: hidden;
+}
+:root {
+  // --bg-default-color-light:rgb(246, 246, 249);
+  --bg-default-color-light:#fff;
+  --card-bg-color-light:#fff;
+  --bg-header-color:#fff;
+  --bg-header-top-color:#fff;
+  --bg-header-bottom-color:rgba(41, 150, 71, 1);
+  --btn-bg-color-light:rgb(243, 243, 247);
+  --font-color-light:#000;
+  --border-color-light:#e9e9f1;
+  --body-heading-color-light:rgb(19 74 143);
+  --table-heading-bg-color-light:rgb(243 243 247);
+  --table-even-row-bg-color-ligh:#f3f3f7;
+  --body-font-size-default:12px;
+  --body-font-size-medium:13px;
+  // --primary-add-btn-color:;
+  --primary-save-btn-color: #389e0d;
+  --primary-edit-btn-color:#fa8c16;
+  // --primary-delete-btn-color:;
+  --primary-reset-btn-color:#13c2c2;
+  --primary-reload-btn-color:#a0d911;
+  --primary-view-btn-color:#2f54eb;
+  --primary-download-btn-color:#2f54eb;
+  --primary-border-color:#D7FFD7;
+}
+a{
+  text-decoration-color: #299647 !important;
+}
+.ant-layout{
+  overflow: scroll;
+}
+
+// Module BAR
+.module-main-layout{
+  position:fixed;
+  top:0px;
+  left:50px;
+  z-index:100;
+}
+
+// Header CSS
+.header-top{
+  background-color: var(--bg-header-top-color);
+  // background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.5)),url(./assets//images/header-top-bg.jpg);
+  background-image: linear-gradient(45deg,rgba(255, 255, 255, 0.5),rgba(255, 255, 255, 0.5));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  min-height: 42px;
+  line-height: 42px !important;
+  display: flex;
+  min-width: 100vw;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 20px 0px 20px;
+}
+.header-top .ant-badge:last-of-type{
+  margin-right: 0px !important;
+}
+.header-top .ant-row{
+  line-height: 35px !important;
+}
+.header-top .ant-row .ant-col-5{
+  line-height: 35px !important;
+}
+.header-bottom{
+  background-color: var(--bg-header-bottom-color);
+  min-height: 42px;
+  min-width: 100vw;
+  padding: 0px 20px 0px 45px;
+}
+.top-header-container{
+  background-color: #fff;
+}
+
+//  Tab Navigation Container CSS Start
+.tab-navigation-container{
+  min-height: 42px;
+  min-width: 100vw;
+  background-color: #fff;
+}
+// For Layout Bacground light theme
+.light-bg{
+  background-color: var(--bg-default-color-light);
+}
+
+
+
+// For Global Button light theme
+.light-button{
+  font-family: 'Titillium Web',sans-serif;
+  font-size: 12px !important;
+  font-weight: 600;
+  color: #000; 
+  background-color: var(--btn-bg-color-light) !important;
+}
+
+.light-button:hover{
+  border-color: var(--border-color-light) !important;
+  color: #000 !important;
+}
+
+// For Global Date Picker Style in light theme
+.light-date-picker{
+  border-color: var(--border-color-light) !important; 
+  font-family: 'Titillium Web',sans-serif;
+  font-size: 12px !important;
+  font-weight: 500;
+}
+
+.light-date-picker:hover{
+  border-color: var(--border-color-light) !important; 
+}
+
+
+// Global Card Inner Container
+.dashboard-card-inner-container{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 5px;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+.body-medium-header-title{
+  font-family: 'Titillium Web',sans-serif;
+  color: rgb(19 74 143);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+
+// Global body bold text
+.global-body-font-light{
+  font-family: 'Titillium Web',sans-serif;;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.global-body-font-bold{
+  font-family: 'Titillium Web',sans-serif;;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+// Global Module Header
+.global-module-header{
+  margin-left:10px;
+  font-family:'Titillium Web',sans-serif;
+  font-weight:700;
+  font-size:15px;
+  color:#000;
+}
+
+// Global Form Label
+
+.ant-form-item .ant-form-item-label >label{
+  font-family:'Titillium Web',sans-serif !important;
+  font-weight:600 !important;
+  font-size:13px !important;
+}
+.ant-radio-wrapper span{
+  font-family:'Titillium Web',sans-serif !important;
+  font-weight:700 !important;
+  font-size:15px !important;
+}
+
+
+.ant-form-item{
+  margin-bottom: 2px;
+}
+
+.ant-menu-item{
+  color: #000;
+}
+.ant-menu-title-content{
+  color: #000;
+}
+.ant-menu-submenu-title{
+  color: #000;
+}
+
+
+.ant-menu-item:hover{
+  color: rgb(183, 200, 223) !important;
+}
+.ant-menu-title-content:hover{
+  color: #000 !important;
+}
+
+
+.ant-menu-submenu-title:hover{
+  position: relative;
+  background-color: #D7FFD7 !important;
+  margin-left: 2px !important;
+  color: #000;
+  span{
+    color: #000 !important;
+  }
+  svg{
+    color: #299647;
+  }
+  .ant-menu-submenu-arrow{
+    color: #299647;
+  }
+}
+.ant-menu-item-selected{
+  color: #299647 !important;
+  border-right: 2px solid #299647;
+  background-color: #D7FFD7 !important;
+  z-index: -5;
+}
+.ant-menu-item.normal-menu-item:hover{
+  background-color: #D7FFD7 !important;
+  color: #000;
+  margin-left: 2px !important;
+  position: relative;
+}
+/***  FOR BACK TOP BUTTON ***/
+.ant-back-top {
+  box-sizing: border-box;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum";
+  position: fixed;
+  right: 25px;
+  bottom: 30px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+}
+label{
+  margin-bottom: 0px;
+}
+
+.ant-layout-sider-children {
+  height: 100%;
+  overflow: auto;
+}
+
+.expand-sidebar li.ant-menu-item.static-menu{
+  padding-left: 5px !important;
+}
+
+.expand-sidebar .static-dashboard-menu{
+  margin-left: 10px !important;
+  margin-inline: 0px !important;
+  margin-block:0px !important;
+}
+.expand-sidebar li.ant-menu-item.static-dashboard-menu {
+  padding-left: 6px !important;
+}
+.expand-sidebar .static-dashboard-menu .ant-menu-title-content a{
+  font-family: 'Titillium Web',sans-serif;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+}
+.module-menu-item .ant-menu-submenu-title{
+  font-family: 'Titillium Web',sans-serif;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+}
+.sub-module-menu-item .ant-menu-title-content{
+  font-size: 11px !important;
+}
+
+.simple-menu .ant-menu-title-content a{
+  font-family: 'Titillium Web',sans-serif;
+  font-size: 10px !important;
+}
+
+.expand-sidebar .ant-menu-item{
+  padding-left: 0px;
+  
+}
+.normal-menu-item{
+  padding-left: 5px !important;
+  font-family: 'Titillium Web',sans-serif;
+  font-size: 13px !important;
+}
+.expand-sidebar .ant-menu-submenu-title{
+  padding-left: 10px !important;
+}
+/* .no-icon-submenu .ant-menu-submenu-title{
+  font-size: 12px !important;
+} */
+
+.expand-sidebar .sub-module-menu-item{
+  padding-left: 0px !important;
+}
+
+.expand-sidebar .ant-menu-sub .ant-menu-item-only-child{
+  padding-left: 6px !important;
+}
+
+/* .ant-menu-item-only-child::before{
+  content: " ";
+  height: 100%;
+  width: 1px;
+  margin-right: 10px;
+  background-color: #9999e2; ;
+}  */
+
+// .expand-sidebar .sub-module-menu-wrapper {
+//   position: relative;
+//   width: 95% !important;
+//   margin-left: auto;
+// }
+
+// .expand-sidebar .sub-module-menu-wrapper::before {
+//   content: "";
+//   position: absolute;
+//   top: -4px;
+//   left: 0px;
+//   width: 2px;
+//   height: calc(100% + 8px);
+//   background: #bebed6;
+// }
+
+// .expand-sidebar .sub-module-menu-wrapper li + li {
+//   margin-top: 0px;
+// }
+.ant-menu-submenu-title strong{
+  z-index: 1501 !important;
+}
+.expand-sidebar .ant-menu-sub {
+  position: relative;
+  width: 95% !important;
+  margin-left: auto;
+}
+
+.expand-sidebar .ant-menu-sub::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 0px;
+  width: 2px;
+  height: calc(100% + 8px);
+  background: #299647;
+}
+
+.expand-sidebar .ant-menu-sub li + li {
+  margin-top: 0px;
+}
+
+.expand-sidebar .normal-menu-item{
+  margin-inline:10px !important;
+  margin-block:2px !important;
+}
+.level-4{
+  /* background: var(--level-4); */
+}
+.expand-sidebar .sub-module-menu-item .ant-menu-submenu-title{
+  padding-left: 15px !important;
+}
+.expand-sidebar .sub-module-menu-item .ant-menu-submenu-title::before{
+  content: "";
+  position: absolute; 
+  top: 50%;
+  left: 10px;
+  transform: translate(-100%, -50%);
+  width: 10px;
+  height: 2px;
+  background: #299647;
+}
+
+.expand-sidebar .normal-menu-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translate(-100%, -50%);
+  width: 10px;
+  height: 2px;
+  background: #299647;
+}
+
+
+/* .rectangle {
+  position: relative;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+} */
+
+.ant-menu-inline .ant-menu-item{
+  line-height: 25px !important;
+  height: 25px !important;
+  width:100%;
+}
+.ant-menu-inline .ant-menu-item, .ant-menu-vertical .ant-menu-item, .ant-menu-inline .ant-menu-submenu-title, .ant-menu-vertical .ant-menu-submenu-title{
+  width:100% !important;
+}
+
+/*Menu Item Padding Reduce*/
+.ant-menu-inline >.ant-menu-item,
+.ant-menu-vertical >.ant-menu-item, 
+.ant-menu-inline >.ant-menu-submenu>.ant-menu-submenu-title, 
+.ant-menu-vertical >.ant-menu-submenu>.ant-menu-submenu-title{
+  line-height: 30px !important;
+  height: 30px;
+  margin-inline:0px !important;
+}
+.ant-menu-inline >.ant-menu-item, 
+.ant-menu-vertical >.ant-menu-item, 
+.ant-menu-inline >.ant-menu-submenu>.ant-menu-submenu-title, 
+.ant-menu-vertical >.ant-menu-submenu>.ant-menu-submenu-title{
+  line-height: 30px !important;
+  height: 30px;
+  border-radius: 0px;
+}
+
+.ant-menu .ant-menu-item{
+  border-radius: 0px !important;
+}
+.ant-menu-inline .ant-menu-sub.ant-menu-inline>.ant-menu-submenu>.ant-menu-submenu-title{
+  line-height: 30px !important;
+  height: 30px !important;
+  border-radius: 0px !important;
+}
+
+.ant-menu-inline .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title:hover{
+  margin-left: 2px !important;
+}
+
+.expand-sidebar .ant-menu-inline .ant-menu-item{
+  overflow: visible !important;
+}
+
+.expand-sidebar .ant-menu-inline .ant-menu-item{
+  overflow: visible !important;
+}
+
+.expand-sidebar .ant-menu-inline .ant-menu-submenu-title{
+  overflow: visible !important;
+}
+.expand-sidebar .ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline{
+  background-color: transparent;
+}
+.ant-menu-inline .ant-menu-submenu-title{
+  height: 25px !important;
+  line-height: 25px !important;
+  border-radius: 0px !important;
+  margin-inline:10px !important;
+  margin-block:2px !important;
+  padding-left: 6px !important;
+}
+.expand-sidebar .ant-menu-sub .ant-menu-item-only-child{
+  height: 25px !important;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+  margin:2px;
+}
+
+
+
+ 
+
+::-webkit-scrollbar-thumb {
+  background: #299647; 
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar:horizontal{
+  height: 7px;
+  background: #966a29; 
+}
+::-webkit-scrollbar-thumb:horizontal{
+  background: #299647; 
+  border-radius: 8px;  
+}
+
+
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #979292; 
+// }
+
+
+
+// ::-webkit-scrollbar-track {
+//   border-radius: 10px;
+//   height: 2px !important;
+//   -webkit-box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+// }
+
+
+// ::-webkit-scrollbar:vertical {
+//   display: none;
+// }
+
+
+// For Transition
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 3000ms;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 3000ms;
+}
+
+.ant-tag{
+  line-height: 15px;
+  font-family: 'Titillium Web',sans-serif;
+  font-size: 11px !important;
+  font-weight: 600;
+}
+.action-tag:hover{
+  cursor: pointer;
+}
+
+.ant-select-single:not(.ant-select-customize-input) .ant-select-selector{
+  height: 25px;
+  border-radius: 4px !important;
+}
+.ant-select-single .ant-select-selector .ant-select-selection-item{
+  line-height: 24px;
+}
+
+
+// Divider Style
+.ant-divider-horizontal {
+  margin: 6px 0px;
+}
+
+
+// INPUT
+.ant-input,.ant-select{
+  // box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px !important;
+}
+
+.ant-tabs-card.ant-tabs-top >.ant-tabs-nav .ant-tabs-tab+.ant-tabs-tab{
+  margin-left: 8px !important;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-inline, .ant-menu-light>.ant-menu.ant-menu-root.ant-menu-inline,.ant-menu-light.ant-menu-root.ant-menu-vertical, .ant-menu-light>.ant-menu.ant-menu-root.ant-menu-vertical{
+  border-inline-end: none;
+}
+
+
+.ant-float-btn-default .ant-float-btn-body .ant-float-btn-content .ant-float-btn-icon{
+  color: green;
+}
+
+
+/*** RESPONSIVE AREA ***/
+@media only screen and (min-width:480px) {
+    
+}
+@media only screen and (min-width:768px) {
+    
+}
+@media only screen and (min-width:980px) {
+   
+}
+@media only screen and (min-width:1360px) {
+    
+}
+@media only screen and (min-width:1920px) {
+  .module-main-layout{
+    left: 70px !important;
+  }
+}

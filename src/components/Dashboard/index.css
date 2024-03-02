@@ -1,0 +1,14 @@
+.my-dashboard .ant-card{
+    /* border-radius: 30px !important; */
+    /* transition: all 0.3s ease;
+    box-shadow:0 2rem 3rem rgba(132, 139, 200, 0.18);
+    cursor: pointer;
+    border-color: #fff; */
+    box-shadow: none;
+}
+.my-dashboard .ant-card:hover{
+    box-shadow: none;
+}
+.my-dashboard .ant-card .ant-card-body{
+    padding: 10px;
+}

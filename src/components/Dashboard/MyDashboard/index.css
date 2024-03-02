@@ -1,0 +1,22 @@
+.common-dashboard{
+    padding: 0px 0px 120px 0px;
+}
+.common-dashboard .ant-card{
+    /* border-radius: 10px !important; */
+    /* transition: all 0.3s ease;
+    box-shadow:0 2rem 3rem rgba(132, 139, 200, 0.18);
+    cursor: pointer;
+    border-color: #fff; */
+}
+.common-dashboard .ant-card:hover{
+    box-shadow: none;
+}
+.common-dashboard .ant-card .ant-card-body{
+    padding: 10px;
+}
+
+.tableTitle{
+    font-family: 'Titillium Web',sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}

@@ -1,0 +1,35 @@
+.ant-segmented-item-label{
+    padding: 6px 2px;
+    padding-bottom: 0px;
+    line-height: 25px;
+}
+.ant-badge .anticon{
+    font-size: 20px !important;
+    margin-right: 4px;
+}
+.ant-badge-count{
+    padding: 0px 3px;
+    min-width: 18px;
+    font-size: 10px;
+    margin-top: 10px !important;
+}
+.employment-status-button{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background: #dfeff7;
+    color:#000;
+    border: 1px solid #dfeff7;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.employment-status-button-active{
+    background: #fff;
+}
+.employment-status-button .employment-status-row{
+    display: flex;
+    align-items: center;
+    padding: 2px 0px;
+}
+.employment-status-button:hover{
+    cursor: pointer;
+}

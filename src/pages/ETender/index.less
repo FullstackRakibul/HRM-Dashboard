@@ -1,0 +1,64 @@
+.new-tender-form{
+    padding: 30px 10px;
+    display: flex;
+    flex-direction: column;
+    & .ant-picker{
+        border-radius: 2px !important;
+    }
+    & input.ant-input-number-input{
+        text-align: right !important;
+    }
+    & .new-tender-input-textarea{
+        min-height: 24px !important;
+    }
+    & .ant-input-number-input{
+        border-radius: 2px !important;
+    }
+    & .new-tender-lists-header{
+        margin-top: 5px;
+        border: 1px solid #c8f2dd;
+        //border-radius: 4px;
+        & .ant-col{
+            padding: 5px;
+            color: #fff;
+            text-align: center;
+            background: #299647;
+            border-right:1px solid #c8f2dd;
+        }
+        & .ant-col:last-of-type{
+            border-right: none !important;
+        }
+    }
+    & .new-tender-lists-content{
+        border: 1px solid #c8f2dd;
+        border-top: none;
+        & .ant-col{
+            padding: 2px;
+            text-align: center;
+            border-right:1px solid #c8f2dd;
+        }
+        & .ant-col:last-of-type{
+            border-right: none !important;
+        }
+        & .close-action-button{
+            color: red;
+            & :hover{
+                cursor: pointer;
+            }
+        }
+    }
+    & .ant-input-number-sm{
+        border-radius: 2px !important;
+        text-align: right !important;
+        //border-color: #D7FFD7 !important;
+    }
+    & .read-only-input{
+        background-color: #f0f0f0 !important;
+        & :focus{
+            border: none !important;
+        }
+        & :hover{
+            border: none !important;
+        }
+    }
+}

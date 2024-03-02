@@ -1,0 +1,7 @@
+.my-dashboard-inner-container .ant-card{
+    border-radius: 5px;
+}
+.my-dashboard-inner-container .ant-card-body{
+    padding: 6px;
+    border-radius: 0px !important;
+}

@@ -1,0 +1,112 @@
+.reusable-attendence-table{
+    overflow: hidden;
+}
+.reusable-attendence-table .ant-table-container{
+    border: 1px solid rgb(243 243 247);
+    border-top: 1px solid #fff;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+/*** For Remove Header Top Border CSS  ***/
+.reusable-attendence-table .ant-table{
+    border-radius: 0px !important;
+}
+.reusable-attendence-table .ant-table-header{
+    border-radius: 0px !important;
+}
+.reusable-attendence-table   .ant-table-container {
+    border-start-start-radius: 0px;
+    border-start-end-radius: 0px;
+}
+
+.reusable-attendence-table .ant-table-tbody tr{
+    border: 1px solid grey !important;
+}
+
+.reusable-attendence-table .overflow-y-false .ant-table-body{
+    overflow-y: hidden !important;
+}
+
+
+.reusable-attendence-table .ant-table-thead .ant-table-cell{
+    padding: 5px 8px  !important;
+    font-family: 'Titillium Web',sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    background-color: rgb(243 243 247);
+    color: #000;
+}
+.reusable-attendence-table .ant-table-thead .ant-table-cell{
+    border: 1px solid #fff;
+    border-right: none !important;
+    border-top: none !important;
+    /* border-bottom: none !important; */
+}
+.reusable-attendence-table .ant-table-thead .ant-table-cell:first-child{
+    border-left: none !important;
+}
+.reusable-attendence-table .ant-table-tbody .ant-table-cell{
+    /* border: 1px solid #f0f5ff; */
+    border-right: none !important;
+    border-bottom: none !important;
+}
+.reusable-attendence-table .ant-table-tbody .ant-table-row .ant-table-cell:first-child{
+    border-left: none !important;
+}
+
+.reusable-attendence-table .ant-table-tbody .ant-table-cell{
+    font-family: 'Titillium Web',sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 6px 8px;
+}
+.reusable-attendence-table .ant-table-tbody .table-row-light .ant-table-cell{
+    background-color: rgb(243 243 247);
+}
+
+.reusable-attendence-table .ant-table-tbody .table-row-weekoff .ant-table-cell{
+    background-color: #52c41a;
+    color: #fff;
+}
+
+.reusable-attendence-table .ant-table-tbody .table-row-weekoff td.ant-table-cell-row-hover{
+    background-color: #389e0d !important;
+    color: #fff !important;
+}
+
+/*** FOR ABSENT ROW STYLE ***/
+.reusable-attendence-table .ant-table-tbody .table-row-absent .ant-table-cell{
+    /* background-color: #f3005b; */
+    /* border-bottom: 1px solid rgb(243 243 247) !important; */
+    background-color: #f5222d;
+    color: #fff;
+}
+
+.reusable-attendence-table .ant-table-tbody .table-row-absent td.ant-table-cell-row-hover{
+    /* background-color: #d8306d !important; */
+    background-color: #cf1322 !important;
+    color: #fff !important;
+}
+
+
+
+/*** For Antd Table Late Row Style  ***/
+
+.reusable-attendence-table .ant-table-tbody .table-row-late .ant-table-cell{
+    background-color: #fadb14;
+    /* border-bottom: 1px solid rgb(243 243 247) !important; */
+    color: #000;
+}
+
+.reusable-attendence-table .ant-table-tbody .table-row-late td.ant-table-cell-row-hover{
+    background-color: #d4b106 !important;
+    color: #fff !important;
+}
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child{
+    border-start-start-radius:0px  !important;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child{
+    border-start-end-radius:0px !important;
+}

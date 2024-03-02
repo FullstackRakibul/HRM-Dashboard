@@ -1,0 +1,90 @@
+.ant-table-body{
+    overflow-x: hidden;
+}
+
+.reusable-nested-lists-table{
+    overflow: hidden;
+}
+.reusable-nested-lists-table .ant-table-container{
+    border: 1px solid rgb(223 255 223);
+    border-top: 1px solid #299647;
+    border-radius: 6px;
+    overflow: hidden;
+    & .ant-table{
+        border-radius: 0px !important;
+    }
+    & .ant-table-header{
+        border-radius: 0px !important;
+    }
+    & .ant-table-tbody tr{
+        border: 1px solid rgb(130, 219, 130) !important;
+    }
+    & .ant-table-container {
+        border-start-start-radius: 0px;
+        border-start-end-radius: 0px;
+    }
+    & .overflow-y-false .ant-table-body{
+        overflow-y: hidden !important;
+    }
+    & .ant-table-thead .ant-table-cell{
+        padding: 5px 8px ;
+        font-family: 'Titillium Web',sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        background-color: #299647;
+        color: #fff;
+    }
+    & .ant-table-thead .ant-table-cell{
+        border: 1px solid rgb(110, 201, 110);
+        border-right: none !important;
+        border-top: none !important;
+        /* border-bottom: none !important; */
+    }
+    & .ant-table-thead .ant-table-cell:first-child{
+        border-left: none !important;
+    }
+    & .ant-table-tbody{
+        & .ant-table-cell{
+            /* border: 1px solid #f0f5ff; */
+            border-right: none !important;
+            border-bottom: none !important;
+        }
+        & .ant-table-cell{
+            font-family: 'Titillium Web',sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            padding: 5px 8px;
+        }
+        & .table-row-light .ant-table-cell{
+            background-color: rgb(223 255 223);
+        }
+    }
+}
+
+.child-table-container{
+    padding: 0px 0px 0px 3.9vw;
+    //background-color: #fff;
+    & .ant-table-thead .ant-table-cell{
+        padding: 5px 8px !important;
+        font-family: 'Titillium Web',sans-serif;
+        font-weight: 600;
+        font-size: 12px;
+        background-color:#8ae5a3!important;
+        color: #000 !important;
+        
+    }
+}
+
+.ant-table-wrapper .ant-table-thead >tr>th:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before,.ant-table-wrapper .ant-table-thead >tr>td:not(:last-child):not(.ant-table-selection-column):not(.ant-table-row-expand-icon-cell):not([colspan])::before{
+    background-color: transparent;
+}
+
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child{
+    border-start-start-radius: 0 !important;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:first-child{
+    border-radius: 0 !important;
+}
+.ant-table-wrapper .ant-table-container table>thead>tr:first-child >*:last-child{
+    border-radius: 0 !important;
+}

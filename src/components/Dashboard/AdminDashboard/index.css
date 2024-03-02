@@ -1,0 +1,90 @@
+.common-dashboard{
+    padding: 0px 0px 120px 0px;
+}
+.common-dashboard .ant-card{
+    /* border-radius: 10px !important; */
+    /* transition: all 0.3s ease;
+    box-shadow:0 2rem 3rem rgba(132, 139, 200, 0.18);
+    cursor: pointer;
+    border-color: #fff; */
+}
+.common-dashboard .ant-card:hover{
+    box-shadow: none;
+}
+.common-dashboard .ant-card .ant-card-body{
+    padding: 10px;
+}
+
+
+.ant-tabs-bottom>.ant-tabs-nav, .ant-tabs-bottom>div>.ant-tabs-nav, .ant-tabs-top>.ant-tabs-nav, .ant-tabs-top>div>.ant-tabs-nav{
+    margin-bottom: 10px;
+}
+
+
+/* .ant-card{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.ant-card-head{
+    padding: 4px 12px;
+    min-height: 0;
+    
+}
+.ant-card-head-title{
+    padding: 0;
+    font-size: 14px;
+} */
+.show-filter-section{
+    opacity: 1;
+    transition: all .5s ease-out;
+    visibility: visible;  
+    display: block;
+}
+.hide-filter-section{
+    visibility: hidden;
+    display: none;
+    transition: all .3s ease .15s;
+    opacity: 0;  
+}
+
+.grid-item{
+    border-radius: 5px;
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
+}
+
+/** FILTER HEADER **/
+.dasboard-filter-box-section .ant-card{
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 5px;
+}
+.dasboard-filter-box-section .ant-card-body{
+    padding: 15px 10px;
+}
+.dasboard-filter-box-section .ant-card-head{
+    padding: 0px 10px;
+}
+.dasboard-filter-box-section .ant-card-extra{
+    padding: 2px 0px;
+}
+.show-filter-open-button{
+    display: block;
+}
+.hide-filter-open-button{
+    display: none;
+}
+.dasboard-filter-box-section .close-filter-box{
+    color:rgb(0, 80, 179);
+}
+.dasboard-filter-box-section .close-filter-box:hover{
+    cursor: pointer;
+}
+
+
+/*** START CARD CONTAINER **/
+.dashboard-card-container{
+    height: 100%;
+    width: 100%;
+}
+.dashboard-card-container-row{
+    height: 6%;
+    width: 100%;
+}

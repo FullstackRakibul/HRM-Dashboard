@@ -1,0 +1,13 @@
+.breadcrumb-main{
+    margin-top:60px !important;
+    
+}
+.breadcrumb-card-container{
+    position: fixed;
+    width: 100%;
+}
+
+.breadcrumb-main .ant-card .ant-card-body{
+    padding: 10px !important;
+    border-radius: 2px !important;
+}

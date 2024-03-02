@@ -1,0 +1,27 @@
+.leaveDeduction{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    /* margin-top: 1rem; */
+    /* background-color: #fff; */
+    /* padding: var(--card-padding);
+    border-radius: var(--card-border-radius); */
+    /* box-shadow: var(--box-shadow); */
+    padding: 6px 0px;
+    /* height: 8vh; */
+    transition: all 0.3s ease;
+    /* background-color: #f3f3f7; */
+    border-radius: 8px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    /* margin-bottom: 5px; */
+}
+
+.leaveDeductionTitle{
+    font-family: 'Titillium Web',sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgb(19 74 143);
+    /* line-height: 2vh !important; */
+    /* color: #1b9c85; */
+}
