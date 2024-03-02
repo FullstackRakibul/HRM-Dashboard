@@ -1437,20 +1437,26 @@ export const supportTicketMenu = [
     children: [
       {
         MenuId: 1,
-        MenuName: "Create Ticket",
+        MenuName: "Dashboard",
         Key: 1,
-        MenuPath: "ticket/ticket/create",
+        MenuPath: "ticket/dashboard",
       },
       {
         MenuId: 2,
-        MenuName: "Ticket Lists",
+        MenuName: "Create Ticket",
         Key: 2,
-        MenuPath: "ticket/ticket/ticketLists",
+        MenuPath: "ticket/create",
+      },
+      {
+        MenuId: 3,
+        MenuName: "Ticket Lists",
+        Key: 3,
+        MenuPath: "ticket/ticketLists",
       },
     ],
   },
   {
-    ModuleId: 1,
+    ModuleId: 2,
     MenuName: "Mail Ticket",
     IconName: "fas fa-mail-bulk",
     children: [
