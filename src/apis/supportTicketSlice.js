@@ -2,7 +2,7 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import axiosBaseQuery from "./axiosBaseQuery";
 
 export const supportTicketSlice = createApi({
-  reducerPath: "eTenderSlice",
+  reducerPath: "supportTicketSlice",
   baseQuery: axiosBaseQuery({
     baseUrl: "https://localhost:7295/",
     prepareHeaders: (headers, { getState }) => {
