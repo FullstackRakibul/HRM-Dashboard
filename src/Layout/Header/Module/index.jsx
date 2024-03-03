@@ -11,6 +11,7 @@ import { list2, lists1, tenderLists, supportTicketMenu } from "../TopBar/data";
 import ModuleMainLogo from "../../../assets/images/erp-module-main-logo.png";
 import DownIcons from "../../../assets/images/module_menu.png";
 import CustomerImage from "../../../assets/images/Customerservice.png";
+import SupportImage from "../../../assets/images/data-management.png";
 import HCM from "../../../assets/images/Hired.png";
 import "./index.less";
 
@@ -86,7 +87,7 @@ const ModuleMain = () => {
             handleOnModuleChange(6);
           }}
         >
-          <img src={CustomerImage} className="module-image" />
+          <img src={SupportImage} className="module-image " />
           <Divider className="separator" />
           <span className="module-description">Support App</span>
         </Card.Grid>

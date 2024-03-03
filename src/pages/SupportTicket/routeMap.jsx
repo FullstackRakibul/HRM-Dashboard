@@ -1,8 +1,15 @@
 import loadable from "@loadable/component";
-const Dashboard = loadable(() => import("./Dashboard/index"));
+
+const SupportTicketDashboard = loadable(() => import("./Dashboard/index"));
+const CreateTicket = loadable(() => import("./CreateTicket/index"));
+
 export default [
   {
     path: "/ticket/dashboard",
-    component: <Dashboard />,
+    component: <SupportTicketDashboard />,
+  },
+  {
+    path: "/ticket/create",
+    component: <CreateTicket />,
   },
 ];
