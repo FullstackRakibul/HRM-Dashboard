@@ -4,7 +4,7 @@ import ComponentHeader from "../../../components/ui/ComponentHeader";
 import ContentContainer from "../../../components/ui/ContentContainer";
 import Statistics from "../../../components/SupportTicket/Global/Statistics";
 
-const index = () => {
+const SupportTicketDashboard = () => {
   return (
     <>
       <ComponentHeader
@@ -24,4 +24,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default SupportTicketDashboard;
