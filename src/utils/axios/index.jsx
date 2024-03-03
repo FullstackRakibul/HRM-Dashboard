@@ -43,8 +43,8 @@ export const setAuthToken = (token) => {
 
 // login baseurl : http://45.114.84.19:8033/
 // API baseurl : https://localhost:7295/
-// export const AxiosInstance = axios.create({
-//   baseURL: "https://localhost:7295/",
-// });
+export const AxiosInstance = axios.create({
+  baseURL: "https://localhost:7295/",
+});
 
 export default ConfigureAxios;

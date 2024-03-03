@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Row, Col, Card, Button } from "antd";
 import ModuleContainer from "../../components/ui/ModuleContainer";
 
-const TicketIndex = () => {
+const ListTicket = () => {
   const loaction = useLocation();
   const { pathname } = loaction;
   const { classLists } = useSelector((state) => state.ui);
@@ -21,4 +21,4 @@ const TicketIndex = () => {
   );
 };
 
-export default TicketIndex;
+export default ListTicket;
