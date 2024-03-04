@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Menu, message } from "antd";
-import { supportTicketSlice } from "../../../../apis/supportTicketSlice";
+import { Row, Col, Menu, message, Table } from "antd";
+
+import axios from "axios";
+import { AxiosInstance } from "../../../../apis/supportTicketSlice";
 
 const AllTicketList = () => {
-  const [tickets, setTickets] = useState([]);
+  const [tickets, setTicketList] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Call the endpoint using the generated hook
-        const { response } =
-          await supportTicketSlice.endpoints.getIssueBox.useQuery({});
-        // Assuming the response contains ticket data in an array format
-        setTickets(response);
+        const response = await AxiosInstance.get(
+          "https://localhost:7295/dashboard/Dashboards/IssueBox"
+        );
+        setTicketList(response.data.tickets);
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -20,30 +21,24 @@ const AllTicketList = () => {
     fetchData();
   }, []);
 
-  // const [ticket, setTicketList] = useState([]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await supportTicketSlice.get(
-  //         "/dashboard/Dashboards/IssueBox"
-  //       );
-  //       setTicketList(response);
-  //       console.log(response);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "title",
+    },
+    {
+      title: "Created At",
+      dataIndex: "createdAt",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+    },
+  ];
+
   return (
     <>
-      <ul>
-        {tickets.map((ticket) => (
-          <li key={ticket.id}>
-            Ticket ID: {ticket.id}, Title: {ticket.title}
-          </li>
-        ))}
-      </ul>
+      <Table columns={columns} dataSource={tickets} />
     </>
   );
 };

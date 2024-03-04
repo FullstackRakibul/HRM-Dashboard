@@ -46,3 +46,10 @@ export default supportTicketSlice;
 //   endpoints: (builder) => ({}),
 // });
 // export default useSupportTicketSliceQuery;
+
+import axios from "axios";
+
+export const AxiosInstance = axios.create({
+  baseURL: "https://localhost:7295/",
+  //baseURL: "http://45.114.84.19:7500/",
+});
