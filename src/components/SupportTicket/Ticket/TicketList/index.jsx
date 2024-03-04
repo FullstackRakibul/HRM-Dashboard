@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Row, Col, Menu, message } from "antd";
-import supportTicketSlice from "../../../../apis/supportTicketSlice";
+import { supportTicketSlice } from "../../../../apis/supportTicketSlice";
 
 const AllTicketList = () => {
-  const [ticket, setTicketList] = useState([]);
+  const [tickets, setTickets] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await supportTicketSlice.get(
-          "/dashboard/Dashboards/IssueBox"
-        );
-        setTicketList(response);
+        // Call the endpoint using the generated hook
+        const { response } =
+          await supportTicketSlice.endpoints.getIssueBox.useQuery({});
+        // Assuming the response contains ticket data in an array format
+        setTickets(response);
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -18,18 +19,30 @@ const AllTicketList = () => {
     };
     fetchData();
   }, []);
+
+  // const [ticket, setTicketList] = useState([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await supportTicketSlice.get(
+  //         "/dashboard/Dashboards/IssueBox"
+  //       );
+  //       setTicketList(response);
+  //       console.log(response);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
   return (
     <>
-      <section></section>
       <ul>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
-        <li>Ticket List All ()</li>
+        {tickets.map((ticket) => (
+          <li key={ticket.id}>
+            Ticket ID: {ticket.id}, Title: {ticket.title}
+          </li>
+        ))}
       </ul>
     </>
   );
