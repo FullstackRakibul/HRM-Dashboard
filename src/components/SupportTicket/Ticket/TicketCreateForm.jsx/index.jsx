@@ -222,9 +222,6 @@ const TicketCreateForm = () => {
 
   return (
     <section className="container mx-auto">
-      <h3 className="font-bengali font-normal text-xl">
-        নতুন টিকেট তৈরী করুন :
-      </h3>
       <Row className="flex justify-center items-center ">
         <Col span={12} className="">
           <Card

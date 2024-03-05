@@ -33,12 +33,12 @@ export const getCookie = (cname) => {
 };
 
 export const setAuthToken = (token) => {
-  if (token) {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + JSON.parse(token);
-  } else {
-    axios.defaults.headers.common["Authorization"] = "";
-  }
+  // if (token) {
+  //   axios.defaults.headers.common["Authorization"] =
+  //     "Bearer " + JSON.parse(token);
+  // } else {
+  //   axios.defaults.headers.common["Authorization"] = "";
+  // }
 };
 
 // login baseurl : http://45.114.84.19:8033/

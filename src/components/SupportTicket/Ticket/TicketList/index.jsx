@@ -127,12 +127,14 @@ const AllTicketList = () => {
 
   const columns = [
     {
+      key: "title",
       title: "Name",
       dataIndex: "title",
       width: "35%",
       align: "left",
     },
     {
+      key: "createdAt",
       title: "Created At",
       dataIndex: "createdAt",
       width: "12%",
@@ -149,6 +151,7 @@ const AllTicketList = () => {
       },
     },
     {
+      key: "status",
       title: "Status",
       dataIndex: "status",
       width: "12%",
@@ -159,10 +162,16 @@ const AllTicketList = () => {
             <Badge
               count={
                 record.status == 0
-                  ? "ZERO"
+                  ? "Open"
                   : record.status == "1"
-                  ? "ONE"
-                  : "TWO"
+                  ? "Acknowledged"
+                  : record.status == "2"
+                  ? "InProgress"
+                  : record.status == "3"
+                  ? "Complete"
+                  : record.status == "4"
+                  ? "Closed"
+                  : "Deleted"
               }
               style={{
                 backgroundColor:
@@ -209,18 +218,7 @@ const AllTicketList = () => {
                   Update For Check
                 </Button>
               )}
-              <Button
-                icon={<SendOutlined />}
-                className="font-sans flex items-center"
-                size="small"
-                type="dashed"
-                onClick={async () => {
-                  setTicketInfos(record);
-                  await getTicketReviewsDetails(record.id);
-                }}
-              >
-                Share Review
-              </Button>
+
               {editingTicket === record ? (
                 <>
                   <Select
@@ -259,6 +257,19 @@ const AllTicketList = () => {
                     icon={<UsergroupAddOutlined />}
                   >
                     Assign
+                  </Button>
+
+                  <Button
+                    icon={<SendOutlined />}
+                    className="font-sans flex items-center"
+                    size="small"
+                    type="dashed"
+                    onClick={async () => {
+                      setTicketInfos(record);
+                      await getTicketReviewsDetails(record.id);
+                    }}
+                  >
+                    Share Review
                   </Button>
                   <Button
                     icon={<DeleteOutlined />}
@@ -308,7 +319,7 @@ const AllTicketList = () => {
               }}
             >
               <Col span={18}>
-                <span className="modal-header-title">
+                <span className="modal-header-title font-anekBangla font-sans">
                   <b>Add New Review - {ticketInfos?.title}</b>
                 </span>
               </Col>
