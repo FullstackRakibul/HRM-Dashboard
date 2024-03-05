@@ -1,30 +1,64 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col, Menu, message, Table, Button, Input, Select } from "antd";
-const { Option } = Select;
+import {
+  Row,
+  Col,
+  Menu,
+  message,
+  Table,
+  Button,
+  Input,
+  Select,
+  Space,
+  Badge,
+  Modal,
+  Divider,
+  Form,
+} from "antd";
+import ConfigureAxios from "../../../../utils/axios";
+import ListsTable from "../../../ui/ListsTable";
+import NormalCard from "../../../ui/Card/NormalCard";
+import CommonFormItem from "../../../ui/FormItem/Common";
+import { convertActualtDateTime } from "../../../../utils/DateConfig";
+import {
+  DeleteOutlined,
+  UsergroupAddOutlined,
+  SendOutlined,
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+} from "@ant-design/icons";
+import PaginationMain from "../../../ui/Pagination";
 
-import axios from "axios";
+const { Option } = Select;
 import { AxiosInstance } from "../../../../apis/supportTicketSlice";
+import "./index.less";
+import axios from "axios";
 
 const AllTicketList = () => {
+  const [form] = Form.useForm();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [tickets, setTicketList] = useState([]);
   const [agents, setAgentList] = useState([]);
   const [editingTicket, setEditingTicket] = useState(null);
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [updateClicked, setUpdateClicked] = useState(false);
+  const [reviewLists, setReviewLists] = useState([]);
+  const [ticketInfos, setTicketInfos] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    ConfigureAxios();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const responseTicket = await AxiosInstance.get(
-          "https://localhost:7295/dashboard/Dashboards/IssueBox"
+          "/dashboard/Dashboards/IssueBox"
         );
         setTicketList(responseTicket.data.tickets);
-        const responseAgent = await AxiosInstance.get(
-          "https://localhost:7295/dashboard/Dashboards/IssueBox"
-        );
-        setAgentList(responseAgent.data.departments);
-        console.log(responseAgent.data.departments);
-        console.log(responseTicket);
+        const responseAgent = await AxiosInstance.get("/api/Supports");
+        setAgentList(responseAgent.data);
+        console.log(responseAgent.data);
+        console.log(responseTicket.data);
       } catch (error) {
         console.log(error);
       }
@@ -32,9 +66,34 @@ const AllTicketList = () => {
     fetchData();
   }, []);
 
+  const getTicketReviewsDetails = async (TicketId) => {
+    if (TicketId) {
+      axios
+        .get(`/api/Reviews/TicketWiseReply?id=${TicketId}`)
+        .then((response) => {
+          console.log("response : ", response);
+          showModal();
+        })
+        .catch((error) => {
+          console.log("Get Ticket Review Details error.");
+        });
+    }
+  };
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+    form.resetFields();
+    //setTenderInfos({});
+  };
   const handleEdit = (record) => {
     setEditingTicket(record);
-    setUpdateClicked(false); // Reset updateClicked state
+    setUpdateClicked(false);
   };
 
   const handleAssign = () => {
@@ -46,78 +105,292 @@ const AllTicketList = () => {
     }
   };
 
-  const handleUpdate = () => {
+  const handleUpdateCheck = () => {
     // Handle update action
     message.success("Ticket has been updated.");
   };
 
   const handleAgentSelect = (value) => {
     setSelectedAgent(value);
+    console.log(selectedAgent);
+  };
+
+  const onPaginationChange = (page, pageSize) => {
+    console.log("Page: ", page);
+    console.log("PageSize: ", pageSize);
+    setCurrentPage(page);
+    const Skip = (page - 1) * pageSize;
+    const Take = pageSize;
+    //getDataLists(UserId, Take, Skip);
+    //console.log("PPage: ",page+" Page Size: ",pageSize)
   };
 
   const columns = [
     {
       title: "Name",
       dataIndex: "title",
+      width: "35%",
+      align: "left",
     },
     {
       title: "Created At",
       dataIndex: "createdAt",
+      width: "12%",
+      key: "OpenDate",
+      align: "center",
+      render: (_, record) => {
+        return (
+          <Space size="middle">
+            <span>
+              <strong>{convertActualtDateTime(record.createdAt)}</strong>
+            </span>
+          </Space>
+        );
+      },
     },
     {
       title: "Status",
       dataIndex: "status",
+      width: "12%",
+      align: "center",
+      render: (_, record) => {
+        return (
+          <Space size="middle">
+            <Badge
+              count={
+                record.status == 0
+                  ? "ZERO"
+                  : record.status == "1"
+                  ? "ONE"
+                  : "TWO"
+              }
+              style={{
+                backgroundColor:
+                  record.status == "0"
+                    ? "#52c41a"
+                    : record.status == "1"
+                    ? "#faad14"
+                    : "#faad14",
+                //padding:"10px",
+                //fontSize:'22px'
+                fontFamily: "'Titillium Web',sans-serif",
+              }}
+              size="large"
+            />
+          </Space>
+        );
+      },
     },
     {
       title: "Actions",
+      align: "center",
       render: (record) => (
-        <span className="gap-2 flex">
-          {editingTicket === record ? (
-            <>
-              <Select
-                showSearch
-                style={{ width: 200 }}
-                placeholder="Select an agent"
-                optionFilterProp="children"
-                onChange={handleAgentSelect}
-                filterOption={(input, option) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                  0
-                }
-              >
-                {agents.map((agent) => (
-                  <Option key={agent.id} value={agent.id}>
-                    {agent.name}
-                  </Option>
-                ))}
-              </Select>
-              <Button onClick={handleAssign}>Assign</Button>
-            </>
-          ) : (
-            <>
-              <Button type="dashed" onClick={() => handleEdit(record)}>
-                Assign
-              </Button>
-
+        <Row>
+          <Col
+            span={24}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <span className="gap-2 flex item-center">
               {record.status === 4 ? (
-                <Button disabled>Complete</Button>
+                <Button className="font-sans" size="small" disabled>
+                  Complete
+                </Button>
               ) : (
-                <Button>Update For Check</Button>
+                <Button
+                  icon={<CheckCircleOutlined />}
+                  className="font-sans flex items-center"
+                  size="small"
+                  onClick={handleUpdateCheck}
+                >
+                  Update For Check
+                </Button>
               )}
-              <Button type="dashed">Share Comment</Button>
-              <Button danger type="primary">
-                Delete
+              <Button
+                icon={<SendOutlined />}
+                className="font-sans flex items-center"
+                size="small"
+                type="dashed"
+                onClick={async () => {
+                  setTicketInfos(record);
+                  await getTicketReviewsDetails(record.id);
+                }}
+              >
+                Share Review
               </Button>
-            </>
-          )}
-        </span>
+              {editingTicket === record ? (
+                <>
+                  <Select
+                    showSearch
+                    style={{ width: 200 }}
+                    placeholder="Select an agent"
+                    optionFilterProp="children"
+                    onChange={handleAgentSelect}
+                    filterOption={(input, option) =>
+                      option.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    {agents.map((agent) => (
+                      <Option key={agent.agentId} value={agent.agentId}>
+                        {agent.name}
+                      </Option>
+                    ))}
+                  </Select>
+                  <Button
+                    size="small"
+                    className="font-sans flex items-center"
+                    onClick={handleAssign}
+                  >
+                    Assign Engineer
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Button
+                    size="small"
+                    type="primary"
+                    className="font-sans bg-primary flex items-center"
+                    onClick={() => handleEdit(record)}
+                    icon={<UsergroupAddOutlined />}
+                  >
+                    Assign
+                  </Button>
+                  <Button
+                    icon={<DeleteOutlined />}
+                    className="font-sans flex items-center"
+                    size="small"
+                    danger
+                    type="primary"
+                  >
+                    Delete
+                  </Button>
+                </>
+              )}
+            </span>
+          </Col>
+        </Row>
       ),
     },
   ];
 
   return (
     <>
-      <Table columns={columns} dataSource={tickets} />
+      <NormalCard>
+        <ListsTable
+          tableProps={{
+            data: tickets?.length ? tickets : [],
+            height: 500,
+            columns,
+          }}
+        />
+        <PaginationMain
+          onPaginationChange={onPaginationChange}
+          count={120}
+          currentPage={currentPage}
+        />
+      </NormalCard>
+      <Modal
+        closable={false}
+        width={800}
+        title={
+          <>
+            <Row
+              style={{
+                padding: "0px 0px 0px 0px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Col span={18}>
+                <span className="modal-header-title">
+                  <b>Add New Review - {ticketInfos?.title}</b>
+                </span>
+              </Col>
+              <Col
+                span={6}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <CloseCircleOutlined
+                  className="close-timer-modal-icon"
+                  onClick={() => {
+                    handleCancel();
+                  }}
+                />
+              </Col>
+            </Row>
+            <Divider
+              style={{
+                margin: "6px 0px 8px 0px",
+              }}
+            />
+          </>
+        }
+        open={isModalOpen}
+        footer={null}
+        className="add-timer-logs-modal"
+      >
+        <Row>
+          <Col span={24}></Col>
+        </Row>
+        <Row>
+          <Col span={24}>
+            <Form size="small" form={form}>
+              <Row>
+                <Col span={24}>
+                  <CommonFormItem
+                    propsLists={{
+                      tooltip: {
+                        title: "Tender Description",
+                      },
+                      rules: {
+                        required: true,
+                        message: "Tender Description Is Required.",
+                      },
+                      name: "TenderDescription",
+                      labelAlign: "right",
+                      label: "Tender Description",
+                    }}
+                  >
+                    <Input.TextArea rows={3} />
+                  </CommonFormItem>
+                </Col>
+              </Row>
+              <Row
+                style={{
+                  padding: "12px 0px 8px 0px",
+                }}
+              >
+                <Col
+                  span={24}
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    gap: "8px",
+                  }}
+                >
+                  <Button size="small" onClick={handleCancel}>
+                    Cancel
+                  </Button>
+                  <Button size="small" htmlType="submit">
+                    Save
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
+          </Col>
+        </Row>
+      </Modal>
     </>
   );
 };

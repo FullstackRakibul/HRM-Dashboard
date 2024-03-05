@@ -51,5 +51,20 @@ import axios from "axios";
 
 export const AxiosInstance = axios.create({
   baseURL: "https://localhost:7295/",
-  //baseURL: "http://45.114.84.19:7500/",
 });
+AxiosInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+
+    // Set default headers
+    config.headers["Content-Type"] = "application/json; charset=utf-8";
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);

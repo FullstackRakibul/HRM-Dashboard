@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ["Montserrat", "sans-serif"],
+      sans: ["lexend", "sans-serif"],
       anekBangla: ['"Anek Bangla"', "sans-serif"],
     },
     extend: {
