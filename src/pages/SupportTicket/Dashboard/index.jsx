@@ -54,7 +54,7 @@ const SupportTicketDashboard = () => {
           </Col>
           <Col span={12}>
             <StatisticCard
-              agentName="Adam Bin Showkot "
+              agentName="Asib Al Hasan"
               problemsRaised={16}
               problemsSolved={13}
               avgTimeToSolve="5.2 hours"

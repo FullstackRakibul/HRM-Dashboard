@@ -13,6 +13,7 @@ import {
   Modal,
   Divider,
   Form,
+  Avatar,
 } from "antd";
 import ConfigureAxios from "../../../../utils/axios";
 import ListsTable from "../../../ui/ListsTable";
@@ -105,9 +106,23 @@ const AllTicketList = () => {
     }
   };
 
-  const handleUpdateCheck = () => {
-    // Handle update action
-    message.success("Ticket has been updated.");
+  const handleUpdateForCheck = async (ticketId) => {
+    try {
+      // const response = await AxiosInstance.get(
+      //   `/api/Tickets/updateForCheck/${ticketId}`
+      // );
+
+      console.log("Check for update Ticket ID", ticketId);
+
+      if (response.status === 200) {
+        message.success("Ticket has been updated.");
+      } else {
+        message.error("Failed to update ticket.");
+      }
+    } catch (error) {
+      console.error("Error updating ticket:", error);
+      message.error("Failed to update ticket.");
+    }
   };
 
   const handleAgentSelect = (value) => {
@@ -213,7 +228,7 @@ const AllTicketList = () => {
                   icon={<CheckCircleOutlined />}
                   className="font-sans flex items-center"
                   size="small"
-                  onClick={handleUpdateCheck}
+                  onClick={handleUpdateForCheck(record.id)}
                 >
                   Update For Check
                 </Button>
@@ -319,8 +334,10 @@ const AllTicketList = () => {
               }}
             >
               <Col span={18}>
-                <span className="modal-header-title font-anekBangla font-sans">
-                  <b>Add New Review - {ticketInfos?.title}</b>
+                <span className="modal-header-title font-sans">
+                  <b className="font-sans">
+                    Add New Review - {ticketInfos?.title}
+                  </b>
                 </span>
               </Col>
               <Col
@@ -351,7 +368,18 @@ const AllTicketList = () => {
         className="add-timer-logs-modal"
       >
         <Row>
-          <Col span={24}></Col>
+          <Col span={24}>
+            <ul>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+              <li>Here will be the messeages</li>
+            </ul>
+          </Col>
         </Row>
         <Row>
           <Col span={24}>
@@ -361,18 +389,18 @@ const AllTicketList = () => {
                   <CommonFormItem
                     propsLists={{
                       tooltip: {
-                        title: "Tender Description",
+                        title: "Add a review on this issue",
                       },
                       rules: {
                         required: true,
-                        message: "Tender Description Is Required.",
+                        message: "Ticket review Is Required.",
                       },
-                      name: "TenderDescription",
+                      name: "TicketReview",
                       labelAlign: "right",
-                      label: "Tender Description",
+                      label: "Add review on this Ticket",
                     }}
                   >
-                    <Input.TextArea rows={3} />
+                    <Input.TextArea rows={2} />
                   </CommonFormItem>
                 </Col>
               </Row>
@@ -390,11 +418,20 @@ const AllTicketList = () => {
                     gap: "8px",
                   }}
                 >
-                  <Button size="small" onClick={handleCancel}>
+                  <Button
+                    size="small"
+                    className="font-sans"
+                    onClick={handleCancel}
+                  >
                     Cancel
                   </Button>
-                  <Button size="small" htmlType="submit">
-                    Save
+                  <Button
+                    type="primary"
+                    className="font-sans bg-primary"
+                    size="small"
+                    htmlType="submit"
+                  >
+                    Send Review
                   </Button>
                 </Col>
               </Row>
