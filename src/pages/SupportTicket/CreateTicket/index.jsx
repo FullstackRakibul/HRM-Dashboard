@@ -1,5 +1,5 @@
 import React from "react";
-import TicketCreateForm from "../../../components/SupportTicket/Ticket/TicketCreateForm.jsx";
+import TicketCreateForm from "../../../components/SupportTicket/Ticket/TicketCreateForm/index.jsx";
 import ComponentHeader from "../../../components/ui/ComponentHeader/index.jsx";
 import { Button } from "antd";
 import ContentContainer from "../../../components/ui/ContentContainer/index.jsx";
