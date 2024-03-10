@@ -22,7 +22,7 @@ import UnitDropDown from "../global/UnitDropDown";
 const { TextArea } = Input;
 const { Dragger } = Upload;
 
-const TicketCreateForm = () => {
+const index = () => {
   const [form] = Form.useForm();
   const [selectedTicketTypeId, setSelectedTicketTypeId] = useState(null);
   const [selectedDepartmentId, setselectedDepartmentId] = useState(null);
@@ -394,7 +394,7 @@ const TicketCreateForm = () => {
   );
 };
 
-export default TicketCreateForm;
+export default index;
 
 // import React, { useEffect, useState } from "react";
 // import { NavLink } from "react-router-dom";
