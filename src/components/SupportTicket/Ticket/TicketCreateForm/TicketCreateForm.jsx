@@ -18,6 +18,8 @@ import {
 } from "antd";
 const { Dragger } = Upload;
 const { Option } = Select;
+import axios from "axios";
+import ConfigureAxios from "../../../../utils/axios";
 
 // file upload section design
 const props = {
@@ -41,14 +43,144 @@ const props = {
 };
 
 const TicketCreateForm = () => {
+  const [form] = Form.useForm();
   const [selectedUnitId, setselectedUnitId] = useState(null);
   const [selectedTicketTypeId, setSelectedTicketTypeId] = useState(null);
   const [unitLists, setUnitLists] = useState([]);
   const [departmentLists, setDepartmentLists] = useState([]);
   const [ticketTypeLists, setTicketTypeLists] = useState([]);
 
-  const onFinish = (values) => {
-    console.log("Received values:", values);
+  const onFinish = async (values) => {
+    const data = {
+      title: values.ticketTitle,
+      unitId: values.unit.value,
+      ticketTypeId: values.ticketType.value,
+      departmentId: values.department.value,
+      createdBy: "088101",
+      description: values.description,
+    };
+    values.title = values.ticketTitle;
+    values.unitId = values.unit.value;
+    values.ticketTypeId = values.ticketType.value;
+    values.departmentId = values.department.value;
+    values.createdBy = "088101";
+
+    console.log("Received values:", data);
+    const response = await axios.post(
+      "/api/Tickets/createTicketWithTarget",
+      data
+    );
+    console.log(response.data);
+    console.log(`status code :${response.status}`);
+    if (response.status === 200) {
+      message.success("Ticket Create Successfully.");
+      //form.resetFields();
+    } else {
+      message.error("Error in Creating Ticket.");
+    }
+  };
+
+  useEffect(() => {
+    ConfigureAxios();
+    initialLoading();
+  }, []);
+
+  const initialLoading = async () => {
+    const typeLists = await getTicketTypeLists();
+    const departmentLists = await getDepartmentLists();
+    const unitLists = await getUnitLists();
+
+    if (typeLists.length) {
+      const configLists = configDataForSelect(typeLists, "id", "typeName");
+      if (configLists.length) {
+        setTicketTypeLists(configLists);
+      } else {
+        setTicketTypeLists([]);
+      }
+    }
+    if (departmentLists.length) {
+      const configLists = configDataForSelect(
+        departmentLists,
+        "id",
+        "departmentName"
+      );
+      if (configLists.length) {
+        setDepartmentLists(configLists);
+      } else {
+        setDepartmentLists([]);
+      }
+    }
+    if (unitLists.length) {
+      const configLists = configDataForSelect(unitLists, "id", "name");
+      if (configLists.length) {
+        setUnitLists(configLists);
+      } else {
+        setUnitLists([]);
+      }
+    }
+  };
+  const getTicketTypeLists = async () => {
+    const lists = await axios
+      .get(`/api/TicketTypes`)
+      .then((response) => {
+        if (response.status === 200) {
+          const data = response.data;
+          return data;
+        }
+      })
+      .catch((error) => {
+        console.log("Get Ticket Type Lists Error.");
+        return [];
+      });
+    return lists;
+  };
+  const getDepartmentLists = async () => {
+    const lists = await axios
+      .get(`/api/Departments`)
+      .then((response) => {
+        if (response.status === 200) {
+          const data = response.data;
+          return data;
+        }
+      })
+      .catch((error) => {
+        console.log("Get Department Lists Error.");
+        return [];
+      });
+    return lists;
+  };
+  const getUnitLists = async () => {
+    const lists = await axios
+      .get(`/api/Units`)
+      .then((response) => {
+        if (response.status === 200) {
+          const data = response.data;
+          return data;
+        }
+      })
+      .catch((error) => {
+        console.log("Get Unit Lists Error.");
+        return [];
+      });
+    return lists;
+  };
+
+  const configDataForSelect = (lists, key, label) => {
+    const newLists = [...lists];
+    let returnLists = [];
+
+    if (newLists.length) {
+      newLists.map((dta) => {
+        const newObject = {
+          key: dta[key],
+          value: dta[key],
+          label: dta[label],
+        };
+        returnLists = [...returnLists, newObject];
+      });
+    }
+
+    return returnLists;
   };
   return (
     <>
