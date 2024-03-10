@@ -9,7 +9,3 @@ export const socket = io.connect(URL, {
   transports: ["websocket"],
   reconnectionAttempts: 15, //Nombre de fois qu'il doit réessayer de se connecter
 });
-
-// export const socket = io("ws://echo.websocket.org", {
-//   transports: ["websocket"],
-// });

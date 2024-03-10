@@ -49,23 +49,29 @@ const AllTicketList = () => {
   useEffect(() => {
     ConfigureAxios();
   }, []);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const responseTicket = await AxiosInstance.get(
-          "/dashboard/Dashboards/IssueBox"
-        );
-        setTicketList(responseTicket.data.tickets);
-        const responseAgent = await AxiosInstance.get("/api/Supports");
-        setAgentList(responseAgent.data);
-        console.log(responseAgent.data);
-        console.log(responseTicket.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
+    fetchData(10, 1);
   }, []);
+
+  const fetchData = async (Take = 10, Skip = 1) => {
+    try {
+      const responseTicket = await AxiosInstance.get(
+        `/api/Tickets/getPaginationList/${Skip}/${Take}`
+      );
+
+      const lists = configDataForTable(responseTicket.data);
+      if (lists.length) {
+        setTicketList(lists);
+      }
+      const responseAgent = await AxiosInstance.get("/api/Supports");
+      setAgentList(responseAgent.data);
+      console.log(responseAgent.data);
+      console.log(responseTicket.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getTicketReviewsDetails = async (TicketId) => {
     if (TicketId) {
@@ -115,13 +121,13 @@ const AllTicketList = () => {
       console.log("Check for update Ticket ID", ticketId);
 
       if (response.status === 200) {
-        message.success("Ticket has been updated.");
+        //message.success("Ticket has been updated.");
       } else {
-        message.error("Failed to update ticket.");
+        //message.error("Failed to update ticket.");
       }
     } catch (error) {
       console.error("Error updating ticket:", error);
-      message.error("Failed to update ticket.");
+      //message.error("Failed to update ticket.");
     }
   };
 
@@ -134,10 +140,28 @@ const AllTicketList = () => {
     console.log("Page: ", page);
     console.log("PageSize: ", pageSize);
     setCurrentPage(page);
-    const Skip = (page - 1) * pageSize;
+    const Skip = page;
     const Take = pageSize;
-    //getDataLists(UserId, Take, Skip);
-    //console.log("PPage: ",page+" Page Size: ",pageSize)
+    fetchData(Take, Skip == 0 ? 1 : Skip);
+  };
+
+  //..............table data setup
+
+  const configDataForTable = (lists) => {
+    const newLists = [...lists];
+    let emptyLists = [];
+
+    if (newLists.length) {
+      newLists.map((d) => {
+        const newObj = {
+          ...d,
+          key: d.id,
+        };
+
+        emptyLists = [...emptyLists, newObj];
+      });
+    }
+    return emptyLists;
   };
 
   const columns = [
