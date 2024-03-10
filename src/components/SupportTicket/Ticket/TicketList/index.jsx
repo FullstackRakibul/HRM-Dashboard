@@ -309,9 +309,17 @@ const AllTicketList = () => {
       <NormalCard>
         <ListsTable
           tableProps={{
+            key: "key",
             data: tickets?.length ? tickets : [],
             height: 500,
             columns,
+            rowSelection: {
+              type: "checkbox",
+              onChange: (selectedRowKeys, selectedRows) => {
+                // Call handleSelectRow function with selected rows
+                handleSelectRow(selectedRows);
+              },
+            },
           }}
         />
         <PaginationMain
