@@ -1449,8 +1449,14 @@ export const supportTicketMenu = [
       },
       {
         MenuId: 3,
-        MenuName: "Ticket Lists",
+        MenuName: "Create Type Ticket",
         Key: 3,
+        MenuPath: "ticket/type/create",
+      },
+      {
+        MenuId: 4,
+        MenuName: "Ticket Lists",
+        Key: 4,
         MenuPath: "ticket/listTicket",
         isDelete: 1,
         isEdit: 1,
