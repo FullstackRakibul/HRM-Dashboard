@@ -121,7 +121,7 @@ const TicketCreateForm = () => {
   };
   const getTicketTypeLists = async () => {
     const lists = await axios
-      .get(`/api/TicketTypes`)
+      .get(`/api/TicketTypes/ticket/type/list`)
       .then((response) => {
         if (response.status === 200) {
           const data = response.data;
