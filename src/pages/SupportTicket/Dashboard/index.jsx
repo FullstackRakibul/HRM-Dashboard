@@ -25,19 +25,19 @@ const SupportTicketDashboard = () => {
         <Row className="pt-6 flex flex-row" gutter={16}>
           <Col span={12}>
             <StatisticCard
-              agentName="Tamal Mazumder"
+              unitName="ADL Unit 02"
               problemsRaised={18}
               problemsSolved={16}
-              avgTimeToSolve="3.3 hours"
+              avgTimeToSolve="2.3 hours"
               skillRating="Excellent"
             />
           </Col>
           <Col span={12}>
             <StatisticCard
-              agentName="Rakibul Hasan"
-              problemsRaised={15}
-              problemsSolved={12}
-              avgTimeToSolve="4.2 hours"
+              unitName="TISWL Unit 03"
+              problemsRaised={23}
+              problemsSolved={17}
+              avgTimeToSolve="1.1 hours"
               skillRating="Good"
             />
           </Col>
@@ -45,7 +45,7 @@ const SupportTicketDashboard = () => {
         <Row className="pt-6 flex flex-row" gutter={16}>
           <Col span={12}>
             <StatisticCard
-              agentName="Baki Billah"
+              unitName="Humana Apparels Ltd."
               problemsRaised={14}
               problemsSolved={14}
               avgTimeToSolve="4.3 hours"
@@ -54,10 +54,10 @@ const SupportTicketDashboard = () => {
           </Col>
           <Col span={12}>
             <StatisticCard
-              agentName="Asib Al Hasan"
+              unitName="Zone Central"
               problemsRaised={16}
               problemsSolved={13}
-              avgTimeToSolve="5.2 hours"
+              avgTimeToSolve="3.1 hours"
               skillRating="Good"
             />
           </Col>

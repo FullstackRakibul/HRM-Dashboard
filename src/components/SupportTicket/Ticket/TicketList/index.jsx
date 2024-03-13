@@ -33,6 +33,7 @@ const { Option } = Select;
 import { AxiosInstance } from "../../../../apis/supportTicketSlice";
 import "./index.less";
 import axios from "axios";
+import AssignAgentModal from "../global/AssignAgentModal";
 
 const AllTicketList = () => {
   const [form] = Form.useForm();
@@ -45,6 +46,7 @@ const AllTicketList = () => {
   const [reviewLists, setReviewLists] = useState([]);
   const [ticketInfos, setTicketInfos] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
+  const [assignModalVisible, setAssignModalVisible] = useState(false);
 
   useEffect(() => {
     ConfigureAxios();
@@ -112,23 +114,28 @@ const AllTicketList = () => {
     }
   };
 
-  const handleUpdateForCheck = async (ticketId) => {
+  const handleUpdateForCheck = (ticketId) => {
     try {
-      // const response = await AxiosInstance.get(
-      //   `/api/Tickets/updateForCheck/${ticketId}`
-      // );
+      const response = AxiosInstance.get(
+        `/api/Tickets/updateForCheck/${ticketId}`
+      );
 
       console.log("Check for update Ticket ID", ticketId);
 
       if (response.status === 200) {
-        //message.success("Ticket has been updated.");
+        message.success("Ticket has been updated.");
       } else {
-        //message.error("Failed to update ticket.");
+        message.error("Failed to update ticket.");
       }
     } catch (error) {
       console.error("Error updating ticket:", error);
       //message.error("Failed to update ticket.");
     }
+  };
+
+  const handleAssignAgentClick = (ticketId) => {
+    setSelectedIssueId(ticketId);
+    setAssignModalVisible(true);
   };
 
   const handleAgentSelect = (value) => {
@@ -219,8 +226,6 @@ const AllTicketList = () => {
                     : record.status == "1"
                     ? "#faad14"
                     : "#faad14",
-                //padding:"10px",
-                //fontSize:'22px'
                 fontFamily: "'Titillium Web',sans-serif",
               }}
               size="large"
@@ -254,73 +259,58 @@ const AllTicketList = () => {
                   size="small"
                   onClick={handleUpdateForCheck(record.id)}
                 >
-                  Update For Check
+                  Update
                 </Button>
               )}
 
-              {editingTicket === record ? (
-                <>
-                  <Select
-                    showSearch
-                    style={{ width: 200 }}
-                    placeholder="Select an agent"
-                    optionFilterProp="children"
-                    onChange={handleAgentSelect}
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
-                  >
-                    {agents.map((agent) => (
-                      <Option key={agent.agentId} value={agent.agentId}>
-                        {agent.name}
-                      </Option>
-                    ))}
-                  </Select>
-                  <Button
-                    size="small"
-                    className="font-sans flex items-center"
-                    onClick={handleAssign}
-                  >
-                    Assign Engineer
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button
-                    size="small"
-                    type="primary"
-                    className="font-sans bg-primary flex items-center"
-                    onClick={() => handleEdit(record)}
-                    icon={<UsergroupAddOutlined />}
-                  >
-                    Assign
-                  </Button>
-
-                  <Button
-                    icon={<SendOutlined />}
-                    className="font-sans flex items-center"
-                    size="small"
-                    type="dashed"
-                    onClick={async () => {
-                      setTicketInfos(record);
-                      await getTicketReviewsDetails(record.id);
-                    }}
-                  >
-                    Share Review
-                  </Button>
-                  <Button
-                    icon={<DeleteOutlined />}
-                    className="font-sans flex items-center"
-                    size="small"
-                    danger
-                    type="primary"
-                  >
-                    Delete
-                  </Button>
-                </>
-              )}
+              {/* <Button
+                size="small"
+                type="primary"
+                className="font-sans bg-primary flex items-center"
+                onClick={() => handleEdit(record)}
+                icon={<UsergroupAddOutlined />}
+              >
+                Assign
+              </Button> */}
+              <AssignAgentModal
+                visible={assignModalVisible}
+                onCancel={() => setAssignModalVisible(false)}
+                ticketId={record.id}
+              />
+              <Button
+                icon={<UsergroupAddOutlined />}
+                className="font-sans flex items-center"
+                size="small"
+                type="dashed"
+                // onClick={async () => {
+                //   setTicketInfos(record);
+                //   await getTicketReviewsDetails(record.id);
+                // }}
+                onClick={() => handleAssignAgentClick()}
+              >
+                Assign
+              </Button>
+              <Button
+                icon={<SendOutlined />}
+                className="font-sans flex items-center"
+                size="small"
+                type="dashed"
+                onClick={async () => {
+                  setTicketInfos(record);
+                  await getTicketReviewsDetails(record.id);
+                }}
+              >
+                Share Review
+              </Button>
+              <Button
+                icon={<DeleteOutlined />}
+                className="font-sans flex items-center"
+                size="small"
+                danger
+                type="primary"
+              >
+                Delete
+              </Button>
             </span>
           </Col>
         </Row>

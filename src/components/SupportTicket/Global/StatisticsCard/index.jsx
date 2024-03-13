@@ -6,7 +6,7 @@ import { CheckCircleOutlined, ClockCircleOutlined } from "@ant-design/icons";
 const { Text } = Typography;
 
 const StatisticCard = ({
-  agentName,
+  unitName,
   problemsRaised,
   problemsSolved,
   avgTimeToSolve,
@@ -85,7 +85,7 @@ const StatisticCard = ({
         <Row className="flex flex-row justify-between w-full">
           <Col span={24} lg={16}>
             <h2 className="text-2xl font-semibold mb-4">
-              Support Agent: {agentName}
+              Unit Name : {unitName}
             </h2>
             <div className="flex justify-between items-center mb-4">
               <div>

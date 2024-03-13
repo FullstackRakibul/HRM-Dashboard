@@ -4,6 +4,7 @@ import ListMailTicket from "./ListMailTicket";
 const SupportTicketDashboard = loadable(() => import("./Dashboard/index"));
 const CreateTicket = loadable(() => import("./CreateTicket/index"));
 const ListTickets = loadable(() => import("./ListTicket/index"));
+const CreateTicketType = loadable(() => import("./CreateTicketType/index"));
 
 export default [
   {
@@ -13,6 +14,10 @@ export default [
   {
     path: "/ticket/create",
     component: <CreateTicket />,
+  },
+  {
+    path: "/ticket/type/create",
+    component: <CreateTicketType />,
   },
   {
     path: "/ticket/listTicket",
