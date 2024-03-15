@@ -13,15 +13,18 @@ const AssignAgentModal = ({ visible, onCancel, ticketId }) => {
     };
     fetchData();
   }, []);
+
+  // ....... handle assign agent ...............
   const handleAssignAgent = async () => {
     try {
       const values = await form.validateFields();
       values.ticketId = ticketId;
       console.log(values);
-      const response = AxiosInstance.post(
+      const response = await AxiosInstance.post(
         "/api/Targets/assignSupportEngineer",
         values
       );
+      console.log(response);
       message.success("Agent assigned successfully!");
       onCancel();
     } catch (error) {

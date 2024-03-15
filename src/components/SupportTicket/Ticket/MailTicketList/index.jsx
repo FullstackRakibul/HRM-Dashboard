@@ -51,7 +51,7 @@ const MailTicketList = () => {
         setTicketList(lists);
       }
 
-      console.log(responseTicket.data);
+      console.log(responseMailTicket.data);
     } catch (error) {
       console.log(error);
     }
@@ -78,11 +78,10 @@ const MailTicketList = () => {
 
   const handleUpdateForCheck = async (ticketId) => {
     try {
-      // const response = await AxiosInstance.get(
-      //   `/api/Tickets/updateForCheck/${ticketId}`
-      // );
-
       console.log("Check for update Ticket ID", ticketId);
+      const response = await AxiosInstance.get(
+        `/api/Tickets/updateForCheck/${ticketId}`
+      );
 
       if (response.status === 200) {
         message.success("Ticket has been updated.");
@@ -193,7 +192,7 @@ const MailTicketList = () => {
                     icon={<CheckCircleOutlined />}
                     className="font-sans flex items-center"
                     size="small"
-                    onClick={handleUpdateForCheck(record.id)}
+                    onClick={() => handleUpdateForCheck(record.id)}
                   >
                     Update For Check
                   </Button>

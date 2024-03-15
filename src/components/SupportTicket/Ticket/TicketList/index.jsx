@@ -14,6 +14,7 @@ import {
   Divider,
   Form,
   Avatar,
+  List,
 } from "antd";
 import ConfigureAxios from "../../../../utils/axios";
 import ListsTable from "../../../ui/ListsTable";
@@ -35,7 +36,21 @@ import "./index.less";
 import axios from "axios";
 import AssignAgentModal from "../global/AssignAgentModal";
 
-const AllTicketList = () => {
+const getTicketReviewsDetails = async (TicketId, setReviews, showModal) => {
+  if (TicketId) {
+    try {
+      const response = await axios.get(
+        `/api/Reviews/TicketWiseReply?id=${TicketId}`
+      );
+      setReviews(response.data);
+      showModal();
+    } catch (error) {
+      console.log("Get Ticket Review Details error.", error);
+    }
+  }
+};
+
+const AllTicketList = ({ TicketId }) => {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tickets, setTicketList] = useState([]);
@@ -43,11 +58,12 @@ const AllTicketList = () => {
   const [editingTicket, setEditingTicket] = useState(null);
   const [selectedAgent, setSelectedAgent] = useState(null);
   const [updateClicked, setUpdateClicked] = useState(false);
-  const [reviewLists, setReviewLists] = useState([]);
   const [ticketInfos, setTicketInfos] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const [assignModalVisible, setAssignModalVisible] = useState(false);
+  const [selectedIssueId, setSelectedIssueId] = useState(null);
 
+  //........show list with pagination ..........................
   useEffect(() => {
     ConfigureAxios();
   }, []);
@@ -75,20 +91,17 @@ const AllTicketList = () => {
     }
   };
 
-  const getTicketReviewsDetails = async (TicketId) => {
-    if (TicketId) {
-      axios
-        .get(`/api/Reviews/TicketWiseReply?id=${TicketId}`)
-        .then((response) => {
-          console.log("response : ", response);
-          showModal();
-        })
-        .catch((error) => {
-          console.log("Get Ticket Review Details error.");
-        });
-    }
+  // ..................const pagination ticket list................
+  const onPaginationChange = (page, pageSize) => {
+    console.log("Page: ", page);
+    console.log("PageSize: ", pageSize);
+    setCurrentPage(page);
+    const Skip = page;
+    const Take = pageSize;
+    fetchData(Take, Skip == 0 ? 1 : Skip);
   };
 
+  //........on modal actions and handeing ...............
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -100,9 +113,21 @@ const AllTicketList = () => {
     form.resetFields();
     //setTenderInfos({});
   };
+
   const handleEdit = (record) => {
     setEditingTicket(record);
     setUpdateClicked(false);
+  };
+
+  // .................. assign agent ................
+  const handleAssignAgentClick = (ticketId) => {
+    setSelectedIssueId(ticketId);
+    setAssignModalVisible(true);
+  };
+
+  const handleAgentSelect = (value) => {
+    setSelectedAgent(value);
+    console.log(selectedAgent);
   };
 
   const handleAssign = () => {
@@ -114,9 +139,10 @@ const AllTicketList = () => {
     }
   };
 
-  const handleUpdateForCheck = (ticketId) => {
+  // .................. update ticket status ................
+  const handleUpdateForCheck = async (ticketId) => {
     try {
-      const response = AxiosInstance.get(
+      const response = await AxiosInstance.get(
         `/api/Tickets/updateForCheck/${ticketId}`
       );
 
@@ -133,26 +159,7 @@ const AllTicketList = () => {
     }
   };
 
-  const handleAssignAgentClick = (ticketId) => {
-    setSelectedIssueId(ticketId);
-    setAssignModalVisible(true);
-  };
-
-  const handleAgentSelect = (value) => {
-    setSelectedAgent(value);
-    console.log(selectedAgent);
-  };
-
-  const onPaginationChange = (page, pageSize) => {
-    console.log("Page: ", page);
-    console.log("PageSize: ", pageSize);
-    setCurrentPage(page);
-    const Skip = page;
-    const Take = pageSize;
-    fetchData(Take, Skip == 0 ? 1 : Skip);
-  };
-
-  //..............table data setup
+  //..............table data setup ...................
 
   const configDataForTable = (lists) => {
     const newLists = [...lists];
@@ -171,6 +178,63 @@ const AllTicketList = () => {
     return emptyLists;
   };
 
+  //............. single ticket reviews data list
+  const [reviews, setReviews] = useState([]);
+  // const ReviewModal = ({ TicketId, isModalOpen, handleCancel }) => {
+  //   const [reviews, setReviews] = useState([]);
+
+  //   const getTicketReviewsDetails = async (TicketId, setReviews) => {
+  //     if (TicketId) {
+  //       try {
+  //         const response = await axios.get(
+  //           `/api/Reviews/TicketWiseReply?id=${TicketId}`
+  //         );
+  //         setReviewLists(response.data);
+  //       } catch (error) {
+  //         console.log("Get Ticket Review Details error.", error);
+  //       }
+  //     }
+  //   };
+
+  //   useEffect(() => {
+  //     if (isModalOpen) {
+  //       getTicketReviewsDetails(TicketId, setReviews);
+  //     }
+  //   }, [TicketId, isModalOpen]);
+  // };
+  //.......... ticket review modal ...................
+  // const getTicketReviewsDetails = async (TicketId) => {
+  //   if (TicketId) {
+  //     axios
+  //       .get(`/api/Reviews/TicketWiseReply?id=${TicketId}`)
+  //       .then((response) => {
+  //         console.log("response : ", response);
+  //         setReviews(response);
+  //         console.log(response);
+  //         showModal();
+  //       })
+  //       .catch((error) => {
+  //         console.log("Get Ticket Review Details error.", error);
+  //       });
+  //   }
+  // };
+
+  useEffect(() => {
+    getTicketReviewsDetails(TicketId, setReviews, () => setIsModalOpen(true));
+  }, [TicketId]);
+
+  //...handle delete ..............
+
+  const handleDeleteItem = async (itemId) => {
+    try {
+      message.warning("Ticket Deleted successfully");
+      console.log(`Item with ID ${itemId} deleted successfully`);
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
+
+  // .............. ticket table data .......
   const columns = [
     {
       key: "title",
@@ -257,36 +321,17 @@ const AllTicketList = () => {
                   icon={<CheckCircleOutlined />}
                   className="font-sans flex items-center"
                   size="small"
-                  onClick={handleUpdateForCheck(record.id)}
+                  onClick={() => handleUpdateForCheck(record.id)}
                 >
                   Update
                 </Button>
               )}
-
-              {/* <Button
-                size="small"
-                type="primary"
-                className="font-sans bg-primary flex items-center"
-                onClick={() => handleEdit(record)}
-                icon={<UsergroupAddOutlined />}
-              >
-                Assign
-              </Button> */}
-              <AssignAgentModal
-                visible={assignModalVisible}
-                onCancel={() => setAssignModalVisible(false)}
-                ticketId={record.id}
-              />
               <Button
                 icon={<UsergroupAddOutlined />}
                 className="font-sans flex items-center"
                 size="small"
                 type="dashed"
-                // onClick={async () => {
-                //   setTicketInfos(record);
-                //   await getTicketReviewsDetails(record.id);
-                // }}
-                onClick={() => handleAssignAgentClick()}
+                onClick={() => handleAssignAgentClick(record.id)}
               >
                 Assign
               </Button>
@@ -297,7 +342,11 @@ const AllTicketList = () => {
                 type="dashed"
                 onClick={async () => {
                   setTicketInfos(record);
-                  await getTicketReviewsDetails(record.id);
+                  await getTicketReviewsDetails(
+                    record.id,
+                    setReviews,
+                    showModal
+                  );
                 }}
               >
                 Share Review
@@ -308,6 +357,9 @@ const AllTicketList = () => {
                 size="small"
                 danger
                 type="primary"
+                onClick={async () => {
+                  await handleDeleteItem(record.id); // Pass the itemId of the item to be deleted
+                }}
               >
                 Delete
               </Button>
@@ -330,7 +382,6 @@ const AllTicketList = () => {
             rowSelection: {
               type: "checkbox",
               onChange: (selectedRowKeys, selectedRows) => {
-                // Call handleSelectRow function with selected rows
                 handleSelectRow(selectedRows);
               },
             },
@@ -391,16 +442,26 @@ const AllTicketList = () => {
       >
         <Row>
           <Col span={24}>
-            <ul>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-              <li>Here will be the messeages</li>
-            </ul>
+            <List
+              style={{ maxHeight: "300px", overflowY: "auto" }}
+              dataSource={reviews}
+              renderItem={(item) => (
+                <List.Item>
+                  <List.Item.Meta
+                    title={
+                      <span className="text-xl font-semibold ">
+                        {item.reviewNote}
+                      </span>
+                    }
+                    description={
+                      <span className="text-sm font-bold">
+                        {convertActualtDateTime(item.createdAt)}
+                      </span>
+                    }
+                  />
+                </List.Item>
+              )}
+            />
           </Col>
         </Row>
         <Row>
@@ -461,6 +522,12 @@ const AllTicketList = () => {
           </Col>
         </Row>
       </Modal>
+
+      <AssignAgentModal
+        visible={assignModalVisible}
+        onCancel={() => setAssignModalVisible(false)}
+        ticketId={selectedIssueId}
+      />
     </>
   );
 };
