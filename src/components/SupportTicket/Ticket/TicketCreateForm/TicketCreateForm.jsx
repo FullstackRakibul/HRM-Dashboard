@@ -58,11 +58,13 @@ const TicketCreateForm = () => {
       departmentId: values.department.value,
       createdBy: "088101",
       description: values.description,
+      attachment: values.attachment.file.name,
     };
     values.title = values.ticketTitle;
     values.unitId = values.unit.value;
     values.ticketTypeId = values.ticketType.value;
     values.departmentId = values.department.value;
+    values.attachment = values.attachment;
     values.createdBy = "088101";
 
     console.log("Received values:", data);
@@ -257,7 +259,8 @@ const TicketCreateForm = () => {
         <Row gutter={16}>
           <Col span={24}>
             <Form.Item label="Attachment">
-              <Form.Item name="attachment" valuePropName="fileList" noStyle>
+              {/* valuePropName="fileList" */}
+              <Form.Item name="attachment" noStyle>
                 <Dragger {...props}>
                   <p className="ant-upload-drag-icon">
                     <InboxOutlined />

@@ -349,7 +349,7 @@ const AllTicketList = ({ TicketId }) => {
                   );
                 }}
               >
-                Share Review
+                Reviews
               </Button>
               <Button
                 icon={<DeleteOutlined />}
