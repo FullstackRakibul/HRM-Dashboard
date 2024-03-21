@@ -370,6 +370,18 @@ const AllTicketList = ({ TicketId }) => {
     },
   ];
 
+  // handle add review ......
+  const [ticketReview, setTicketReview] = useState("");
+
+  const handleAddReview = async (values) => {
+    console.log("asfcas", values);
+    if (!ticketReview) {
+      console.log(`Add review button ..${ticketReview}`);
+      //message.error("Please enter a review message.");
+      return;
+    }
+  };
+
   return (
     <>
       <NormalCard>
@@ -466,7 +478,7 @@ const AllTicketList = ({ TicketId }) => {
         </Row>
         <Row>
           <Col span={24}>
-            <Form size="small" form={form}>
+            <Form size="small" form={form} onFinish={handleAddReview}>
               <Row>
                 <Col span={24}>
                   <CommonFormItem
@@ -483,7 +495,7 @@ const AllTicketList = ({ TicketId }) => {
                       label: "Add review on this Ticket",
                     }}
                   >
-                    <Input.TextArea rows={2} />
+                    <Input.TextArea name="ticketReview" rows={2} />
                   </CommonFormItem>
                 </Col>
               </Row>
@@ -513,6 +525,7 @@ const AllTicketList = ({ TicketId }) => {
                     className="font-sans bg-primary"
                     size="small"
                     htmlType="submit"
+                    onSubmit={handleAddReview}
                   >
                     Send Review
                   </Button>
