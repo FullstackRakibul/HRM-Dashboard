@@ -76,7 +76,7 @@ const TicketCreateForm = () => {
     console.log(`status code :${response.status}`);
     if (response.status === 200) {
       message.success("Ticket Create Successfully.");
-      //form.resetFields();
+      form.resetFields();
     } else {
       message.error("Error in Creating Ticket.");
     }
