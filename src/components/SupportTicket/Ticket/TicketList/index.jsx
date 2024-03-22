@@ -373,13 +373,26 @@ const AllTicketList = ({ TicketId }) => {
   // handle add review ......
   const [ticketReview, setTicketReview] = useState("");
 
-  const handleAddReview = async (values) => {
-    console.log("asfcas", values);
-    if (!ticketReview) {
-      console.log(`Add review button ..${ticketReview}`);
-      //message.error("Please enter a review message.");
-      return;
+  const handleCreateReview = async (values) => {
+    const insertData = {
+      ticketId: "105",
+      reviewerId: "000000",
+      reviewNote: values.reviewNote,
+    };
+    console.log(insertData);
+    const response = await AxiosInstance.post(
+      "/api/Reviews/create-review-note",
+      insertData
+    );
+    console.log(response.data);
+    if (response.status === 200) {
+      message.success("Review note added.");
+      form.resetFields();
+    } else {
+      message.error("Error in adding review.");
     }
+
+    return;
   };
 
   return (
@@ -466,9 +479,16 @@ const AllTicketList = ({ TicketId }) => {
                       </span>
                     }
                     description={
-                      <span className="text-sm font-bold">
-                        {convertActualtDateTime(item.createdAt)}
-                      </span>
+                      <>
+                        <span className="text-sm font-bold">
+                          <b className="text-primary">ReviewerId :</b>{" "}
+                          {item.reviewerId}
+                        </span>
+                        <br></br>
+                        <span className="text-sm font-bold">
+                          {convertActualtDateTime(item.createdAt)}
+                        </span>
+                      </>
                     }
                   />
                 </List.Item>
@@ -478,7 +498,7 @@ const AllTicketList = ({ TicketId }) => {
         </Row>
         <Row>
           <Col span={24}>
-            <Form size="small" form={form} onFinish={handleAddReview}>
+            <Form size="small" form={form} onFinish={handleCreateReview}>
               <Row>
                 <Col span={24}>
                   <CommonFormItem
@@ -490,12 +510,12 @@ const AllTicketList = ({ TicketId }) => {
                         required: true,
                         message: "Ticket review Is Required.",
                       },
-                      name: "TicketReview",
+                      name: "reviewNote",
                       labelAlign: "right",
                       label: "Add review on this Ticket",
                     }}
                   >
-                    <Input.TextArea name="ticketReview" rows={2} />
+                    <Input.TextArea rows={2} />
                   </CommonFormItem>
                 </Col>
               </Row>
@@ -525,7 +545,7 @@ const AllTicketList = ({ TicketId }) => {
                     className="font-sans bg-primary"
                     size="small"
                     htmlType="submit"
-                    onSubmit={handleAddReview}
+                    onSubmit={handleCreateReview}
                   >
                     Send Review
                   </Button>
