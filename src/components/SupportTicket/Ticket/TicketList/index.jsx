@@ -140,16 +140,19 @@ const AllTicketList = ({ TicketId }) => {
   };
 
   // .................. update ticket status ................
+  const [isButtonDisabled, setIsButtonDisabled] = useState([false]);
   const handleUpdateForCheck = async (ticketId) => {
     try {
-      const response = await AxiosInstance.get(
-        `/api/Tickets/updateForCheck/${ticketId}`
+      console.log(ticketId);
+      const response = await AxiosInstance.post(
+        `/api/Tickets/UpdateForCheckTicketStatus/${ticketId}`
       );
-
-      console.log("Check for update Ticket ID", ticketId);
-
+      console.log("Check for update Ticket ID", response);
       if (response.status === 200) {
         message.success("Ticket has been updated.");
+        // disable this button for 1 min
+        //isButtonDisabled(true);
+        //setTimeout(() => setIsButtonDisabled(false), 1 * 60 * 1000);
       } else {
         message.error("Failed to update ticket.");
       }
@@ -224,7 +227,6 @@ const AllTicketList = ({ TicketId }) => {
   }, [TicketId]);
 
   //...handle delete ..............
-
   const handleDeleteItem = async (itemId) => {
     try {
       message.warning("Ticket Deleted successfully");
@@ -285,7 +287,17 @@ const AllTicketList = ({ TicketId }) => {
               }
               style={{
                 backgroundColor:
-                  status == 0 ? "#52c41a" : status == 1 ? "#faad14" : "#faad14",
+                  status == 0
+                    ? "#52c41a"
+                    : status == 1
+                    ? "#faad14"
+                    : status == 2
+                    ? "#ff5f20"
+                    : status == 3
+                    ? "#5356FF"
+                    : status == 4
+                    ? "#00224D"
+                    : "#faad14",
                 fontFamily: "'Titillium Web',sans-serif",
               }}
               size="large"
@@ -317,9 +329,10 @@ const AllTicketList = ({ TicketId }) => {
                   icon={<CheckCircleOutlined />}
                   className="font-sans flex items-center"
                   size="small"
+                  // disabled={isButtonDisabled}
                   onClick={() => handleUpdateForCheck(record.id)}
                 >
-                  Update
+                  Update Status
                 </Button>
               )}
               <Button

@@ -105,6 +105,18 @@ const MailTicketList = () => {
     fetchData(Take, Skip == 0 ? 1 : Skip);
   };
 
+  // ......... button disable section .........
+  const [isButtonDisabled, setIsButtonDisabled] = useState([false]);
+  const [isButtonDisabledTest, setIsButtonDisabledTest] = useState([false]);
+
+  const handleButtonClick = async (recordId) => {
+    // Call your existing functionality
+    handleUpdateForCheck(recordId);
+    // Disable the button and re-enable after 20 minutes
+    setIsButtonDisabled(true);
+    setTimeout(() => setIsButtonDisabled(false), 0.5 * 60 * 1000);
+  };
+
   const columns = [
     {
       key: "title",
@@ -137,7 +149,6 @@ const MailTicketList = () => {
       width: "12%",
       align: "center",
       render: (status) => {
-        console.log(`this is a status code : ${status}`);
         return (
           <Space size="middle">
             <Badge
@@ -173,6 +184,7 @@ const MailTicketList = () => {
         return (
           <Row>
             <Col
+              className="gap-2"
               span={24}
               style={{
                 display: "flex",
@@ -190,11 +202,22 @@ const MailTicketList = () => {
                     icon={<CheckCircleOutlined />}
                     className="font-sans flex items-center"
                     size="small"
-                    onClick={() => handleUpdateForCheck(record.id)}
+                    // onClick={() => handleUpdateForCheck(record.id)}
+                    disabled={isButtonDisabled}
+                    onClick={() => handleButtonClick(record.id)}
                   >
                     Soft Reminder
                   </Button>
                 )}
+              </span>
+              <span className="font-sans">
+                <Button
+                  className="font-sans flex items-center"
+                  size="small"
+                  icon={<UsergroupAddOutlined />}
+                >
+                  Assign Agent
+                </Button>
               </span>
             </Col>
           </Row>
