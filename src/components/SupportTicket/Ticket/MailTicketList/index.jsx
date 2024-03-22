@@ -43,7 +43,7 @@ const MailTicketList = () => {
   const fetchData = async (Take = 10, Skip = 1) => {
     try {
       const responseMailTicket = await AxiosInstance.get(
-        `/api/Tickets/getPaginationList/${Skip}/${Take}`
+        `/api/Tickets/GetMailTicketList/${Skip}/${Take}`
       );
 
       const lists = configDataForTable(responseMailTicket.data);
@@ -79,18 +79,19 @@ const MailTicketList = () => {
   const handleUpdateForCheck = async (ticketId) => {
     try {
       console.log("Check for update Ticket ID", ticketId);
-      const response = await AxiosInstance.get(
-        `/api/Tickets/updateForCheck/${ticketId}`
-      );
+      message.success("The support agent has been notified.");
+      // const response = await AxiosInstance.get(
+      //   `/api/Tickets/updateForCheck/${ticketId}`
+      // );
 
-      if (response.status === 200) {
-        message.success("Ticket has been updated.");
-      } else {
-        message.error("Failed to update ticket.");
-      }
+      // if (response.status === 200) {
+      //   message.success("Ticket has been updated.");
+      // } else {
+      //   message.error("Failed to update ticket.");
+      // }
     } catch (error) {
-      console.error("Error updating ticket:", error);
-      message.error("Failed to update ticket.");
+      console.error("Remainder added failed:", error);
+      message.error("Remainder added failed.");
     }
   };
 
@@ -135,30 +136,27 @@ const MailTicketList = () => {
       dataIndex: "status",
       width: "12%",
       align: "center",
-      render: (record) => {
+      render: (status) => {
+        console.log(`this is a status code : ${status}`);
         return (
           <Space size="middle">
             <Badge
               count={
-                record.status == 0
+                status == 0
                   ? "Open"
-                  : record.status == "1"
+                  : status == 1
                   ? "Acknowledged"
-                  : record.status == "2"
+                  : status == 2
                   ? "InProgress"
-                  : record.status == "3"
+                  : status == 3
                   ? "Complete"
-                  : record.status == "4"
+                  : status == 4
                   ? "Closed"
                   : "Deleted"
               }
               style={{
                 backgroundColor:
-                  record.status == "0"
-                    ? "#52c41a"
-                    : record.status == "1"
-                    ? "#faad14"
-                    : "#faad14",
+                  status == 0 ? "#52c41a" : status == 1 ? "#faad14" : "#faad14",
                 fontFamily: "'Titillium Web',sans-serif",
               }}
               size="large"
@@ -194,7 +192,7 @@ const MailTicketList = () => {
                     size="small"
                     onClick={() => handleUpdateForCheck(record.id)}
                   >
-                    Update For Check
+                    Soft Reminder
                   </Button>
                 )}
               </span>

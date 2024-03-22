@@ -266,30 +266,26 @@ const AllTicketList = ({ TicketId }) => {
       dataIndex: "status",
       width: "12%",
       align: "center",
-      render: (_, record) => {
+      render: (status) => {
         return (
-          <Space size="middle">
+          <Space size="status">
             <Badge
               count={
-                record.status == 0
+                status == 0
                   ? "Open"
-                  : record.status == "1"
+                  : status == 1
                   ? "Acknowledged"
-                  : record.status == "2"
+                  : status == 2
                   ? "InProgress"
-                  : record.status == "3"
+                  : status == 3
                   ? "Complete"
-                  : record.status == "4"
+                  : status == 4
                   ? "Closed"
                   : "Deleted"
               }
               style={{
                 backgroundColor:
-                  record.status == "0"
-                    ? "#52c41a"
-                    : record.status == "1"
-                    ? "#faad14"
-                    : "#faad14",
+                  status == 0 ? "#52c41a" : status == 1 ? "#faad14" : "#faad14",
                 fontFamily: "'Titillium Web',sans-serif",
               }}
               size="large"

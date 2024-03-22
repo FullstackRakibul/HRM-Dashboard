@@ -51,6 +51,7 @@ import axios from "axios";
 
 export const AxiosInstance = axios.create({
   baseURL: "https://localhost:7295/",
+  //baseURL: "https://localhost:44397/",
   //baseURL: "http://45.114.84.19:7500/",
 });
 AxiosInstance.interceptors.request.use(
