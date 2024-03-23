@@ -60,12 +60,6 @@ const TicketCreateForm = () => {
       description: values.description,
       attachment: values.attachment.file.name,
     };
-    values.title = values.ticketTitle;
-    values.unitId = values.unit.value;
-    values.ticketTypeId = values.ticketType.value;
-    values.departmentId = values.department.value;
-    values.attachment = values.attachment;
-    values.createdBy = "088101";
 
     console.log("Received values:", data);
     const response = await axios.post(

@@ -140,16 +140,19 @@ const AllTicketList = ({ TicketId }) => {
   };
 
   // .................. update ticket status ................
+  const [isButtonDisabled, setIsButtonDisabled] = useState([false]);
   const handleUpdateForCheck = async (ticketId) => {
     try {
-      const response = await AxiosInstance.get(
-        `/api/Tickets/updateForCheck/${ticketId}`
+      console.log(ticketId);
+      const response = await AxiosInstance.post(
+        `/api/Tickets/UpdateForCheckTicketStatus/${ticketId}`
       );
-
-      console.log("Check for update Ticket ID", ticketId);
-
+      console.log("Check for update Ticket ID", response);
       if (response.status === 200) {
         message.success("Ticket has been updated.");
+        // disable this button for 1 min
+        //isButtonDisabled(true);
+        //setTimeout(() => setIsButtonDisabled(false), 1 * 60 * 1000);
       } else {
         message.error("Failed to update ticket.");
       }
@@ -224,7 +227,6 @@ const AllTicketList = ({ TicketId }) => {
   }, [TicketId]);
 
   //...handle delete ..............
-
   const handleDeleteItem = async (itemId) => {
     try {
       message.warning("Ticket Deleted successfully");
@@ -266,29 +268,35 @@ const AllTicketList = ({ TicketId }) => {
       dataIndex: "status",
       width: "12%",
       align: "center",
-      render: (_, record) => {
+      render: (status) => {
         return (
-          <Space size="middle">
+          <Space size="status">
             <Badge
               count={
-                record.status == 0
+                status == 0
                   ? "Open"
-                  : record.status == "1"
+                  : status == 1
                   ? "Acknowledged"
-                  : record.status == "2"
+                  : status == 2
                   ? "InProgress"
-                  : record.status == "3"
+                  : status == 3
                   ? "Complete"
-                  : record.status == "4"
+                  : status == 4
                   ? "Closed"
                   : "Deleted"
               }
               style={{
                 backgroundColor:
-                  record.status == "0"
+                  status == 0
                     ? "#52c41a"
-                    : record.status == "1"
+                    : status == 1
                     ? "#faad14"
+                    : status == 2
+                    ? "#ff5f20"
+                    : status == 3
+                    ? "#5356FF"
+                    : status == 4
+                    ? "#00224D"
                     : "#faad14",
                 fontFamily: "'Titillium Web',sans-serif",
               }}
@@ -321,9 +329,10 @@ const AllTicketList = ({ TicketId }) => {
                   icon={<CheckCircleOutlined />}
                   className="font-sans flex items-center"
                   size="small"
+                  // disabled={isButtonDisabled}
                   onClick={() => handleUpdateForCheck(record.id)}
                 >
-                  Update
+                  Update Status
                 </Button>
               )}
               <Button
@@ -373,13 +382,26 @@ const AllTicketList = ({ TicketId }) => {
   // handle add review ......
   const [ticketReview, setTicketReview] = useState("");
 
-  const handleAddReview = async (values) => {
-    console.log("asfcas", values);
-    if (!ticketReview) {
-      console.log(`Add review button ..${ticketReview}`);
-      //message.error("Please enter a review message.");
-      return;
+  const handleCreateReview = async (values) => {
+    const insertData = {
+      ticketId: "105",
+      reviewerId: "000000",
+      reviewNote: values.reviewNote,
+    };
+    console.log(insertData);
+    const response = await AxiosInstance.post(
+      "/api/Reviews/create-review-note",
+      insertData
+    );
+    console.log(response.data);
+    if (response.status === 200) {
+      message.success("Review note added.");
+      form.resetFields();
+    } else {
+      message.error("Error in adding review.");
     }
+
+    return;
   };
 
   return (
@@ -466,9 +488,16 @@ const AllTicketList = ({ TicketId }) => {
                       </span>
                     }
                     description={
-                      <span className="text-sm font-bold">
-                        {convertActualtDateTime(item.createdAt)}
-                      </span>
+                      <>
+                        <span className="text-sm font-bold">
+                          <b className="text-primary">ReviewerId :</b>{" "}
+                          {item.reviewerId}
+                        </span>
+                        <br></br>
+                        <span className="text-sm font-bold">
+                          {convertActualtDateTime(item.createdAt)}
+                        </span>
+                      </>
                     }
                   />
                 </List.Item>
@@ -478,7 +507,7 @@ const AllTicketList = ({ TicketId }) => {
         </Row>
         <Row>
           <Col span={24}>
-            <Form size="small" form={form} onFinish={handleAddReview}>
+            <Form size="small" form={form} onFinish={handleCreateReview}>
               <Row>
                 <Col span={24}>
                   <CommonFormItem
@@ -490,12 +519,12 @@ const AllTicketList = ({ TicketId }) => {
                         required: true,
                         message: "Ticket review Is Required.",
                       },
-                      name: "TicketReview",
+                      name: "reviewNote",
                       labelAlign: "right",
                       label: "Add review on this Ticket",
                     }}
                   >
-                    <Input.TextArea name="ticketReview" rows={2} />
+                    <Input.TextArea rows={2} />
                   </CommonFormItem>
                 </Col>
               </Row>
@@ -525,7 +554,7 @@ const AllTicketList = ({ TicketId }) => {
                     className="font-sans bg-primary"
                     size="small"
                     htmlType="submit"
-                    onSubmit={handleAddReview}
+                    onSubmit={handleCreateReview}
                   >
                     Send Review
                   </Button>

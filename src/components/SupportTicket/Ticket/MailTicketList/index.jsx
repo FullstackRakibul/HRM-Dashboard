@@ -43,7 +43,7 @@ const MailTicketList = () => {
   const fetchData = async (Take = 10, Skip = 1) => {
     try {
       const responseMailTicket = await AxiosInstance.get(
-        `/api/Tickets/getPaginationList/${Skip}/${Take}`
+        `/api/Tickets/GetMailTicketList/${Skip}/${Take}`
       );
 
       const lists = configDataForTable(responseMailTicket.data);
@@ -79,18 +79,19 @@ const MailTicketList = () => {
   const handleUpdateForCheck = async (ticketId) => {
     try {
       console.log("Check for update Ticket ID", ticketId);
-      const response = await AxiosInstance.get(
-        `/api/Tickets/updateForCheck/${ticketId}`
-      );
+      message.success("The support agent has been notified.");
+      // const response = await AxiosInstance.get(
+      //   `/api/Tickets/updateForCheck/${ticketId}`
+      // );
 
-      if (response.status === 200) {
-        message.success("Ticket has been updated.");
-      } else {
-        message.error("Failed to update ticket.");
-      }
+      // if (response.status === 200) {
+      //   message.success("Ticket has been updated.");
+      // } else {
+      //   message.error("Failed to update ticket.");
+      // }
     } catch (error) {
-      console.error("Error updating ticket:", error);
-      message.error("Failed to update ticket.");
+      console.error("Remainder added failed:", error);
+      message.error("Remainder added failed.");
     }
   };
 
@@ -102,6 +103,18 @@ const MailTicketList = () => {
     const Skip = page;
     const Take = pageSize;
     fetchData(Take, Skip == 0 ? 1 : Skip);
+  };
+
+  // ......... button disable section .........
+  const [isButtonDisabled, setIsButtonDisabled] = useState([false]);
+  const [isButtonDisabledTest, setIsButtonDisabledTest] = useState([false]);
+
+  const handleButtonClick = async (recordId) => {
+    // Call your existing functionality
+    handleUpdateForCheck(recordId);
+    // Disable the button and re-enable after 20 minutes
+    setIsButtonDisabled(true);
+    setTimeout(() => setIsButtonDisabled(false), 0.5 * 60 * 1000);
   };
 
   const columns = [
@@ -135,30 +148,26 @@ const MailTicketList = () => {
       dataIndex: "status",
       width: "12%",
       align: "center",
-      render: (record) => {
+      render: (status) => {
         return (
           <Space size="middle">
             <Badge
               count={
-                record.status == 0
+                status == 0
                   ? "Open"
-                  : record.status == "1"
+                  : status == 1
                   ? "Acknowledged"
-                  : record.status == "2"
+                  : status == 2
                   ? "InProgress"
-                  : record.status == "3"
+                  : status == 3
                   ? "Complete"
-                  : record.status == "4"
+                  : status == 4
                   ? "Closed"
                   : "Deleted"
               }
               style={{
                 backgroundColor:
-                  record.status == "0"
-                    ? "#52c41a"
-                    : record.status == "1"
-                    ? "#faad14"
-                    : "#faad14",
+                  status == 0 ? "#52c41a" : status == 1 ? "#faad14" : "#faad14",
                 fontFamily: "'Titillium Web',sans-serif",
               }}
               size="large"
@@ -175,6 +184,7 @@ const MailTicketList = () => {
         return (
           <Row>
             <Col
+              className="gap-2"
               span={24}
               style={{
                 display: "flex",
@@ -192,11 +202,22 @@ const MailTicketList = () => {
                     icon={<CheckCircleOutlined />}
                     className="font-sans flex items-center"
                     size="small"
-                    onClick={() => handleUpdateForCheck(record.id)}
+                    // onClick={() => handleUpdateForCheck(record.id)}
+                    disabled={isButtonDisabled}
+                    onClick={() => handleButtonClick(record.id)}
                   >
-                    Update For Check
+                    Soft Reminder
                   </Button>
                 )}
+              </span>
+              <span className="font-sans">
+                <Button
+                  className="font-sans flex items-center"
+                  size="small"
+                  icon={<UsergroupAddOutlined />}
+                >
+                  Assign Agent
+                </Button>
               </span>
             </Col>
           </Row>
