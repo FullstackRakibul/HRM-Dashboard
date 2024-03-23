@@ -21,9 +21,9 @@ const CreateTicketType = () => {
         title="Create Ticket Type"
         description="For classifying the issues, create a ticket type."
       >
-        <Button size="small" icon={<i className="fas fa-window-restore"></i>}>
+        {/* <Button size="small" icon={<i className="fas fa-window-restore"></i>}>
           See List
-        </Button>
+        </Button> */}
       </ComponentHeader>
       <ContentContainer>
         <TicketTypeCreateForm />

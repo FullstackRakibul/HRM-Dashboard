@@ -229,8 +229,9 @@ const AllTicketList = ({ TicketId }) => {
   //...handle delete ..............
   const handleDeleteItem = async (itemId) => {
     try {
+      const response = await AxiosInstance.delete(`/api/Tickets/${itemId}`);
+      console.log(response);
       message.warning("Ticket Deleted successfully");
-      console.log(`Item with ID ${itemId} deleted successfully`);
     } catch (error) {
       console.error("Error deleting item:", error);
     }

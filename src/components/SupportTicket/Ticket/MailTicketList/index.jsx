@@ -109,10 +109,13 @@ const MailTicketList = () => {
   const [isButtonDisabled, setIsButtonDisabled] = useState([false]);
   const [isButtonDisabledTest, setIsButtonDisabledTest] = useState([false]);
 
-  const handleButtonClick = async (recordId) => {
-    // Call your existing functionality
-    handleUpdateForCheck(recordId);
-    // Disable the button and re-enable after 20 minutes
+  const handleSoftReminderButtonClick = async (recordId) => {
+    const response = await AxiosInstance.post(
+      `/api/Tickets/soft-reminder/${recordId}`
+    );
+    console.log(response);
+    message.success("Reminder added to an Agent", recordId);
+
     setIsButtonDisabled(true);
     setTimeout(() => setIsButtonDisabled(false), 0.5 * 60 * 1000);
   };
@@ -203,8 +206,8 @@ const MailTicketList = () => {
                     className="font-sans flex items-center"
                     size="small"
                     // onClick={() => handleUpdateForCheck(record.id)}
-                    disabled={isButtonDisabled}
-                    onClick={() => handleButtonClick(record.id)}
+                    //disabled={isButtonDisabled}
+                    onClick={() => handleSoftReminderButtonClick(record.id)}
                   >
                     Soft Reminder
                   </Button>
