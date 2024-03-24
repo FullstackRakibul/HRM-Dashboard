@@ -26,10 +26,32 @@ const props = {
   name: "attachment",
   multiple: true,
   action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-  onChange(info) {
+  //action: "/api/Tickets/createTicketWithTarget",
+  async onChange(info) {
     const { status } = info.file;
     if (status !== "uploading") {
       console.log(info.file, info.fileList);
+
+      //.........................
+      // if (info.file.status === "done") {
+      //   const texts = await info.file.originFileObj.text();
+      //   const results = parse(texts, {
+      //     header: true
+      //   });
+
+      //   const col = _.keys(results.data[0]);
+
+      //   const customCol = _.map(col, (value) => ({
+      //     title: value,
+      //     dataIndex: value,
+      //     key: value.toLowerCase(),
+      //   }));
+
+      //   const data = results.data;
+
+      //   console.log({ customCol });
+      //   console.log({ data });
+      //.........................
     }
     if (status === "done") {
       message.success(`${info.file.name} attachment uploaded successfully.`);
