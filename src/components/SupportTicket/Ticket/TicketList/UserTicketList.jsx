@@ -25,29 +25,33 @@ import {
 } from "@ant-design/icons";
 import NormalCard from "../../../ui/Card/NormalCard";
 import ListsTable from "../../../ui/ListsTable";
+import { AxiosInstance } from "../../../../apis/supportTicketSlice";
+import { convertActualtDateTime } from "../../../../utils/DateConfig";
 
 const UserTicketList = () => {
-  const [tickets, setTicketList] = useState([]);
+  const [tickets, setTickets] = useState([]);
   useEffect(() => {
-    fetchData(10, 1);
+    fetchTicketData(5, 1);
   }, []);
 
-  const fetchData = async (Take = 10, Skip = 1) => {
+  // Ticket Operation ............
+  const fetchTicketData = async (Take = 5, Skip = 1) => {
     try {
-      const responseMailTicket = await AxiosInstance.get(
+      const responseTicket = await AxiosInstance.get(
         `/api/Tickets/GetMailTicketList/${Skip}/${Take}`
       );
 
-      const lists = configDataForTable(responseMailTicket.data);
+      const lists = configDataForTable(responseTicket.data);
       if (lists.length) {
-        setTicketList(lists);
+        setTickets(lists);
       }
 
-      console.log(responseMailTicket.data);
+      console.log(setTickets.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   const configDataForTable = (lists) => {
     const newLists = [...lists];
     let emptyLists = [];
@@ -151,7 +155,7 @@ const UserTicketList = () => {
                     className="font-sans flex items-center"
                     size="small"
                   >
-                    Soft Reminder
+                    Update Status
                   </Button>
                 )}
               </span>
@@ -166,21 +170,6 @@ const UserTicketList = () => {
     <>
       <section className="pt-3">
         <h3 className="font-sans font-semibold text-2xl">Assigned List </h3>
-        <div>
-          <NormalCard>
-            <ListsTable
-              tableProps={{
-                data: tickets?.length ? tickets : [],
-                height: 500,
-                columns,
-                rowSelection: tickets.id,
-              }}
-            ></ListsTable>
-          </NormalCard>
-        </div>
-      </section>
-      <section className="pt-3">
-        <h3 className="font-sans font-semibold text-2xl">Raised List</h3>
         <div>
           <NormalCard>
             <ListsTable
