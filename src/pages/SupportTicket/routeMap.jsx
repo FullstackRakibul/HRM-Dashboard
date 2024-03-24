@@ -1,10 +1,12 @@
 import loadable from "@loadable/component";
-import ListMailTicket from "./ListMailTicket";
+//import ListMailTicket from "./ListMailTicket";
 
 const SupportTicketDashboard = loadable(() => import("./Dashboard/index"));
 const CreateTicket = loadable(() => import("./CreateTicket/index"));
 const ListTickets = loadable(() => import("./ListTicket/index"));
 const CreateTicketType = loadable(() => import("./CreateTicketType/index"));
+const MyTicketList = loadable(() => import("./ListTicket/MyTicketList"));
+const ListMailTicket = loadable(() => import("./ListMailTicket"));
 
 export default [
   {
@@ -26,5 +28,9 @@ export default [
   {
     path: "/ticket/mail/listTicket",
     component: <ListMailTicket />,
+  },
+  {
+    path: "/ticket/myticket",
+    component: <MyTicketList />,
   },
 ];
