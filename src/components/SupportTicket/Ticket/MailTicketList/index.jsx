@@ -28,7 +28,6 @@ import { AxiosInstance } from "../../../../apis/supportTicketSlice";
 import { convertActualtDateTime } from "../../../../utils/DateConfig";
 
 import NormalCard from "../../../ui/Card/NormalCard";
-import ListTicket from "../../../../pages/SupportTicket/ListTicket";
 import ListsTable from "../../../ui/ListsTable";
 import PaginationMain from "../../../ui/Pagination";
 
