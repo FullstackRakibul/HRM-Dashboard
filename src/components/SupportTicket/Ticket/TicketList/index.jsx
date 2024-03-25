@@ -21,6 +21,7 @@ import ListsTable from "../../../ui/ListsTable";
 import NormalCard from "../../../ui/Card/NormalCard";
 import CommonFormItem from "../../../ui/FormItem/Common";
 import { convertActualtDateTime } from "../../../../utils/DateConfig";
+import * as SignalR from "@microsoft/signalr";
 import {
   DeleteOutlined,
   UsergroupAddOutlined,
@@ -224,6 +225,7 @@ const AllTicketList = ({ TicketId }) => {
 
   useEffect(() => {
     getTicketReviewsDetails(TicketId, setReviews, () => setIsModalOpen(true));
+    connectToSignalR();
   }, [TicketId]);
 
   //...handle delete ..............
@@ -237,7 +239,24 @@ const AllTicketList = ({ TicketId }) => {
     }
   };
 
-  // .............. ticket table data .......
+  // .............. SignalR setup .......
+  let connection = null;
+  const connectToSignalR = () => {
+    connection = new SignalR.HubConnectionBuilder()
+      .withUrl("https://localhost:7295" + "/reviewHub")
+      .build();
+    connection
+      .start()
+      .then(() => {
+        console.log("Successfully connected sent bundle list");
+      })
+      .catch((err) => console.log(err));
+    // connection.invoke("Sweet", 123);
+    connection.on("NewBarcodeGenerated", (data) => {
+      getBundleList();
+    });
+  };
+
   const columns = [
     {
       key: "title",

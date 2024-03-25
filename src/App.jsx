@@ -6,24 +6,22 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.less";
 import MyRouter from "./Router";
 import { SocketContextApi } from "./context/SocketContext";
-import { socket } from "./socket/socket";
+// import { socket } from "./socket/socket";
 import { Chart } from "chart.js/auto";
 
 function App() {
   const [count, setCount] = useState(0);
   const [socketInstance, setSocketInstance] = useState("");
   useEffect(() => {
-    function onConnect(e) {
-      socket.emit("i-m-connected");
-      console.log("Connected...");
-      setSocketInstance(socket);
-    }
-
-    function onDisconnect() {
-      //setIsConnected(false);
-    }
-
-    socket.on("connect", onConnect);
+    // function onConnect(e) {
+    //   socket.emit("i-m-connected");
+    //   console.log("Connected...");
+    //   setSocketInstance(socket);
+    // }
+    // function onDisconnect() {
+    //   //setIsConnected(false);
+    // }
+    // socket.on("connect", onConnect);
   }, []);
 
   return (
