@@ -1487,10 +1487,24 @@ export const supportTicketMenu = [
       //   MenuPath: "ticket/mail/create",
       // },
       {
-        MenuId: 2,
+        MenuId: 1,
         MenuName: "Mail Ticket Lists",
-        Key: 2,
+        Key: 1,
         MenuPath: "ticket/mail/listTicket",
+      },
+    ],
+  },
+
+  {
+    ModuleId: 3,
+    MenuName: "Form Test",
+    IconName: "fas fa-mail-bulk",
+    children: [
+      {
+        MenuId: 1,
+        MenuName: "Upload Attachment",
+        Key: 1,
+        MenuPath: "ticket/form/UploadFile",
       },
     ],
   },

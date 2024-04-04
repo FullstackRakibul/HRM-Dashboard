@@ -1,4 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import {
+  Button,
+  Cascader,
+  Checkbox,
+  ColorPicker,
+  DatePicker,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  Slider,
+  Switch,
+  TreeSelect,
+  Upload,
+} from "antd";
 import ComponentHeader from "../../../components/ui/ComponentHeader";
 import ContentContainer from "../../../components/ui/ContentContainer";
 import GlobalUploadFile from "../../../components/Common/FormPart/GlobalUploadFile";
@@ -16,7 +32,6 @@ const FormTest = () => {
       </ComponentHeader>
       <ContentContainer>
         <GlobalUploadFile />
-        <div>test ............</div>
       </ContentContainer>
     </>
   );

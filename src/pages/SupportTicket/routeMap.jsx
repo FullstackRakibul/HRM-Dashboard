@@ -1,4 +1,5 @@
 import loadable from "@loadable/component";
+import FormTest from "../TESTPAGES/FormTest";
 //import ListMailTicket from "./ListMailTicket";
 
 const SupportTicketDashboard = loadable(() => import("./Dashboard/index"));
@@ -28,6 +29,10 @@ export default [
   {
     path: "/ticket/mail/listTicket",
     component: <ListMailTicket />,
+  },
+  {
+    path: "/ticket/form/UploadFile",
+    component: <FormTest />,
   },
   {
     path: "/ticket/myticket",
