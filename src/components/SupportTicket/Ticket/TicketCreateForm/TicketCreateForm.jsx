@@ -80,7 +80,7 @@ const TicketCreateForm = () => {
       departmentId: values.department.value,
       createdBy: "088101",
       description: values.description,
-      attachment: values.attachment.file.name,
+      //attachment: values.attachment.file.name,
     };
 
     console.log("Received values:", data);
