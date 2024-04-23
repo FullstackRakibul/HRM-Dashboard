@@ -1,11 +1,14 @@
 import React from "react";
-import { Button, Row, Col } from "antd";
+import { Button, Row, Col, Card } from "antd";
+
 import ComponentHeader from "../../../components/ui/ComponentHeader";
 import ContentContainer from "../../../components/ui/ContentContainer";
 import Statistics from "../../../components/SupportTicket/Global/Statistics";
 import StatisticCard from "../../../components/SupportTicket/Global/StatisticsCard";
 import DepartmentStatistics from "../../../components/SupportTicket/Global/DepartmentStatistics/DepartmentStatistics";
 import CompanyOverview from "../../../components/SupportTicket/Global/Statistics/CompanyOverview";
+import ProblemSolvingLiquidChart from "../../../components/SupportTicket/Dashboard/Charts/LiquidChart";
+import ProblemSolvingColumnChart from "../../../components/SupportTicket/Dashboard/Charts/ColumnChart";
 
 const SupportTicketDashboard = () => {
   return (
@@ -16,12 +19,25 @@ const SupportTicketDashboard = () => {
           "track performance, identify trends, and drive business growth."
         }
       >
-        <Button size="small" icon={<i className="fas fa-window-restore"></i>}>
-          Reset
+        <Button size="small" icon={<i className="fas fa-sync"></i>}>
+          refresh
         </Button>
       </ComponentHeader>
       <ContentContainer>
-        <Statistics title="Statistics" />
+        {/* <Statistics title="Statistics" /> */}
+        <Row justify={"space-between"} className="mt-8" gutter={10}>
+          <Col span={18}>
+            <Card title="Unit-Wise Raised Problem Count">
+              <ProblemSolvingColumnChart />
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card title="Problem Solving ratio">
+              <ProblemSolvingLiquidChart percentRate={0.65} />
+            </Card>
+          </Col>
+        </Row>
+
         <Row className="pt-6 flex flex-row" gutter={16}>
           <Col span={12}>
             <StatisticCard
