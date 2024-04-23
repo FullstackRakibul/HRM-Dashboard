@@ -404,8 +404,8 @@ const AllTicketList = ({ TicketId }) => {
 
   const handleCreateReview = async (values) => {
     const insertData = {
-      ticketId: "105",
-      reviewerId: "000000",
+      ticketId: ticketInfos.id,
+      reviewerId: "088101",
       reviewNote: values.reviewNote,
     };
     console.log(insertData);

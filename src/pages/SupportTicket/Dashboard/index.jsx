@@ -32,7 +32,7 @@ const SupportTicketDashboard = () => {
             </Card>
           </Col>
           <Col span={6}>
-            <Card title="Problem Solving ratio">
+            <Card title="Problem Solving Ratio">
               <ProblemSolvingLiquidChart percentRate={0.65} />
             </Card>
           </Col>

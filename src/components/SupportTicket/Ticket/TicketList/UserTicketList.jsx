@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-
+import { AxiosInstance } from "../../../../apis/supportTicketSlice";
+import { convertActualtDateTime } from "../../../../utils/DateConfig";
 import {
   Row,
   Col,
@@ -35,7 +36,7 @@ const UserTicketList = () => {
   const fetchData = async (Take = 10, Skip = 1) => {
     try {
       const responseMailTicket = await AxiosInstance.get(
-        `/api/Tickets/GetMailTicketList/${Skip}/${Take}`
+        `/api/Tickets/getTicketByCreator/088101`
       );
 
       const lists = configDataForTable(responseMailTicket.data);
