@@ -1,12 +1,19 @@
 import loadable from "@loadable/component";
+import FormTest from "../TESTPAGES/FormTest";
 //import ListMailTicket from "./ListMailTicket";
 
-const SupportTicketDashboard = loadable(() => import("./Dashboard/index"));
-const CreateTicket = loadable(() => import("./CreateTicket/index"));
-const ListTickets = loadable(() => import("./ListTicket/index"));
-const CreateTicketType = loadable(() => import("./CreateTicketType/index"));
-const MyTicketList = loadable(() => import("./ListTicket/MyTicketList"));
-const ListMailTicket = loadable(() => import("./ListMailTicket"));
+const SupportTicketDashboard = loadable(() =>
+  import("./Ticket/Dashboard/index")
+);
+const CreateTicket = loadable(() => import("./Ticket/CreateTicket/index"));
+const ListTickets = loadable(() => import("./Ticket/ListTicket/index"));
+const CreateTicketType = loadable(() =>
+  import("./Ticket/CreateTicketType/index")
+);
+const MyTicketList = loadable(() =>
+  import("./Profile/MyTicketList/MyTicketList")
+);
+const ListMailTicket = loadable(() => import("./Mail/ListMailTicket"));
 
 export default [
   {
@@ -28,6 +35,10 @@ export default [
   {
     path: "/ticket/mail/listTicket",
     component: <ListMailTicket />,
+  },
+  {
+    path: "/ticket/form/UploadFile",
+    component: <FormTest />,
   },
   {
     path: "/ticket/myticket",

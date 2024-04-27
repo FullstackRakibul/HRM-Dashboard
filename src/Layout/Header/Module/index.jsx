@@ -89,7 +89,8 @@ const ModuleMain = () => {
         >
           <img
             src={SupportImage}
-            className="module-image text-center flex justify-center "
+            className="module-image"
+            
           />
           <Divider className="separator" />
           <span className="module-description">Ticket</span>

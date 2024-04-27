@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Button, message } from "antd";
 
-import ComponentHeader from "../../../components/ui/ComponentHeader";
-import ContentContainer from "../../../components/ui/ContentContainer";
-import MailTicketList from "../../../components/SupportTicket/Ticket/MailTicketList";
-import { AxiosInstance } from "../../../apis/supportTicketSlice";
+import ComponentHeader from "../../../../components/ui/ComponentHeader";
+import ContentContainer from "../../../../components/ui/ContentContainer";
+import MailTicketList from "../../../../components/SupportTicket/Ticket/MailTicketList";
+import { AxiosInstance } from "../../../../apis/supportTicketSlice";
 
 const ListMailTicket = () => {
   const [isLoading, setIsLoading] = useState([false]);
