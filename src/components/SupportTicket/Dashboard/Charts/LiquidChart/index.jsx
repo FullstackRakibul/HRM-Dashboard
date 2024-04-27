@@ -4,6 +4,7 @@ import "./index.css";
 
 const ProblemSolvingLiquidChart = (props) => {
   const config = {
+    titleFill: "#ff5f20",
     interaction: {
       tooltip: {
         render: () => (
@@ -18,8 +19,13 @@ const ProblemSolvingLiquidChart = (props) => {
       waveLength: 128,
       fill: "#299647",
       stroke: "#299647",
+
       titleFill: "#ff5f20",
+
       subtitleFill: "#ff5f20",
+      color: {
+        primary: "#ff5f20",
+      },
     },
   };
   return <Liquid {...config} />;

@@ -150,7 +150,6 @@ const ProblemSolvingColumnChart = (props) => {
       radiusTopRight: 5,
       fill: "#299647",
     },
-    color: ["#299647"],
   };
   return <Column {...config} />;
 };
