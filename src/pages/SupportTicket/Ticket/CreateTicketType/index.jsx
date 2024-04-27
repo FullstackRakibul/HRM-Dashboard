@@ -10,9 +10,9 @@ import {
   Form,
   message,
 } from "antd";
-import ComponentHeader from "../../../components/ui/ComponentHeader";
-import ContentContainer from "../../../components/ui/ContentContainer";
-import TicketTypeCreateForm from "../../../components/SupportTicket/Ticket/TicketTypeCreateForm";
+import ComponentHeader from "../../../../components/ui/ComponentHeader/index";
+import ContentContainer from "../../../../components/ui/ContentContainer";
+import TicketTypeCreateForm from "../../../../components/SupportTicket/Ticket/TicketTypeCreateForm";
 
 const CreateTicketType = () => {
   return (

@@ -26,8 +26,6 @@ import {
 } from "@ant-design/icons";
 import NormalCard from "../../../ui/Card/NormalCard";
 import ListsTable from "../../../ui/ListsTable";
-import { AxiosInstance } from "../../../../apis/supportTicketSlice";
-import { convertActualtDateTime } from "../../../../utils/DateConfig";
 
 const UserTicketList = () => {
   const [tickets, setTickets] = useState([]);

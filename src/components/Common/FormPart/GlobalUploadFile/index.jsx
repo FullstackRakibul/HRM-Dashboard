@@ -13,23 +13,29 @@ const GlobalUploadFile = () => {
 
   const handleFileUpload = async (values) => {
     try {
-      console.log(`uploaded data : `, { values });
+      console.log(
+        `uploaded data : ${values.Uploadfile.fileList[0].originFileObj}`
+      );
+      console.log(values.Uploadfile.file, values.Uploadfile.fileList);
       const formData = new FormData();
 
       // hardCoderData
-      formData.append("UploadedFile", values.Uploadfile?.file);
+      formData.append(
+        "UploadedFile",
+        values.Uploadfile.fileList[0].originFileObj
+      );
       formData.append("TicketId", "10");
       formData.append("FolderIndex", "1");
       formData.append("FilePathUrl", "GloballlyUploadedFile");
 
-      console.log(formData);
+      console.log(`Form Data : ${formData}`);
 
-      const response = await AxiosInstance.post("/api/FileUpload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log(response);
+      // const response = await AxiosInstance.post("/api/FileUpload", formData, {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // });
+      // console.log(response);
 
       message.success("File Upload Success!");
       //form.resetFields();
