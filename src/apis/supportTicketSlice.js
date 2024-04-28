@@ -71,3 +71,26 @@ AxiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+// to upload form data ...............
+
+export const AxiosInstanceMultipart = axios.create({
+  baseURL: "https://localhost:7295/",
+});
+
+AxiosInstanceMultipart.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+
+    // Set default headers
+    config.headers["Content-Type"] = "multipart/form-data";
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);

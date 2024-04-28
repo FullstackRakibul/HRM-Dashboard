@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { AxiosInstance } from "../../../../apis/supportTicketSlice";
+import { AxiosInstanceMultipart } from "../../../../apis/supportTicketSlice";
 import axios from "axios";
 import { Button, Form, Upload, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
@@ -17,40 +17,16 @@ const GlobalUploadFile = () => {
       console.log("Uploaded file:", values.Uploadfile);
       const formData = new FormData();
 
-      console.log(values);
-
-      let fileType = values.Uploadfile?.file?.name;
-      console.log("TYpe", fileType);
-      if (fileType) {
-        fileType = fileType.split(".");
-        const len = fileType.length;
-        fileType = fileType[len - 1];
-        const TenderImageName = `testrtss.${fileType}`;
-        console.log(TenderImageName);
-
-        // console.log("Value: ", values.Uploadfile?.file);
-        formData.append(
-          "UploadedFile",
-          values.Uploadfile?.file,
-          `${TenderImageName}`
-        );
-      }
-
+      formData.append("UploadedFile", values.Uploadfile?.file);
       formData.append("TicketId", "10");
       formData.append("FolderIndex", "1");
       formData.append("FilePathUrl", "ticketFiles");
 
-      //   console.log(`Form Data : ${[...formData.values()]}`);
-
-      const response = await axios.post(
-        "https://localhost:7295/api/FileUpload",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+      const response = await AxiosInstanceMultipart.post(
+        "api/FileUpload",
+        formData
       );
+
       console.log(response);
 
       message.success("File Upload Success!");
