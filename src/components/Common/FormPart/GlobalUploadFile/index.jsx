@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AxiosInstance } from "../../../../apis/supportTicketSlice";
+import axios from "axios";
 import { Button, Form, Upload, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
@@ -13,32 +14,47 @@ const GlobalUploadFile = () => {
 
   const handleFileUpload = async (values) => {
     try {
-      console.log(
-        `uploaded data : ${values.Uploadfile.fileList[0].originFileObj}`
-      );
-      console.log(values.Uploadfile.file, values.Uploadfile.fileList);
+      console.log("Uploaded file:", values.Uploadfile);
       const formData = new FormData();
 
-      // hardCoderData
-      formData.append(
-        "UploadedFile",
-        values.Uploadfile.fileList[0].originFileObj
-      );
+      console.log(values);
+
+      let fileType = values.Uploadfile?.file?.name;
+      console.log("TYpe", fileType);
+      if (fileType) {
+        fileType = fileType.split(".");
+        const len = fileType.length;
+        fileType = fileType[len - 1];
+        const TenderImageName = `testrtss.${fileType}`;
+        console.log(TenderImageName);
+
+        // console.log("Value: ", values.Uploadfile?.file);
+        formData.append(
+          "UploadedFile",
+          values.Uploadfile?.file,
+          `${TenderImageName}`
+        );
+      }
+
       formData.append("TicketId", "10");
       formData.append("FolderIndex", "1");
-      formData.append("FilePathUrl", "GloballlyUploadedFile");
+      formData.append("FilePathUrl", "ticketFiles");
 
-      console.log(`Form Data : ${formData}`);
+      //   console.log(`Form Data : ${[...formData.values()]}`);
 
-      // const response = await AxiosInstance.post("/api/FileUpload", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      // console.log(response);
+      const response = await axios.post(
+        "https://localhost:7295/api/FileUpload",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
 
       message.success("File Upload Success!");
-      //form.resetFields();
+      form.resetFields();
     } catch (error) {
       message.error("File Upload Failed!");
       console.error(error);
@@ -46,11 +62,7 @@ const GlobalUploadFile = () => {
   };
   return (
     <>
-      <Form
-        onFinish={handleFileUpload}
-        form={form}
-        enctype="multipart/form-data"
-      >
+      <Form onFinish={handleFileUpload} form={form}>
         <Form.Item label="Upload" name="Uploadfile">
           <Upload
             //multiple={true}
