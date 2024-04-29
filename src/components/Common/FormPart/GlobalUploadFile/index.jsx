@@ -21,7 +21,7 @@ const GlobalUploadFile = () => {
       const formData = new FormData();
 
       formData.append("UploadedFile", values.Uploadfile?.file);
-      formData.append("TicketId", "10");
+      formData.append("TicketId", "6");
       formData.append("FolderIndex", "1");
       formData.append("FilePathUrl", "ticketFiles");
 
