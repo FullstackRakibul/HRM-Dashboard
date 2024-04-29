@@ -4,6 +4,9 @@ import axios from "axios";
 import { Button, Form, Upload, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
+import dotMenuImage from "../../../../assets/images/appLauncherMenuBlack.svg";
+import { fill } from "lodash";
+
 const GlobalUploadFile = () => {
   const [fileUpload, setFileUpload] = useState([]);
   const [fileList, setFileList] = useState([]);
@@ -36,17 +39,15 @@ const GlobalUploadFile = () => {
       console.error(error);
     }
   };
+
   return (
     <>
       <Form onFinish={handleFileUpload} form={form}>
         <Form.Item label="Upload" name="Uploadfile">
           <Upload
-            //multiple={true}
+            multiple={true}
             beforeUpload={() => false}
             listType="picture-card"
-            onRemove={() => {
-              setFileUpload([]);
-            }}
           >
             <button style={{ border: 0, background: "none" }} type="button">
               <PlusOutlined />
@@ -55,7 +56,7 @@ const GlobalUploadFile = () => {
           </Upload>
         </Form.Item>
         <Form.Item label="Button">
-          <Button htmlType="submit">Upload</Button>
+          <Button htmlType="submit">Submit</Button>
         </Form.Item>
       </Form>
     </>
