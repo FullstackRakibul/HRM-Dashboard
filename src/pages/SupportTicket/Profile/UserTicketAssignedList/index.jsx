@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Table } from "antd";
-import UserTicketList from "../../../../components/SupportTicket/Ticket/TicketList/UserTicketList";
+import AssignedTicketListTable from "../../../../components/SupportTicket/Ticket/AssignedTicketListTable";
 import ComponentHeader from "../../../../components/ui/ComponentHeader";
 import ContentContainer from "../../../../components/ui/ContentContainer";
 
@@ -16,7 +16,7 @@ const MyTicketList = () => {
         </Button>
       </ComponentHeader>
       <ContentContainer>
-        <UserTicketList />
+        <AssignedTicketListTable />
       </ContentContainer>
     </>
   );

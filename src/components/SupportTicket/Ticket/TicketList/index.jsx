@@ -69,10 +69,6 @@ const AllTicketList = ({ TicketId }) => {
     ConfigureAxios();
   }, []);
 
-  useEffect(() => {
-    fetchData(10, 1);
-  }, []);
-
   const fetchData = async (Take = 10, Skip = 1) => {
     try {
       const responseTicket = await AxiosInstance.get(
@@ -91,6 +87,10 @@ const AllTicketList = ({ TicketId }) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    fetchData(10, 1);
+  }, []);
 
   // ..................const pagination ticket list................
   const onPaginationChange = (page, pageSize) => {

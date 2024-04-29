@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { AxiosInstanceMultipart } from "../../../../apis/supportTicketSlice";
+import {
+  AxiosInstance,
+  AxiosInstanceMultipart,
+} from "../../../../apis/supportTicketSlice";
 import axios from "axios";
 import { Button, Form, Upload, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";

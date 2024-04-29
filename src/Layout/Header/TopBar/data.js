@@ -1502,9 +1502,9 @@ export const supportTicketMenu = [
       },
       {
         MenuId: 1,
-        MenuName: "Raised Tickets",
+        MenuName: "Assigned Tickets",
         Key: 1,
-        MenuPath: "ticket/myticket",
+        MenuPath: "ticket/assigned-ticket",
         isDelete: 1,
         isEdit: 1,
         isCreate: 1,
@@ -1512,9 +1512,9 @@ export const supportTicketMenu = [
       },
       {
         MenuId: 1,
-        MenuName: "Assigned Tickets",
+        MenuName: "Raised Tickets",
         Key: 1,
-        MenuPath: "/#/#",
+        MenuPath: "ticket/raised-ticket",
         isDelete: 1,
         isEdit: 1,
         isCreate: 1,

@@ -10,9 +10,14 @@ const ListTickets = loadable(() => import("./Ticket/ListTicket/index"));
 const CreateTicketType = loadable(() =>
   import("./Ticket/CreateTicketType/index")
 );
-const MyTicketList = loadable(() =>
-  import("./Profile/MyTicketList/MyTicketList")
+const UserTicketAssignedList = loadable(() =>
+  import("./Profile/UserTicketAssignedList/index")
 );
+
+const UserTicketRaisedList = loadable(() =>
+  import("../../pages/SupportTicket/Profile/UserTicketRaisedList/index")
+);
+
 const ListMailTicket = loadable(() => import("./Mail/ListMailTicket"));
 
 export default [
@@ -41,7 +46,11 @@ export default [
     component: <FormTest />,
   },
   {
-    path: "/ticket/myticket",
-    component: <MyTicketList />,
+    path: "/ticket/assigned-ticket",
+    component: <UserTicketAssignedList />,
+  },
+  {
+    path: "/ticket/raised-ticket",
+    component: <UserTicketRaisedList />,
   },
 ];

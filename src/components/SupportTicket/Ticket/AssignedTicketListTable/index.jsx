@@ -27,7 +27,7 @@ import {
 import NormalCard from "../../../ui/Card/NormalCard";
 import ListsTable from "../../../ui/ListsTable";
 
-const UserTicketList = () => {
+const AssignedTicketListTable = () => {
   const [tickets, setTickets] = useState([]);
   useEffect(() => {
     fetchTicketData(5, 1);
@@ -186,4 +186,4 @@ const UserTicketList = () => {
   );
 };
 
-export default UserTicketList;
+export default AssignedTicketListTable;
