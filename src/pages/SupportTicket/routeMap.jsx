@@ -1,5 +1,6 @@
 import loadable from "@loadable/component";
 import FormTest from "../TESTPAGES/FormTest";
+import RaiseIssueViaMail from "./Mail/ComposeIssueMail";
 //import ListMailTicket from "./ListMailTicket";
 
 const SupportTicketDashboard = loadable(() =>
@@ -19,6 +20,10 @@ const UserTicketRaisedList = loadable(() =>
 );
 
 const ListMailTicket = loadable(() => import("./Mail/ListMailTicket"));
+const UserDashboard = loadable(() => import("./Profile/UserDashboard/index"));
+const ComposeIssueMail = loadable(() =>
+  import("./Mail/ComposeIssueMail/index")
+);
 
 export default [
   {
@@ -52,5 +57,13 @@ export default [
   {
     path: "/ticket/raised-ticket",
     component: <UserTicketRaisedList />,
+  },
+  {
+    path: "/ticket/user-dashboard",
+    component: <UserDashboard />,
+  },
+  {
+    path: "/ticket/compose-issue-mail",
+    component: <ComposeIssueMail />,
   },
 ];

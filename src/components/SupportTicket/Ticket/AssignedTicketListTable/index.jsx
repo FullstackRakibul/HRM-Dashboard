@@ -36,11 +36,11 @@ const AssignedTicketListTable = () => {
   // Ticket Operation ............
   const fetchTicketData = async (Take = 5, Skip = 1) => {
     try {
-      const responseMailTicket = await AxiosInstance.get(
-        `/api/Tickets/getTicketByCreator/088101`
+      const responseAgentIssueList = await AxiosInstance.get(
+        `/api/Targets/agentIssueList/123456`
       );
 
-      const lists = configDataForTable(responseTicket.data);
+      const lists = configDataForTable(responseAgentIssueList.data);
       if (lists.length) {
         setTickets(lists);
       }
