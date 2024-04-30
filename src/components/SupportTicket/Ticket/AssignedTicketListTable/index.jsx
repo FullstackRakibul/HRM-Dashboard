@@ -37,7 +37,7 @@ const AssignedTicketListTable = () => {
   const fetchTicketData = async (Take = 5, Skip = 1) => {
     try {
       const responseAgentIssueList = await AxiosInstance.get(
-        `/api/Targets/agentIssueList/123456`
+        `/api/Targets/agentIssueList/053324`
       );
 
       const lists = configDataForTable(responseAgentIssueList.data);
