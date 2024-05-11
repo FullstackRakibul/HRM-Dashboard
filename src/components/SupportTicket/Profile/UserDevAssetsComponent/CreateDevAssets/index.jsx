@@ -18,6 +18,11 @@ const CreateDevAssets = () => {
     { value: "Apparel", label: "Apparel" },
   ];
 
+  const languageTypes = [
+    { value: "SQL", label: "SQL" },
+    { value: "DotNet", label: "DotNet" },
+  ];
+
   const [isPublic, setIsPublic] = useState(false); // Initial state for code visibility
 
   const onFinish = (values) => {
@@ -52,6 +57,24 @@ const CreateDevAssets = () => {
           </Col>
           <Col span={8}>
             <Form.Item
+              label="Language"
+              name="language"
+              rules={[
+                { required: true, message: "Please select a software type" },
+              ]}
+            >
+              <Select options={languageTypes} />
+            </Form.Item>
+          </Col>
+
+          <Col span={10}>
+            <Form.Item label="Description" name="description">
+              <Input.TextArea rows={3} placeholder="Write Short Description." />
+            </Form.Item>
+          </Col>
+
+          <Col span={6}>
+            <Form.Item
               label="Software Type"
               name="softwareType"
               rules={[
@@ -61,13 +84,7 @@ const CreateDevAssets = () => {
               <Select options={softwareTypes} />
             </Form.Item>
           </Col>
-
-          <Col span={16}>
-            <Form.Item label="Description" name="description">
-              <Input.TextArea rows={3} placeholder="Write Short Description." />
-            </Form.Item>
-          </Col>
-          <Col span={8}>
+          <Col span={6}>
             <Form.Item
               label="Code Visibility"
               style={{ display: "flex", alignItems: "center" }}
