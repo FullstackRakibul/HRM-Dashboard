@@ -24,6 +24,7 @@ const UserDashboard = loadable(() => import("./Profile/UserDashboard/index"));
 const ComposeIssueMail = loadable(() =>
   import("./Mail/ComposeIssueMail/index")
 );
+const UserDevAssets = loadable(() => import("./Profile/UserDevAssets/index"));
 
 export default [
   {
@@ -65,5 +66,9 @@ export default [
   {
     path: "/ticket/compose-issue-mail",
     component: <ComposeIssueMail />,
+  },
+  {
+    path: "/ticket/dev-assets",
+    component: <UserDevAssets />,
   },
 ];

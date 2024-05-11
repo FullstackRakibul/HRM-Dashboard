@@ -1520,6 +1520,16 @@ export const supportTicketMenu = [
         isCreate: 1,
         isUpdate: 1,
       },
+      {
+        MenuId: 1,
+        MenuName: "Dev Assets",
+        Key: 1,
+        MenuPath: "ticket/dev-assets",
+        isDelete: 1,
+        isEdit: 1,
+        isCreate: 1,
+        isUpdate: 1,
+      },
     ],
   },
   {
