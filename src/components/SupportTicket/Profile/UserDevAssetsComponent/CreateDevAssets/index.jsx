@@ -8,9 +8,12 @@ import {
   InputNumber,
   Row,
   Col,
+  message,
 } from "antd";
+import { AxiosInstance } from "../../../../../apis/supportTicketSlice";
 
 const CreateDevAssets = () => {
+  const [isPublic, setIsPublic] = useState(false);
   const [form] = Form.useForm();
 
   const softwareTypes = [
@@ -23,11 +26,20 @@ const CreateDevAssets = () => {
     { value: "DotNet", label: "DotNet" },
   ];
 
-  const [isPublic, setIsPublic] = useState(false); // Initial state for code visibility
-
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
+    values.isPublic = isPublic;
     console.log("Success:", values);
-    // Submit the form data to your backend API here
+    try {
+      const responseCreateDevAssets = await AxiosInstance.post(
+        "/api/CodeSnippets/create-code-snippet",
+        values
+      );
+      console.log(responseCreateDevAssets.data.message);
+      message.success("CodeSnippet created successfully");
+      form.resetFields();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -93,8 +105,7 @@ const CreateDevAssets = () => {
                 Public
               </Checkbox>
               <Form.Item name="isPublic" hidden>
-                <InputNumber value={isPublic ? 1 : 0} />{" "}
-                {/* Hidden field for form submission */}
+                <InputNumber value={isPublic ? 1 : 0} />
               </Form.Item>
             </Form.Item>
           </Col>
