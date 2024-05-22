@@ -20,12 +20,14 @@ const { Dragger } = Upload;
 const { Option } = Select;
 import axios from "axios";
 import ConfigureAxios from "../../../../utils/axios";
+import { AxiosInstanceMultipart } from "../../../../apis/supportTicketSlice";
 
 // file upload section design
 const props = {
   name: "attachment",
   multiple: true,
-  action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+  beforeUpload: false,
+  //action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
   //action: "/api/Tickets/createTicketWithTarget",
   async onChange(info) {
     const { status } = info.file;
@@ -80,12 +82,16 @@ const TicketCreateForm = () => {
       departmentId: values.department.value,
       createdBy: "088101",
       description: values.description,
-      //attachment: values.attachment.file.name,
+      attachment: values.attachment?.file,
     };
 
     console.log("Received values:", data);
-    const response = await axios.post(
-      "/api/Tickets/createTicketWithTarget",
+    // const response = await AxiosInstanceMultipart.post(
+    //   "/api/Tickets/createTicketWithTarget",
+    //   data
+    // );
+    const response = await AxiosInstanceMultipart.post(
+      "/api/Tickets/raised-issue",
       data
     );
     console.log(response.data);
@@ -139,10 +145,10 @@ const TicketCreateForm = () => {
   };
   const getTicketTypeLists = async () => {
     const lists = await axios
-      .get(`/api/TicketTypes/ticket/type/list`)
+      .get(`/api/TicketTypes/get-all-ticket-type`)
       .then((response) => {
         if (response.status === 200) {
-          const data = response.data;
+          const data = response.data.data;
           return data;
         }
       })

@@ -19,10 +19,14 @@ const TicketTypeCreateForm = () => {
 
   const onFinish = async (values) => {
     try {
-      values.status = 1;
-      const response = await AxiosInstance.post("/api/TicketTypes", values);
+      console.log(values);
+      const response = await AxiosInstance.post(
+        "/api/TicketTypes/create-ticket-type",
+        values
+      );
+      console.log(response);
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         message.success("Type Created Successfully.");
         fetchTicketTypes();
         form.resetFields();
@@ -38,9 +42,10 @@ const TicketTypeCreateForm = () => {
   const fetchTicketTypes = async () => {
     try {
       const response = await AxiosInstance.get(
-        "/api/TicketTypes/ticket/type/list"
+        "/api/TicketTypes/get-all-ticket-type"
       );
-      setTicketTypes(response.data);
+      console.log(response.data);
+      setTicketTypes(response.data.data);
     } catch (error) {
       console.error("Error fetching tickets:", error);
     }
