@@ -83,10 +83,10 @@ AxiosInstanceMultipart.interceptors.request.use(
     const token = localStorage.getItem("token");
 
     // Set default headers
-    config.headers["Content-Type"] = "multipart/form-data";
-    if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
-    }
+    //config.headers["Content-Type"] = "multipart/form-data";
+    // if (token) {
+    //   config.headers["Authorization"] = `Bearer ${token}`;
+    // }
 
     return config;
   },
