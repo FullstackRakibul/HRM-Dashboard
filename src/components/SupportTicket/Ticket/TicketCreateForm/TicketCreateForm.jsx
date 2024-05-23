@@ -25,40 +25,40 @@ import ConfigureAxios from "../../../../utils/axios";
 const props = {
   name: "attachment",
   multiple: true,
-  action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+  //action: "/api/Tickets/raised-attachment-issue",
   //action: "/api/Tickets/createTicketWithTarget",
-  async onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
+  // async onChange(info) {
+  //   const { status } = info.file;
+  //   if (status !== "uploading") {
+  //     console.log(info.file, info.fileList);
 
-      //.........................
-      // if (info.file.status === "done") {
-      //   const texts = await info.file.originFileObj.text();
-      //   const results = parse(texts, {
-      //     header: true
-      //   });
+  //     //.........................
+  //     // if (info.file.status === "done") {
+  //     //   const texts = await info.file.originFileObj.text();
+  //     //   const results = parse(texts, {
+  //     //     header: true
+  //     //   });
 
-      //   const col = _.keys(results.data[0]);
+  //     //   const col = _.keys(results.data[0]);
 
-      //   const customCol = _.map(col, (value) => ({
-      //     title: value,
-      //     dataIndex: value,
-      //     key: value.toLowerCase(),
-      //   }));
+  //     //   const customCol = _.map(col, (value) => ({
+  //     //     title: value,
+  //     //     dataIndex: value,
+  //     //     key: value.toLowerCase(),
+  //     //   }));
 
-      //   const data = results.data;
+  //     //   const data = results.data;
 
-      //   console.log({ customCol });
-      //   console.log({ data });
-      //.........................
-    }
-    if (status === "done") {
-      message.success(`${info.file.name} attachment uploaded successfully.`);
-    } else if (status === "error") {
-      message.error(`${info.file.name} attachment upload failed.`);
-    }
-  },
+  //     //   console.log({ customCol });
+  //     //   console.log({ data });
+  //     //.........................
+  //   }
+  //   if (status === "done") {
+  //     message.success(`${info.file.name} attachment uploaded successfully.`);
+  //   } else if (status === "error") {
+  //     message.error(`${info.file.name} attachment upload failed.`);
+  //   }
+  // },
   onDrop(e) {
     console.log("Dropped files", e.dataTransfer.files);
   },
@@ -81,21 +81,26 @@ const TicketCreateForm = () => {
       createdBy: "088101",
       description: values.description,
       //attachment: values.attachment.file.name,
+      attachment: values.attachment?.file,
     };
 
     console.log("Received values:", data);
-    const response = await axios.post(
-      "/api/Tickets/createTicketWithTarget",
-      data
-    );
-    console.log(response.data);
-    console.log(`status code :${response.status}`);
-    if (response.status === 200) {
-      message.success("Ticket Create Successfully.");
-      form.resetFields();
-    } else {
-      message.error("Error in Creating Ticket.");
-    }
+    // const response = await axios.post(
+    //   "/api/Tickets/createTicketWithTarget",
+    //   data
+    // );
+    // const response = await axios.post(
+    //   "/api/Tickets/raised-attachment-issue",
+    //   data
+    // );
+    //console.log(response.data);
+    // console.log(`status code :${response.status}`);
+    // if (response.status === 200) {
+    //   message.success("Ticket Create Successfully.");
+    //   form.resetFields();
+    // } else {
+    //   message.error("Error in Creating Ticket.");
+    // }
   };
 
   useEffect(() => {
