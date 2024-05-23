@@ -96,7 +96,7 @@ const ListDevAssets = () => {
         size="small"
       />
 
-      <NormalCard>
+      {/* <NormalCard>
         <ListsTable
           tableProps={{
             data: codeSnippetData?.length ? codeSnippetData : [],
@@ -105,7 +105,7 @@ const ListDevAssets = () => {
             rowSelection: codeSnippetData.id,
           }}
         ></ListsTable>
-      </NormalCard>
+      </NormalCard> */}
     </>
   );
 };

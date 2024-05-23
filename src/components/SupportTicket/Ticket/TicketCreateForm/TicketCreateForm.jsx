@@ -3,6 +3,7 @@ const { TextArea } = Input;
 import {
   InboxOutlined,
   PlusCircleOutlined,
+  PlusOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
 import {
@@ -20,48 +21,11 @@ const { Dragger } = Upload;
 const { Option } = Select;
 import axios from "axios";
 import ConfigureAxios from "../../../../utils/axios";
+import { AxiosInstanceMultipart } from "../../../../apis/supportTicketSlice";
 
 // file upload section design
 const props = {
   name: "attachment",
-  multiple: true,
-  //action: "/api/Tickets/raised-attachment-issue",
-  //action: "/api/Tickets/createTicketWithTarget",
-  // async onChange(info) {
-  //   const { status } = info.file;
-  //   if (status !== "uploading") {
-  //     console.log(info.file, info.fileList);
-
-  //     //.........................
-  //     // if (info.file.status === "done") {
-  //     //   const texts = await info.file.originFileObj.text();
-  //     //   const results = parse(texts, {
-  //     //     header: true
-  //     //   });
-
-  //     //   const col = _.keys(results.data[0]);
-
-  //     //   const customCol = _.map(col, (value) => ({
-  //     //     title: value,
-  //     //     dataIndex: value,
-  //     //     key: value.toLowerCase(),
-  //     //   }));
-
-  //     //   const data = results.data;
-
-  //     //   console.log({ customCol });
-  //     //   console.log({ data });
-  //     //.........................
-  //   }
-  //   if (status === "done") {
-  //     message.success(`${info.file.name} attachment uploaded successfully.`);
-  //   } else if (status === "error") {
-  //     message.error(`${info.file.name} attachment upload failed.`);
-  //   }
-  // },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
-  },
 };
 
 const TicketCreateForm = () => {
@@ -73,34 +37,28 @@ const TicketCreateForm = () => {
   const [ticketTypeLists, setTicketTypeLists] = useState([]);
 
   const onFinish = async (values) => {
-    const data = {
-      title: values.ticketTitle,
-      unitId: values.unit.value,
-      ticketTypeId: values.ticketType.value,
-      departmentId: values.department.value,
-      createdBy: "088101",
-      description: values.description,
-      //attachment: values.attachment.file.name,
-      attachment: values.attachment?.file,
-    };
+    const formData = new FormData();
+    formData.append("title", values.ticketTitle);
+    formData.append("unitId", values.unit.value);
+    formData.append("ticketTypeId", values.ticketType.value);
+    formData.append("departmentId", values.department.value);
+    formData.append("createdBy", "088101");
+    formData.append("description", values.description);
+    formData.append("attachment", values.attachment?.file);
 
-    console.log("Received values:", data);
-    // const response = await axios.post(
-    //   "/api/Tickets/createTicketWithTarget",
-    //   data
-    // );
-    // const response = await axios.post(
-    //   "/api/Tickets/raised-attachment-issue",
-    //   data
-    // );
-    //console.log(response.data);
-    // console.log(`status code :${response.status}`);
-    // if (response.status === 200) {
-    //   message.success("Ticket Create Successfully.");
-    //   form.resetFields();
-    // } else {
-    //   message.error("Error in Creating Ticket.");
-    // }
+    console.log("Received values:", formData);
+    const response = await AxiosInstanceMultipart.post(
+      "/api/Tickets/raised-issue",
+      formData
+    );
+    console.log(response.data);
+    console.log(`status code :${response.status}`);
+    if (response.status === 200) {
+      message.success("Ticket Create Successfully.");
+      form.resetFields();
+    } else {
+      message.error("Error in Creating Ticket.");
+    }
   };
 
   useEffect(() => {
@@ -144,10 +102,10 @@ const TicketCreateForm = () => {
   };
   const getTicketTypeLists = async () => {
     const lists = await axios
-      .get(`/api/TicketTypes/ticket/type/list`)
+      .get(`/api/TicketTypes/get-all-ticket-type`)
       .then((response) => {
         if (response.status === 200) {
-          const data = response.data;
+          const data = response.data.data;
           return data;
         }
       })
@@ -279,8 +237,7 @@ const TicketCreateForm = () => {
         </Row>
         <Row gutter={16}>
           <Col span={24}>
-            <Form.Item label="Attachment">
-              {/* valuePropName="fileList" */}
+            {/* <Form.Item label="Attachment">
               <Form.Item name="attachment" noStyle>
                 <Dragger {...props}>
                   <p className="ant-upload-drag-icon">
@@ -295,6 +252,18 @@ const TicketCreateForm = () => {
                   </p>
                 </Dragger>
               </Form.Item>
+            </Form.Item> */}
+            <Form.Item label="Attachment" name="attachment">
+              <Upload
+                multiple={true}
+                beforeUpload={() => false}
+                listType="picture-card"
+              >
+                <button style={{ border: 0, background: "none" }} type="button">
+                  <PlusOutlined />
+                  <div style={{ marginTop: 8 }}>Upload</div>
+                </button>
+              </Upload>
             </Form.Item>
           </Col>
         </Row>
