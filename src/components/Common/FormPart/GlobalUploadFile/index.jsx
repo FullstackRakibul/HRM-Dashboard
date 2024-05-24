@@ -28,6 +28,7 @@ const GlobalUploadFile = () => {
       formData.append("FolderIndex", "1");
       formData.append("FilePathUrl", "ticketFiles");
 
+      console.log(formData);
       const response = await AxiosInstanceMultipart.post(
         "api/FileUpload",
         formData

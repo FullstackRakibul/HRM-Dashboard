@@ -21,7 +21,7 @@ const UserDevAssets = () => {
           <Col span={24}>
             <CreateDevAssets />
           </Col>
-          <Col span={16}>
+          <Col span={24}>
             <ListDevAssets />
           </Col>
         </Row>

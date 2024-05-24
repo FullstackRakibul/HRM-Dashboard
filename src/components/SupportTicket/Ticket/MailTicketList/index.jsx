@@ -233,7 +233,7 @@ const MailTicketList = () => {
         <ListsTable
           tableProps={{
             data: tickets?.length ? tickets : [],
-            height: 500,
+            height: 300,
             columns,
             rowSelection: tickets.id,
           }}
