@@ -12,7 +12,7 @@ import {
 } from "antd";
 import { AxiosInstance } from "../../../../../apis/supportTicketSlice";
 
-const CreateDevAssets = () => {
+const CreateDevAssets = ({ onUpdate }) => {
   const [isPublic, setIsPublic] = useState(false);
   const [form] = Form.useForm();
 
@@ -37,6 +37,7 @@ const CreateDevAssets = () => {
       console.log(responseCreateDevAssets.data.message);
       message.success("CodeSnippet created successfully");
       form.resetFields();
+      onUpdate();
     } catch (error) {
       console.log(error);
     }

@@ -4,7 +4,7 @@ import { Table, Button, Popconfirm } from "antd";
 import ListsTable from "../../../../ui/ListsTable";
 import NormalCard from "../../../../ui/Card/NormalCard";
 
-const ListDevAssets = () => {
+const ListDevAssets = ({ updateFlag }) => {
   const [codeSnippetData, setCodeSnippetData] = useState([]);
 
   const fetchCodeSnippetData = async () => {
@@ -12,6 +12,7 @@ const ListDevAssets = () => {
       const response = await AxiosInstance.get(
         "/api/CodeSnippets/get-all-code"
       );
+
       console.log(response.data.data);
       setCodeSnippetData(response.data.data);
     } catch (error) {
@@ -20,7 +21,7 @@ const ListDevAssets = () => {
   };
   useEffect(() => {
     fetchCodeSnippetData();
-  }, []);
+  }, [updateFlag]);
 
   // config data for table
 
