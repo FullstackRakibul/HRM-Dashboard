@@ -1,0 +1,44 @@
+.add-timer-logs-modal {
+  & .ant-modal-content {
+    padding: 8px 15px;
+    border-radius: 4px;
+
+    & .ant-modal-header {
+      .modal-header-title {
+        font-size: 14px;
+        font-family: 'Titillium Web', sans-serif !important;
+      }
+
+      & .close-timer-modal-icon {
+        font-size: 20px;
+        color: red;
+        font-weight: 700;
+      }
+
+      .close-timer-modal-icon:hover {
+        cursor: pointer;
+      }
+    }
+
+    & .ant-modal-body {
+      padding: 10px 0px 0px 0px;
+    }
+
+    & .ant-modal-close-icon {
+      display: none;
+    }
+  }
+}
+
+.read-only-input {
+  background-color: #f0f0f0 !important;
+  font-family: 'Titillium Web', sans-serif !important;
+
+  & :focus {
+    border: none !important;
+  }
+
+  & :hover {
+    border: none !important;
+  }
+}

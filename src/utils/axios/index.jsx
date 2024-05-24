@@ -3,8 +3,8 @@ import { Navigate, useNavigate, Outlet } from "react-router-dom";
 
 const ConfigureAxios = () => {
   axios.defaults.headers.post["Content-Type"] = "application/json";
-  //axios.defaults.baseURL = "http://192.168.61.40:3000/tms/api/v1";
-  axios.defaults.baseURL = "http://202.22.203.92:3100/tms/api/v1";
+  axios.defaults.baseURL = "https://localhost:7295/";
+  //axios.defaults.baseURL = "http://202.22.203.92:3100/tms/api/v1";
 
   let token = localStorage.getItem("token");
 
@@ -33,18 +33,19 @@ export const getCookie = (cname) => {
 };
 
 export const setAuthToken = (token) => {
-  if (token) {
-    axios.defaults.headers.common["Authorization"] =
-      "Bearer " + JSON.parse(token);
-  } else {
-    axios.defaults.headers.common["Authorization"] = "";
-  }
+  // if (token) {
+  //   axios.defaults.headers.common["Authorization"] =
+  //     "Bearer " + JSON.parse(token);
+  // } else {
+  //   axios.defaults.headers.common["Authorization"] = "";
+  // }
 };
 
 // login baseurl : http://45.114.84.19:8033/
 // API baseurl : https://localhost:7295/
-// export const AxiosInstance = axios.create({
-//   baseURL: "https://localhost:7295/",
-// });
+export const AxiosInstance = axios.create({
+  baseURL: "https://localhost:7295/",
+  //baseURL: "http://45.114.84.19:7500/",
+});
 
 export default ConfigureAxios;

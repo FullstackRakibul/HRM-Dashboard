@@ -87,9 +87,13 @@ const ModuleMain = () => {
             handleOnModuleChange(6);
           }}
         >
-          <img src={SupportImage} className="module-image " />
+          <img
+            src={SupportImage}
+            className="module-image"
+            
+          />
           <Divider className="separator" />
-          <span className="module-description">Support App</span>
+          <span className="module-description">Ticket</span>
         </Card.Grid>
       </NormalCard>
     </>

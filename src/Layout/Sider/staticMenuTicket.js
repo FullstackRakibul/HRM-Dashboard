@@ -26,7 +26,7 @@ const supportTicketMenu = [
             UserId: "**",
             key: "****",
             MenuName: "Recently Added Ticket",
-            MenuPath: "../ticket/recent",
+            MenuPath: "../ticket/listTicket",
             SortOrder: "****",
             ModuleId: "****",
           },
