@@ -14,11 +14,9 @@ const CreateTicketType = loadable(() =>
 const UserTicketAssignedList = loadable(() =>
   import("./Profile/UserTicketAssignedList/index")
 );
-
 const UserTicketRaisedList = loadable(() =>
   import("../../pages/SupportTicket/Profile/UserTicketRaisedList/index")
 );
-
 const ListMailTicket = loadable(() => import("./Mail/ListMailTicket"));
 const UserDashboard = loadable(() => import("./Profile/UserDashboard/index"));
 const ComposeIssueMail = loadable(() =>

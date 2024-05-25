@@ -28,14 +28,12 @@ const CreateDevAssets = ({ onUpdate }) => {
 
   const onFinish = async (values) => {
     values.isPublic = isPublic;
-    console.log("Success:", values);
     try {
       const responseCreateDevAssets = await AxiosInstance.post(
         "/api/CodeSnippets/create-code-snippet",
         values
       );
-      console.log(responseCreateDevAssets.data.message);
-      message.success("CodeSnippet created successfully");
+      message.success(responseCreateDevAssets.data.message);
       form.resetFields();
       onUpdate();
     } catch (error) {
