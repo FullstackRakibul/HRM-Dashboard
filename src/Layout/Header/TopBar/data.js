@@ -1463,6 +1463,16 @@ export const supportTicketMenu = [
         isCreate: 1,
         isUpdate: 1,
       },
+      {
+        MenuId: 5,
+        MenuName: "Support Monitoring",
+        Key: 5,
+        MenuPath: "ticket/supportMonitoring",
+        isDelete: 1,
+        isEdit: 1,
+        isCreate: 1,
+        isUpdate: 1,
+      },
     ],
   },
   {

@@ -24,6 +24,10 @@ const ComposeIssueMail = loadable(() =>
 );
 const UserDevAssets = loadable(() => import("./Profile/UserDevAssets/index"));
 
+const SupportMonitoring = loadable(() =>
+  import("./Ticket/SupportMonitoring/index")
+);
+
 export default [
   {
     path: "/ticket/dashboard",
@@ -68,5 +72,9 @@ export default [
   {
     path: "/ticket/dev-assets",
     component: <UserDevAssets />,
+  },
+  {
+    path: "/ticket/supportMonitoring",
+    component: <SupportMonitoring />,
   },
 ];

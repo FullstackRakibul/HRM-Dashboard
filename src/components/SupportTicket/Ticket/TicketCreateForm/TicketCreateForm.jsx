@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+
 const { TextArea } = Input;
 import {
   InboxOutlined,
@@ -36,6 +39,8 @@ const TicketCreateForm = () => {
   const [departmentLists, setDepartmentLists] = useState([]);
   const [ticketTypeLists, setTicketTypeLists] = useState([]);
 
+  const [textValue, setTextValue] = useState("");
+
   const onFinish = async (values) => {
     const formData = new FormData();
     formData.append("title", values.ticketTitle);
@@ -43,7 +48,7 @@ const TicketCreateForm = () => {
     formData.append("ticketTypeId", values.ticketType.value);
     formData.append("departmentId", values.department.value);
     formData.append("createdBy", "088101");
-    formData.append("description", values.description);
+    formData.append("description", textValue);
     formData.append("attachment", values.attachment?.file);
 
     console.log("Received values:", formData);
@@ -231,7 +236,13 @@ const TicketCreateForm = () => {
               name="description"
               rules={[{ required: true, message: "Please enter description" }]}
             >
-              <Input.TextArea rows={3} />
+              {/* <Input.TextArea rows={3} /> */}
+              <ReactQuill
+                className=" h-80 "
+                theme="snow"
+                value={textValue}
+                onChange={setTextValue}
+              />
             </Form.Item>
           </Col>
         </Row>
