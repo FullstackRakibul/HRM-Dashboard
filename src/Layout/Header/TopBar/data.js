@@ -1532,16 +1532,50 @@ export const supportTicketMenu = [
       },
     ],
   },
+  // {
+  //   ModuleId: 4,
+  //   MenuName: "Form Test",
+  //   IconName: "fas fa-mail-bulk",
+  //   children: [
+  //     {
+  //       MenuId: 1,
+  //       MenuName: "Upload Attachment",
+  //       Key: 1,
+  //       MenuPath: "ticket/form/UploadFile",
+  //     },
+  //   ],
+  // },
+
   {
     ModuleId: 4,
-    MenuName: "Form Test",
-    IconName: "fas fa-mail-bulk",
+    MenuName: "Quick Support",
+    IconName: "fas fa-check-double",
     children: [
       {
         MenuId: 1,
-        MenuName: "Upload Attachment",
-        Key: 1,
-        MenuPath: "ticket/form/UploadFile",
+        MenuName: "Apparel",
+        IconName: "fas fa-tshirt",
+        children: [
+          {
+            MenuId: 1,
+            MenuName: "Forcely Week Off",
+            Key: 1,
+            MenuPath: "ticket/quickSupport/apparel/forceWeekOff",
+          },
+          {
+            MenuId: 2,
+            MenuName: "Forcely General Off",
+            Key: 2,
+            MenuPath: "ticket/quickSupport/apparel/forceGeneralDuty",
+          },
+        ],
+      },
+      {
+        MenuId: 2,
+        MenuName: "HRM",
+        IconName: "fas fa-industry",
+        Key: 2,
+        MenuPath: "ticket/quickSupport/hrm",
       },
     ],
   },

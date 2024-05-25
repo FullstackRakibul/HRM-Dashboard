@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { AxiosInstance } from "../../../../../apis/supportTicketSlice";
-import { Table, Button, Popconfirm } from "antd";
+import { Table, Button, Popconfirm, message } from "antd";
 import ListsTable from "../../../../ui/ListsTable";
 import NormalCard from "../../../../ui/Card/NormalCard";
 
 const ListDevAssets = ({ updateFlag }) => {
   const [codeSnippetData, setCodeSnippetData] = useState([]);
+  const [trigger, setTrigger] = useState(false);
 
   const fetchCodeSnippetData = async () => {
     try {
       const response = await AxiosInstance.get(
         "/api/CodeSnippets/get-all-code"
       );
-
-      console.log(response.data.data);
       setCodeSnippetData(response.data.data);
     } catch (error) {
       console.log(error);
@@ -21,7 +20,21 @@ const ListDevAssets = ({ updateFlag }) => {
   };
   useEffect(() => {
     fetchCodeSnippetData();
-  }, [updateFlag]);
+  }, [updateFlag, trigger]);
+
+  //::::::::::::::  button Operation
+
+  const handleDelete = async (id) => {
+    const response = await AxiosInstance.delete(
+      `/api/CodeSnippets/delete-code-snippet-${id}`
+    );
+    if (response.data.status == true) {
+      message.error(`${response.data.data}`);
+      setTrigger(!trigger);
+    } else {
+      message.error(response.data.status);
+    }
+  };
 
   // config data for table
 
@@ -70,7 +83,7 @@ const ListDevAssets = ({ updateFlag }) => {
           ></Button>
           <Popconfirm
             title="Are you sure you want to delete this snippet?"
-            onConfirm={() => handleDelete(record.key)}
+            onConfirm={() => handleDelete(record.id)}
             okText="Yes"
             cancelText="No"
             className=" bg-error text-white font-sans font-xl font-semibold hover:bg-black mt-3"
