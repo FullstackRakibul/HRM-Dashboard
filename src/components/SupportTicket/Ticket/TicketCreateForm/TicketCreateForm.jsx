@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "./index.less";
 
 const { TextArea } = Input;
 import {
@@ -78,6 +79,7 @@ const TicketCreateForm = () => {
 
     if (typeLists.length) {
       const configLists = configDataForSelect(typeLists, "id", "typeName");
+
       if (configLists.length) {
         setTicketTypeLists(configLists);
       } else {
@@ -168,11 +170,12 @@ const TicketCreateForm = () => {
 
     return returnLists;
   };
+
   return (
     <>
       <Form layout="vertical" onFinish={onFinish} form={form}>
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={18}>
             <Form.Item
               label="Ticket Title"
               name="ticketTitle"
@@ -181,7 +184,39 @@ const TicketCreateForm = () => {
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+        </Row>
+        <Row gutter={16}>
+          <Col span={6}>
+            <Form.Item
+              label="Department"
+              name="department"
+              rules={[{ required: true, message: "Please select department" }]}
+            >
+              <Select
+                labelInValue={true}
+                optionFilterProp="label"
+                showSearch
+                allowClear
+                options={departmentLists}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={6}>
+            <Form.Item
+              label="Unit"
+              name="unit"
+              rules={[{ required: true, message: "Please select unit" }]}
+            >
+              <Select
+                labelInValue={true}
+                optionFilterProp="label"
+                showSearch
+                allowClear
+                options={unitLists}
+              />
+            </Form.Item>
+          </Col>
+          <Col span={6}>
             <Form.Item
               label="Ticket Type"
               name="ticketType"
@@ -198,47 +233,13 @@ const TicketCreateForm = () => {
           </Col>
         </Row>
         <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Department"
-              name="department"
-              rules={[{ required: true, message: "Please select department" }]}
-            >
-              <Select
-                labelInValue={true}
-                optionFilterProp="label"
-                showSearch
-                allowClear
-                options={departmentLists}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Unit"
-              name="unit"
-              rules={[{ required: true, message: "Please select unit" }]}
-            >
-              <Select
-                labelInValue={true}
-                optionFilterProp="label"
-                showSearch
-                allowClear
-                options={unitLists}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={24}>
+          <Col span={18}>
             <Form.Item
               label="Description"
               name="description"
               rules={[{ required: true, message: "Please enter description" }]}
             >
-              {/* <Input.TextArea rows={3} /> */}
               <ReactQuill
-                className=" h-80 "
                 theme="snow"
                 value={textValue}
                 onChange={setTextValue}
@@ -248,22 +249,6 @@ const TicketCreateForm = () => {
         </Row>
         <Row gutter={16}>
           <Col span={24}>
-            {/* <Form.Item label="Attachment">
-              <Form.Item name="attachment" noStyle>
-                <Dragger {...props}>
-                  <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p className="ant-upload-text">
-                    Click or drag file to this area to upload
-                  </p>
-                  <p className="ant-upload-hint">
-                    Support for a single or bulk upload. Strictly prohibited
-                    from uploading company data or other banned files.
-                  </p>
-                </Dragger>
-              </Form.Item>
-            </Form.Item> */}
             <Form.Item label="Attachment" name="attachment">
               <Upload
                 multiple={true}

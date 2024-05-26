@@ -37,20 +37,6 @@ import "./index.less";
 import axios from "axios";
 import AssignAgentModal from "../global/AssignAgentModal";
 
-const getTicketReviewsDetails = async (TicketId, setReviews, showModal) => {
-  if (TicketId) {
-    try {
-      const response = await axios.get(
-        `/api/Reviews/TicketWiseReply?id=${TicketId}`
-      );
-      setReviews(response.data);
-      showModal();
-    } catch (error) {
-      console.log("Get Ticket Review Details error.", error);
-    }
-  }
-};
-
 const AllTicketList = ({ TicketId }) => {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -63,6 +49,7 @@ const AllTicketList = ({ TicketId }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [assignModalVisible, setAssignModalVisible] = useState(false);
   const [selectedIssueId, setSelectedIssueId] = useState(null);
+  const [trigger, setTrigger] = useState(false);
 
   //........show list with pagination ..........................
   useEffect(() => {
@@ -90,7 +77,7 @@ const AllTicketList = ({ TicketId }) => {
 
   useEffect(() => {
     fetchData(10, 1);
-  }, []);
+  }, [trigger]);
 
   // ..................const pagination ticket list................
   const onPaginationChange = (page, pageSize) => {
@@ -183,48 +170,17 @@ const AllTicketList = ({ TicketId }) => {
   };
 
   //............. single ticket reviews data list
+
   const [reviews, setReviews] = useState([]);
-  // const ReviewModal = ({ TicketId, isModalOpen, handleCancel }) => {
-  //   const [reviews, setReviews] = useState([]);
-
-  //   const getTicketReviewsDetails = async (TicketId, setReviews) => {
-  //     if (TicketId) {
-  //       try {
-  //         const response = await axios.get(
-  //           `/api/Reviews/TicketWiseReply?id=${TicketId}`
-  //         );
-  //         setReviewLists(response.data);
-  //       } catch (error) {
-  //         console.log("Get Ticket Review Details error.", error);
-  //       }
-  //     }
-  //   };
-
-  //   useEffect(() => {
-  //     if (isModalOpen) {
-  //       getTicketReviewsDetails(TicketId, setReviews);
-  //     }
-  //   }, [TicketId, isModalOpen]);
-  // };
-  //.......... ticket review modal ...................
-  // const getTicketReviewsDetails = async (TicketId) => {
-  //   if (TicketId) {
-  //     axios
-  //       .get(`/api/Reviews/TicketWiseReply?id=${TicketId}`)
-  //       .then((response) => {
-  //         console.log("response : ", response);
-  //         setReviews(response);
-  //         console.log(response);
-  //         showModal();
-  //       })
-  //       .catch((error) => {
-  //         console.log("Get Ticket Review Details error.", error);
-  //       });
-  //   }
-  // };
 
   useEffect(() => {
-    getTicketReviewsDetails(TicketId, setReviews, () => setIsModalOpen(true));
+    getTicketReviewsDetails(
+      TicketId,
+      setReviews,
+      () => setIsModalOpen(true),
+      setTrigger
+    );
+
     connectToSignalR();
   }, [TicketId]);
 
@@ -232,6 +188,7 @@ const AllTicketList = ({ TicketId }) => {
   const handleDeleteItem = async (itemId) => {
     try {
       const response = await AxiosInstance.delete(`/api/Tickets/${itemId}`);
+      setTrigger(!trigger);
       console.log(response);
       message.warning("Ticket Deleted successfully");
     } catch (error) {
@@ -387,7 +344,7 @@ const AllTicketList = ({ TicketId }) => {
                 danger
                 type="primary"
                 onClick={async () => {
-                  await handleDeleteItem(record.id); // Pass the itemId of the item to be deleted
+                  await handleDeleteItem(record.id);
                 }}
               >
                 Delete
@@ -417,11 +374,27 @@ const AllTicketList = ({ TicketId }) => {
     if (response.status === 200) {
       message.success("Review note added.");
       form.resetFields();
+      setTrigger(!trigger);
     } else {
       message.error("Error in adding review.");
     }
 
     return;
+  };
+
+  const getTicketReviewsDetails = async (TicketId, setReviews, showModal) => {
+    if (TicketId) {
+      try {
+        const response = await axios.get(
+          `/api/Reviews/TicketWiseReply?id=${TicketId}`
+        );
+        setReviews(response.data);
+
+        showModal();
+      } catch (error) {
+        console.log("Get Ticket Review Details error.", error);
+      }
+    }
   };
 
   return (

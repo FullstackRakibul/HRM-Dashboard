@@ -1585,7 +1585,14 @@ export const supportTicketMenu = [
         MenuName: "HRM",
         IconName: "fas fa-industry",
         Key: 2,
-        MenuPath: "ticket/quickSupport/hrm",
+        children: [
+          {
+            MenuId: 1,
+            MenuName: "Final Settlement",
+            Key: 1,
+            MenuPath: "ticket/quickSupport/hrm/finalSettlement",
+          },
+        ],
       },
     ],
   },

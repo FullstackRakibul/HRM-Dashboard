@@ -24,8 +24,21 @@ const ComposeIssueMail = loadable(() =>
 );
 const UserDevAssets = loadable(() => import("./Profile/UserDevAssets/index"));
 
+// apparel loadable
+const ForceGeneralDuty = loadable(() =>
+  import("./QuickSupport/Apparel/ForceGeneralDuty/index")
+);
+const ForceWeekOff = loadable(() =>
+  import("./QuickSupport/Apparel/ForceWeekOff/index")
+);
 const SupportMonitoring = loadable(() =>
   import("./Ticket/SupportMonitoring/index")
+);
+
+// HRM roadable
+
+const FinalSettlement = loadable(() =>
+  import("./QuickSupport/HRM/FinalSettlement/index")
 );
 
 export default [
@@ -76,5 +89,17 @@ export default [
   {
     path: "/ticket/supportMonitoring",
     component: <SupportMonitoring />,
+  },
+  {
+    path: "/ticket/quickSupport/apparel/forceGeneralDuty",
+    component: <ForceGeneralDuty />,
+  },
+  {
+    path: "/ticket/quickSupport/apparel/forceWeekOff",
+    component: <ForceWeekOff />,
+  },
+  {
+    path: "/ticket/quickSupport/hrm/finalSettlement",
+    component: <FinalSettlement />,
   },
 ];
