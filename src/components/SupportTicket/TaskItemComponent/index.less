@@ -1,0 +1,75 @@
+@card-border-radius: 10px;
+@border-color: #e0e0e0;
+@select-height: 40px; //quill editor
+@select-line-height: 40px; //quill editor
+@border-radius: 8px;
+@box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+@padding: 10px;
+
+.react-quill {
+  border-radius: @border-radius;
+  border: 1px solid @border-color;
+}
+
+.ant-card {
+  border-radius: @card-border-radius;
+  box-shadow: @box-shadow;
+}
+
+.minimal-input {
+  border-radius: @border-radius;
+  border: 1px solid @border-color;
+  padding: @padding;
+}
+
+.ql-toolbar.ql-snow {
+  border: none;
+}
+
+.ql-container.ql-snow  {
+  border: none;
+
+}
+.ql-editor{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+.minimal-input {
+  padding: 0;
+
+}
+
+.custom-select {
+  height: @select-height;
+
+  .ant-select-selector {
+    height: @select-height !important;
+    line-height: @select-line-height !important;
+    display: flex;
+    align-items: center;
+  }
+}
+
+
+// Custom styles for the Card and Buttons
+.ant-card.small-card {
+  .ant-card-body {
+    padding: 10px;
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}

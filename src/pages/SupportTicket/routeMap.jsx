@@ -35,11 +35,15 @@ const SupportMonitoring = loadable(() =>
   import("./Ticket/SupportMonitoring/index")
 );
 
-// HRM roadable
+// HRM loadable
 
 const FinalSettlement = loadable(() =>
   import("./QuickSupport/HRM/FinalSettlement/index")
 );
+
+// taskItem leadable
+
+const TaskItem = loadable(() => import("./TaskItem/index"));
 
 export default [
   {
@@ -101,5 +105,9 @@ export default [
   {
     path: "/ticket/quickSupport/hrm/finalSettlement",
     component: <FinalSettlement />,
+  },
+  {
+    path: "/ticket/TaskItem",
+    component: <TaskItem />,
   },
 ];

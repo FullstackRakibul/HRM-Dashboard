@@ -1542,19 +1542,6 @@ export const supportTicketMenu = [
       },
     ],
   },
-  // {
-  //   ModuleId: 4,
-  //   MenuName: "Form Test",
-  //   IconName: "fas fa-mail-bulk",
-  //   children: [
-  //     {
-  //       MenuId: 1,
-  //       MenuName: "Upload Attachment",
-  //       Key: 1,
-  //       MenuPath: "ticket/form/UploadFile",
-  //     },
-  //   ],
-  // },
 
   {
     ModuleId: 4,
@@ -1595,5 +1582,13 @@ export const supportTicketMenu = [
         ],
       },
     ],
+  },
+
+  {
+    ModuleId: 5,
+    Key: 5,
+    MenuName: "TaskItem",
+    IconName: "fas fa-tasks",
+    MenuPath: "ticket/TaskItem",
   },
 ];
