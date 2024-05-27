@@ -82,7 +82,7 @@ const ListDevAssets = ({ updateFlag }) => {
             className=" bg-warning text-white font-sans font-xl font-semibold hover:bg-white mt-3"
           ></Button>
           <Popconfirm
-            title="Are you sure you want to delete this snippet?"
+            title="Sure ?"
             onConfirm={() => handleDelete(record.id)}
             okText="Yes"
             cancelText="No"

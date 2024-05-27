@@ -243,6 +243,8 @@ const TicketCreateForm = () => {
                 theme="snow"
                 value={textValue}
                 onChange={setTextValue}
+                placeholder="Enter task description"
+                className="minimal-input"
               />
             </Form.Item>
           </Col>

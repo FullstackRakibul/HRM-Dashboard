@@ -1,4 +1,4 @@
-@card-border-radius: 10px;
+@card-border-radius: 5px;
 @border-color: #e0e0e0;
 @select-height: 40px; //quill editor
 @select-line-height: 40px; //quill editor
@@ -67,9 +67,46 @@
 }
 
 .items-center {
-  align-items: center;
+  //align-items: center;
 }
 
 .gap-2 {
   gap: 8px;
+}
+
+
+
+////////////////////
+
+
+@primary-bg: #28a745;
+@primary-bg-hover: #218838;
+@primary-border-hover: #1e7e34;
+
+@default-bg: #dc3545;
+@default-bg-hover: #c82333;
+@default-border-hover: #bd2130;
+
+.custom-popconfirm-overlay {
+  .ant-btn-primary {
+    background-color: @primary-bg !important;
+    border-color: @primary-bg !important;
+    color: white !important;
+
+    &:hover {
+      background-color: @primary-bg-hover !important;
+      border-color: @primary-border-hover !important;
+    }
+  }
+
+  .ant-btn-default {
+    background-color: @default-bg !important;
+    border-color: @default-bg !important;
+    color: white !important;
+
+    &:hover {
+      background-color: @default-bg-hover !important;
+      border-color: @default-border-hover !important;
+    }
+  }
 }
