@@ -12,9 +12,12 @@ import {
   Col,
   message,
   Popconfirm,
+  Descriptions,
+  Modal,
 } from "antd";
 import { AxiosInstance } from "../../../apis/supportTicketSlice";
 import "./index.less";
+import { convertActualtDateTime } from "../../../utils/DateConfig";
 //import "./index.css"; // Ensure your custom styles are imported
 
 const TaskItemComponent = () => {
@@ -23,12 +26,14 @@ const TaskItemComponent = () => {
   const [loading, setLoading] = useState(true);
   const [textValue, setTextValue] = useState(""); // For Quill
   const [supportEnginner, setSupportEnginner] = useState([]);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const onFinish = async (values) => {
     try {
       values.assignedTo = values.assignedTo?.value
         ? values.assignedTo.value
-        : null;
+        : "000001";
       console.log("create data : ", values);
       const response = await AxiosInstance.post(
         "/api/TaskItem/create-task-item",
@@ -89,8 +94,19 @@ const TaskItemComponent = () => {
     }
   };
 
-  const handleView = async (value) => {
-    console.log(value);
+  const handleView = async (task) => {
+    console.log("view button data :", task);
+    const response = await AxiosInstance.get(
+      `/api/TaskItem/item-details-${task}`
+    );
+    console.log("task view response data :", response.data);
+    setSelectedTask(response.data.data);
+    setIsModalVisible(true);
+  };
+
+  const handleClose = () => {
+    setIsModalVisible(false);
+    setSelectedTask(null);
   };
 
   return (
@@ -189,7 +205,6 @@ const TaskItemComponent = () => {
                   labelInValue={true}
                   optionFilterProp="label"
                   className="custom-select"
-                  //style={{ width: 200 }}
                 >
                   {supportEnginner.map((item) => (
                     <Select.Option value={item.agentId}>
@@ -211,7 +226,56 @@ const TaskItemComponent = () => {
           </Form.Item>
         </Form>
       </Card>
+      {selectedTask && (
+        <TaskDetailsModal
+          task={selectedTask}
+          visible={isModalVisible}
+          onClose={handleClose}
+        />
+      )}
     </div>
+  );
+};
+
+//:::::::::::::::::::::: modal component
+
+const TaskDetailsModal = ({ task, visible, onClose }) => {
+  return (
+    <Modal
+      title="Task Details"
+      visible={visible}
+      onCancel={onClose}
+      footer={[
+        <Button key="close" onClick={onClose}>
+          Close
+        </Button>,
+      ]}
+    >
+      <Descriptions bordered column={1}>
+        <Descriptions.Item label="Title">
+          <div dangerouslySetInnerHTML={{ __html: task.taskItemTitle }} />
+        </Descriptions.Item>
+        <Descriptions.Item label="Assigned To">
+          {task.assignedTo}
+        </Descriptions.Item>
+        <Descriptions.Item label="Status">
+          {task.status ? "Completed" : "Pending"}
+        </Descriptions.Item>
+        <Descriptions.Item label="Created At">
+          {convertActualtDateTime(task.createdAt)}
+        </Descriptions.Item>
+        <Descriptions.Item label="Updated At">
+          {convertActualtDateTime(task.updatedAt)}
+        </Descriptions.Item>
+        <Descriptions.Item label="Created By">
+          {task.createdBy}
+        </Descriptions.Item>
+        <Descriptions.Item label="Updated By">
+          {task.updatedBy}
+        </Descriptions.Item>
+        <Descriptions.Item label="Remarks">{task.remarks}</Descriptions.Item>
+      </Descriptions>
+    </Modal>
   );
 };
 
