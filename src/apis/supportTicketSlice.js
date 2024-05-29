@@ -50,7 +50,7 @@ export default supportTicketSlice;
 import axios from "axios";
 
 export const AxiosInstance = axios.create({
-  baseURL: "https://localhost:7295/",
+  baseURL: "http://192.168.3.12:5002/",
   //baseURL: "https://localhost:44397/",
   //baseURL: "http://45.114.84.19:7500/",
 });
@@ -75,7 +75,7 @@ AxiosInstance.interceptors.request.use(
 // to upload form data ...............
 
 export const AxiosInstanceMultipart = axios.create({
-  baseURL: "https://localhost:7295/",
+  baseURL: "http://192.168.3.12:5002/",
 });
 
 AxiosInstanceMultipart.interceptors.request.use(
