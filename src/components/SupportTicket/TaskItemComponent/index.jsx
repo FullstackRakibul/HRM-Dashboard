@@ -28,6 +28,12 @@ const TaskItemComponent = () => {
   const [supportEnginner, setSupportEnginner] = useState([]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+  useEffect(() => {
+    fetchTasks();
+    fetchSupportEnginner();
+  }, [refresh]);
 
   const onFinish = async (values) => {
     try {
@@ -39,20 +45,15 @@ const TaskItemComponent = () => {
         "/api/TaskItem/create-task-item",
         values
       );
-      //console.log(response);
-      //setTasks([...tasks, response.data.data]);
-      fetchTasks();
+      console.log(response);
+      setTasks([...tasks, response.data.data]);
+      //fetchTasks();
       form.resetFields();
       setTextValue("");
     } catch (error) {
       console.error("Error creating task:", error);
     }
   };
-
-  useEffect(() => {
-    fetchTasks();
-    fetchSupportEnginner();
-  }, []);
 
   const fetchTasks = async () => {
     try {
@@ -86,7 +87,7 @@ const TaskItemComponent = () => {
         `/api/TaskItem/mark-done-${value}`
       );
       message.success(responseMarkAs.data.data);
-      fetchTasks();
+      setRefresh(!refresh);
       setLoading(false);
       console.log(responseMarkAs);
     } catch (error) {
@@ -100,6 +101,7 @@ const TaskItemComponent = () => {
       `/api/TaskItem/item-details-${task}`
     );
     console.log("task view response data :", response.data);
+    setRefresh(!refresh);
     setSelectedTask(response.data.data);
     setIsModalVisible(true);
   };
@@ -127,25 +129,29 @@ const TaskItemComponent = () => {
                   }
                   className="bg-gray-100"
                   size="small"
-                  style={{
+                  headStyle={{
                     backgroundColor:
                       task.status == 0
-                        ? "#ffcccc"
+                        ? "#7E8EF1"
                         : task.status == 1
-                        ? "#ffd3bb"
+                        ? "#ACD793"
+                        : task.status == 2
+                        ? "#FF7F3E"
                         : "#85BB4B",
                   }}
                 >
                   <div className="flex justify-between items-center">
                     <div className="flex justify-around items-start">
-                      <p className="mb-1 gap-10">
-                        <b>Assigned To:</b> {task.assignedTo}
-                        <b>Status:</b>{" "}
+                      <p className="flex justify-between mb-1 gap-10">
+                        <b>Assigned To:</b> {task.assignToAgentName}
+                        <b>Status:</b>
                         {task.status == 0
                           ? "Fresh Task"
                           : task.status == 1
                           ? "Working On"
-                          : "Complete"}
+                          : task.status == 2
+                          ? "On Hold"
+                          : "Delay"}
                       </p>
                     </div>
                     <div className="flex gap-2">
@@ -207,7 +213,7 @@ const TaskItemComponent = () => {
                   className="custom-select"
                 >
                   {supportEnginner.map((item) => (
-                    <Select.Option value={item.agentId}>
+                    <Select.Option value={item.empCode}>
                       {item.name}
                     </Select.Option>
                   ))}
@@ -231,6 +237,8 @@ const TaskItemComponent = () => {
           task={selectedTask}
           visible={isModalVisible}
           onClose={handleClose}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
       )}
     </div>
@@ -239,11 +247,22 @@ const TaskItemComponent = () => {
 
 //:::::::::::::::::::::: modal component
 
-const TaskDetailsModal = ({ task, visible, onClose }) => {
+const TaskDetailsModal = ({ task, visible, onClose, refresh, setRefresh }) => {
+  const handleUpdateStatusClick = async (value) => {
+    try {
+      const response = await AxiosInstance.put(
+        `/api/TaskItem/update-status-${value}`
+      );
+      message.success(response.data.data);
+      setRefresh(!refresh);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <Modal
       title="Task Details"
-      visible={visible}
+      open={visible}
       onCancel={onClose}
       footer={[
         <Button key="close" onClick={onClose}>
@@ -256,24 +275,38 @@ const TaskDetailsModal = ({ task, visible, onClose }) => {
           <div dangerouslySetInnerHTML={{ __html: task.taskItemTitle }} />
         </Descriptions.Item>
         <Descriptions.Item label="Assigned To">
-          {task.assignedTo}
+          {task.assignToAgentName}
         </Descriptions.Item>
-        <Descriptions.Item label="Status">
-          {task.status ? "Completed" : "Pending"}
+
+        <Descriptions.Item
+          label="Status"
+          className="flex justify-between gap-9 "
+        >
+          <p>
+            {task.status == 0
+              ? "Fresh Task"
+              : task.status == 1
+              ? "Working On"
+              : task.status == 2
+              ? "On Hold"
+              : "Delay"}
+          </p>
+          <Button
+            type="text"
+            htmlType="submit"
+            small
+            className="font-sans font-sm font-semibold hover:bg-primary"
+            onClick={() => handleUpdateStatusClick(task.id)}
+          >
+            Update Status
+          </Button>
         </Descriptions.Item>
         <Descriptions.Item label="Created At">
           {convertActualtDateTime(task.createdAt)}
         </Descriptions.Item>
-        <Descriptions.Item label="Updated At">
-          {convertActualtDateTime(task.updatedAt)}
-        </Descriptions.Item>
         <Descriptions.Item label="Created By">
-          {task.createdBy}
+          {task.createdByAgentName}
         </Descriptions.Item>
-        <Descriptions.Item label="Updated By">
-          {task.updatedBy}
-        </Descriptions.Item>
-        <Descriptions.Item label="Remarks">{task.remarks}</Descriptions.Item>
       </Descriptions>
     </Modal>
   );
